@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="description" content="Fest Guest App">
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="view-transition" content="same-origin" />
+    <meta name="keywords" content="fest guest, app, events, festivals, concerts, conferences, parties, houses, accommodations, transportation, ridesharing">
+    <meta name="robots" content="index, follow">
+
+    <title>Home</title>
+    <!--Icono de Fest Guest-->
+    <link rel="icon" href="FestGuest.ico" type="image/x-icon">
+  
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/74a5cf865e.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- View transition -->
+    <script src="/src/utils/viewTransition/viewTransition.js"></script>
+    <link rel="stylesheet" href="/src/utils/viewTransition/viewTransition.css"/>
+    <!-- Header Styles -->
+    <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
+</head>
+<body class="bg-transparent">
+    <!-- Header dynamic load -->
+    <script src="/src/utils/loadComponents/loadComponents.js"></script>
+    <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
+    <div style="display: block; margin: 6rem;">
+        <header id="header"></header>
+    </div>
+
+    <div id="content">
+        <!-- Image of Fest Guest -->
+        <div class="flex justify-center mt-10">
+            <img src="/src/images/FestGuest.jpg" class="max-w-full h-auto max-h-80" alt="FestGuest Logo">
+        </div>        
+
+        <!-- Search bar -->
+        <div class="flex justify-center mt-8">
+            <div class="w-3/4">
+                <div class="relative">
+                    <input type="text" class="w-full py-3 px-4 rounded-l-lg text-lg border border-gray-300 focus:outline-none focus:ring-0" placeholder="Search...">
+                    <button class="absolute right-0 top-0 bottom-0 py-3 px-4 bg-indigo-500 text-white rounded-r-lg focus:outline-none">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons "Search" and "I'm feeling lucky" -->
+        <div class="flex justify-center mt-4">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l-lg">
+                Search
+            </button>
+            <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-r-lg">
+                I'm Feeling Lucky
+            </button>
+        </div>
+    </div>
+</body>
+</html>
