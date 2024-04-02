@@ -33,13 +33,39 @@
     <!-- Header dynamic load -->
     <script src="/src/utils/loadComponents/loadComponents.js"></script>
     <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
-    <div style="display: block; margin: 6rem;">
-        <header id="header"></header>
-    </div>
+    
+    <header id="header"></header>
 
-    <div id="content">
-        <h1 class="text-4xl font-bold">Aquí va el login</h1>
-        <p>ewewe</p>
+    <div style="display: flex; width: 100%; height: 100vh;">
+        <div style="width: 70%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <form style="width: 100%; max-width: 800px;">
+                <div class="mb-8">
+                    <p class="text-3xl font-bold text-blue-900">Iniciar sesión</p>
+                    <hr style="height:3px; background-color: #0D47A1; border: none;"/>
+                  </div>
+                <div class="mb-10">
+                  <label class="block text-blue-900 text-xl font-bold mb-2 " for="username">
+                    Username
+                  </label>
+                  <input class="justify-center shadow appearance-none rounded-xl w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-700 focus:border-2 transition duration-1000" id="username" type="text" placeholder="Username">
+                </div>
+                <div class="mb-4">
+                  <label class="block text-blue-900 text-xl font-bold mb-2" for="password">
+                    Password
+                  </label>
+                  <input class="justify-center appearance-none rounded-xl w-full py-4 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-700 focus:border-2 transition duration-1000" id="password" type="password" placeholder="****">
+                </div>
+                <div class="flex items-center justify-center">
+                  <button class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline" type="button">
+                    Sign In
+                  </button>
+                </div>
+              </form>
+        </div>
+
+        <div style="width: 30%; display: flex; height: 100vh;flex-direction: column;justify-content: center;align-items: center; background-color: gray;">
+            <p>QUEVEDO</p>
+        </div>
     </div>
 
 </body>
