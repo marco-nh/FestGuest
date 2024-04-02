@@ -3,8 +3,19 @@
     
     <!-- Selector of the language -->
     <div class="flex items-center">
-      <p class="text-white text-sm md:text-base">Language</p>
-      <i class="fas fa-globe text-white ml-2"></i>
+      <div class="dropdown">
+        <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Language
+          <i class="fas fa-globe text-white ml-2"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item"><div class="flex"><img src="/src/images/uk_flag.png" alt="uk_flag" class="w-10 h-auto"><p class="px-2">English</p></div></a>
+          <a class="dropdown-item"><div class="flex"><img src="/src/images/ca_flag.png" alt="ca_flag" class="w-10 h-auto"><p class="px-2">Catalá</p></div></a>
+          <a class="dropdown-item"><div class="flex"><img src="/src/images/nk_flag.png" alt="nk_flag" class="w-10 h-auto"><p class="px-2">한국인</p></div></a>
+          <a class="dropdown-item"><div class="flex"><img src="/src/images/sp_flag.png" alt="sp_flag" class="w-10 h-auto"><p class="px-2">Español</p></div></a>
+        </div>
+      </div>
+      
     </div>
 
     <div class="flex justify-center ml-32">
