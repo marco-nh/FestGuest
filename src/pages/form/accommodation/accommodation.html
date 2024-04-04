@@ -27,6 +27,62 @@
     <link rel="stylesheet" href="/src/utils/viewTransition/viewTransition.css"/>
     <!-- Header Styles -->
     <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
+    <!--Accomodation Script-->
+    <script src="/src/pages/form/accommodation/backAccomodation.js"></script>
+
+    <style>
+        #subirImagen{
+            display: none;
+        }
+
+        #subirImagenFigma{
+            cursor: pointer;
+            max-width: 30%;
+        }
+
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .image-preview-wrapper {
+            position: relative;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .image-preview {
+            width: 150px;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: red;
+            color: white;
+            cursor: pointer;
+            padding: 0 5px;
+            border-radius: 50%;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+
+    </style>
 </head>
 
 <body class="bg-transparent">
@@ -38,7 +94,43 @@
     </div>
 
     <div id="content">
-        <h1 class="text-4xl font-bold">Aquí va el Accomodation</h1>
+        <!--<h1 class="text-4xl font-bold">Aquí va el Accomodation</h1>-->
+        <form id="accomodationForm" class="mx-auto p-4 w-2/5">
+            <div class="form-group">
+                <label for="nombreAnuncio" class="text-4xl font-bold">Ad name</label>
+                <input type="text" class="form-control " id="nombreAnuncioCasa" name="nombreAnuncioCasa">
+            </div>
+
+            <div class="form-group">
+                <label for="numeroHuespedesLibres"class="text-4xl font-bold">Number of free guests</label>
+                <select class="form-control" id="numeroHuespedesLibres" name="numeroHuespedesLibres">
+                    <option value="1">1 guests</option>
+                    <option value="2">2 guests</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4 or more</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="subirImagen" class="text-4xl font-bold">Upload Images</label>
+                <input type="file" id="subirImagen" name="file-upload" accept="image/*" multiple>
+                <img id="subirImagenFigma" src="/src/images/selectPhoto.png" alt="Upload" width="100%">
+                <div id="previewImagen" class="preview-container"></div>
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="descripcion" class="text-4xl font-bold">Description</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="10" ></textarea>
+            </div>
+            <div class="flex mb-4 -mx-2">
+                <div class="form-group relative px-2 w-1/2">
+                    <label for="precio" class="text-4xl font-bold">Price</label>
+                    <input type="number" class="form-control" id="precio" name="precio">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-full">Submit</button>
+
+        </form>
     </div>
     
 </body>
