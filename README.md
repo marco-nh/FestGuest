@@ -5,3 +5,4 @@
 </p>
 
 Our proposed venture aims to develop a social festival reservation application (FestGuest). This innovative platform will facilitate the booking of accommodations 🏨 and transportation 🚗 for various social events and festivals.
+ 
