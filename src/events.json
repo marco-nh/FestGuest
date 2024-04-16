@@ -11,7 +11,7 @@
       "categoria": "Música",
       "precio": 50,
       "owner": "LiveNation",
-      "images": ["/src/images/cantante.png"]
+      "images": ["https://picsum.photos/536/319"]
     },
     {
       "nombre": "Festival de Arte",
@@ -24,7 +24,7 @@
       "categoria": "Arte",
       "precio": 30,
       "owner": "Museo de Arte Moderno de París",
-      "images": ["/src/images/cantante.png"]
+      "images": ["https://picsum.photos/536/324"]
     },
     {
       "nombre": "Conferencia Tecnológica",
@@ -37,7 +37,7 @@
       "categoria": "Tecnología",
       "precio": 100,
       "owner": "TechSummit",
-      "images": ["/src/images/cantante.png"]
+      "images": ["https://picsum.photos/536/357"]
     },
     {
       "nombre": "Feria Gastronómica",
@@ -50,7 +50,7 @@
       "categoria": "Gastronomía",
       "precio": 20,
       "owner": "Asociación de Chefs de Canarias",
-      "images": ["/src/images/cantante.png"]
+      "images": ["https://picsum.photos/536/356"]
     }
   ]
 }
