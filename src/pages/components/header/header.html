@@ -1,7 +1,7 @@
-<header class="header display-high-width">
+<header class="header display-high-width z-50 relative">
   <div class="bg-blue-900 py-4 px-6 md:px-12 lg:px-16 xl:px-20 flex justify-between items-center fixed top-0 left-0 right-0">
     
-    <!-- Selector of the language -->
+    <!-- Selector de idioma -->
     <div class="flex items-center">
       <div class="dropdown">
         <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -15,7 +15,6 @@
           <a class="dropdown-item"><div class="flex"><img src="/src/images/sp_flag.png" alt="sp_flag" class="w-10 h-auto"><p class="px-2">Español</p></div></a>
         </div>
       </div>
-      
     </div>
 
     <div class="flex justify-center ml-32">
@@ -24,19 +23,19 @@
       </a>
     </div>
 
-    <!-- Sign In and Login buttons -->
+    <!-- Botones de inicio de sesión y registro -->
     <div class="flex items-center">
-      <a href="/src/pages/sigIn/signIn.html" style="text-decoration: none;">
-        <div id="signInBtn" class="button-secondary px-3 md:px-4 py-2 rounded-md mr-4 md:mr-6 flex items-center cursor-pointer" data-page="page1.html">
+      <a href="/src/pages/signIn/signIn.html" class="no-underline">
+        <button id="signInBtn" class="button-secondary px-3 md:px-4 py-2 rounded-md mr-4 md:mr-6 flex items-center cursor-pointer" data-page="page1.html">
           <i class="fas fa-user-plus mr-1"></i>
-          <p class="hidden md:inline">Sign In</p>
-        </div>
+          <span>Sign In</span>
+        </button>
       </a>
-      <a href="/src/pages/login/login.html" style="text-decoration: none;">
-        <div id="loginBtn" class="button-secondary px-3 md:px-4 py-2 rounded-md flex items-center cursor-pointer" data-page="page2.html">
+      <a href="/src/pages/login/login.html" class="no-underline">
+        <button id="loginBtn" class="button-secondary px-3 md:px-4 py-2 rounded-md flex items-center cursor-pointer" data-page="page2.html">
           <i class="fas fa-sign-in-alt mr-1"></i>
-          <p class="hidden md:inline">Log in</p>
-        </div>
+          <span>Log in</span>
+        </button>
       </a>
     </div>
   </div>
