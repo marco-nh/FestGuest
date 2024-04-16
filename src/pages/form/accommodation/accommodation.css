@@ -1,0 +1,55 @@
+
+#subirImagenFigma{
+    cursor: pointer;
+    max-width: 100%;
+    width: 4rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-gap: 1rem;
+}
+
+.preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.image-preview-wrapper {
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.image-preview {
+    width: 150px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.remove-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: red;
+    color: white;
+    cursor: pointer;
+    padding: 0 5px;
+    border-radius: 50%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    background-color: #fff;
+}
