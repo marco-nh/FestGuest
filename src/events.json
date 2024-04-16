@@ -1,0 +1,56 @@
+{
+  "eventos": [
+    {
+      "nombre": "Concierto en Vivo",
+      "fecha": "2024-05-15",
+      "ubicacion": {
+        "ciudad": "Los Angeles",
+        "pais": "Estados Unidos"
+      },
+      "descripcion": "Disfruta de un emocionante concierto en vivo con tus artistas favoritos.",
+      "categoria": "Música",
+      "precio": 50,
+      "owner": "LiveNation",
+      "images": ["/src/images/cantante.png"]
+    },
+    {
+      "nombre": "Festival de Arte",
+      "fecha": "2024-06-20",
+      "ubicacion": {
+        "ciudad": "París",
+        "pais": "Francia"
+      },
+      "descripcion": "Explora una amplia variedad de obras de arte de artistas de renombre internacional.",
+      "categoria": "Arte",
+      "precio": 30,
+      "owner": "Museo de Arte Moderno de París",
+      "images": ["/src/images/cantante.png"]
+    },
+    {
+      "nombre": "Conferencia Tecnológica",
+      "fecha": "2024-07-10",
+      "ubicacion": {
+        "ciudad": "San Francisco",
+        "pais": "Estados Unidos"
+      },
+      "descripcion": "Únete a expertos de la industria para discutir las últimas tendencias y avances en tecnología.",
+      "categoria": "Tecnología",
+      "precio": 100,
+      "owner": "TechSummit",
+      "images": ["/src/images/cantante.png"]
+    },
+    {
+      "nombre": "Feria Gastronómica",
+      "fecha": "2024-08-25",
+      "ubicacion": {
+        "ciudad": "Las Palmas de Gran Canaria",
+        "pais": "España"
+      },
+      "descripcion": "Descubre una variedad de deliciosos platos y productos locales en esta feria gastronómica.",
+      "categoria": "Gastronomía",
+      "precio": 20,
+      "owner": "Asociación de Chefs de Canarias",
+      "images": ["/src/images/cantante.png"]
+    }
+  ]
+}
