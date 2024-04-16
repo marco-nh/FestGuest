@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let contadorImagen = Math.min(archivos.length, espacioRestante);
 
         
-        for (var i = 0; i < contadorImagen; i++) {
+        for (let i = 0; i < contadorImagen; i++) {
             (function(file) {
                 let reader = new FileReader();
                 reader.onload = function(e) {
@@ -82,8 +82,6 @@ async function validacionFormulario() {
         } else if (totalImagenes === 0) { 
             alert("At least 1 image must be uploaded");
         } else {
-            // Subir imágenes a Storage
-            const imageRefs = [];
             const imageUrls = []; // Para almacenar los URLs de las imágenes
             const files = document.getElementById('subirImagen').files;
             for (const file of files) {
@@ -91,7 +89,6 @@ async function validacionFormulario() {
                 const imageRef = ref(storage, 'images/accommodation' + imageName);
                 try {
                     await uploadBytes(imageRef, file);
-                    imageRefs.push(imageRef);
                     // Obtener el URL de la imagen subida
                     const url = await getDownloadURL(imageRef);
                     imageUrls.push(url); // Guardar el URL en el array
