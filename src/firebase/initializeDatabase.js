@@ -1,6 +1,8 @@
-//Para usar los servicios de Firebase en otro js basta con hacer un import rollo:
-//import app from "..\src\firebase\databaseInitialize.js"
+// Dependencias de Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-storage.js"; 
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDc0OBSYcfUWHP9XpTd8QTtSXRh__irX9g",
@@ -13,11 +15,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const database = getDatabase(app); 
+const storage = getStorage(app);
 
-if (app) {
-    console.log("Firebase se inicializó correctamente.");
-  } else {
-    console.log("Firebase no se inicializó.");
-  }
-
-export default app;
+export { app, database, storage }; 
