@@ -18,6 +18,7 @@ const auth = getAuth(app);
 
 
 registro.addEventListener('click',(e) => {
+    
     var email = document.getElementById('emailreg');
     var password = document.getElementById('passwordreg');
     var password2 = document.getElementById('password2reg');
@@ -65,7 +66,8 @@ registro.addEventListener('click',(e) => {
         sendEmailVerification(auth.currentUser).then(() => {
             alert('Se ha enviado un correo de verificación.');
         });
-        window.location.href = 'login.html';
+        window.location.href = "/src/pages/login/login.html";
+        
     }).catch(error => {
         const erroCode = error.code;
 
@@ -77,4 +79,5 @@ registro.addEventListener('click',(e) => {
             emailErrorDiv.style.display = 'block';
         }
     });
+    
 });
