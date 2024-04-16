@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var searchForm = document.getElementById('searchForm');
-    var searchButton = document.getElementById('searchButton');
-    var searchInput = document.getElementById('voice-search');
+    let searchForm = document.getElementById('searchForm');
+    let searchButton = document.getElementById('searchButton');
+    let searchInput = document.getElementById('voice-search');
 
     // Encoding the search in 64 base
     function performSearch() {
-        var searchTerm = searchInput.value;
-        var encodedSearchTerm = btoa(searchTerm);
+        let searchTerm = searchInput.value;
+        let encodedSearchTerm = btoa(searchTerm);
         window.location.href = '/src/pages/events/events.html?search=' + encodedSearchTerm;
     }
 
