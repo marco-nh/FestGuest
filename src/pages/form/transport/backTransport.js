@@ -1,4 +1,4 @@
-//Faltaria todo lo que tiene que ver con firebase: tanto el verificar que los usuarios registrados pueden entrar a esta url
+//Faltaria lo que tiene que ver con firebase: tanto el verificar que los usuarios registrados pueden entrar a esta url
 
 import { app } from "/src/firebase/initializeDatabase.js"; // Importa la instancia de Firebase desde initializeDatabase.js
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Importa las funciones necesarias de Firestore
@@ -32,7 +32,6 @@ function agregarSugerencias(inputId, suggestionsId) {
         data.results.forEach(result => {
           const div = document.createElement('div');
           div.innerHTML = result.address.freeformAddress;
-          div.classList.add('suggestion-item');
           div.classList.add('suggestion-item');
           div.addEventListener('click', function() {
             input.value = result.address.freeformAddress;
