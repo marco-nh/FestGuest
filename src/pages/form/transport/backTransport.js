@@ -50,12 +50,12 @@ async function validacionFormulario() {
   document.getElementById('rutaForm').addEventListener('submit', async function(event) {
       event.preventDefault();
 
-      var nombreAnuncioCoche = document.getElementById('nombreAnuncioCoche').value;
-      var origen = document.getElementById('origen').value;
-      var destino = document.getElementById('destino').value;
-      var numeroAsientosLibres = document.getElementById('numeroAsientosLibres').value;
-      var descripcion = document.getElementById('descripcion').value;
-      var precio = document.getElementById('precio').value;
+      let nombreAnuncioCoche = document.getElementById('nombreAnuncioCoche').value;
+      let origen = document.getElementById('origen').value;
+      let destino = document.getElementById('destino').value;
+      let numeroAsientosLibres = document.getElementById('numeroAsientosLibres').value;
+      let descripcion = document.getElementById('descripcion').value;
+      let precio = document.getElementById('precio').value;
 
       if (!nombreAnuncioCoche || !origen || !destino || !numeroAsientosLibres || !descripcion || !precio) {
           alert("All fields are required. Please fill out the entire form.");
