@@ -3,8 +3,8 @@ import { getFirestore, collection, addDoc } from "https://www.gstatic.com/fireba
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-storage.js"; // Importa las funciones necesarias de Firebase Storage
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    var totalImagenes = 0; 
-    var maxImagenes = 5;
+    let totalImagenes = 0; 
+    let maxImagenes = 5;
 
     document.getElementById('subirImagenFigma').addEventListener('click', function() {
         
@@ -16,12 +16,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     document.getElementById('subirImagen').addEventListener('change', function() {
-        var contenedorImagenes = document.getElementById('previewImagen');
+        let contenedorImagenes = document.getElementById('previewImagen');
         
-        var archivos = this.files;
+        let archivos = this.files;
         
-        var espacioRestante = maxImagenes - totalImagenes;
-        var contadorImagen = Math.min(archivos.length, espacioRestante);
+        let espacioRestante = maxImagenes - totalImagenes;
+        let contadorImagen = Math.min(archivos.length, espacioRestante);
 
         
         for (var i = 0; i < contadorImagen; i++) {
