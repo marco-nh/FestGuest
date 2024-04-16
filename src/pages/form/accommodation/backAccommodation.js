@@ -26,16 +26,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
         for (var i = 0; i < contadorImagen; i++) {
             (function(file) {
-                var reader = new FileReader();
+                let reader = new FileReader();
                 reader.onload = function(e) {
-                    var imageWrapper = document.createElement('div');
+                    let imageWrapper = document.createElement('div');
                     imageWrapper.classList.add('image-preview-wrapper');
 
-                    var img = document.createElement('img');
+                    let img = document.createElement('img');
                     img.src = e.target.result;
                     img.classList.add('image-preview');
 
-                    var removeButton = document.createElement('div');
+                    let removeButton = document.createElement('div');
                     removeButton.classList.add('remove-image');
                     removeButton.textContent = 'X';
                     removeButton.onclick = function() {
@@ -66,14 +66,14 @@ async function validacionFormulario() {
     document.getElementById('accomodationForm').addEventListener('submit', async function(event) {
         event.preventDefault(); 
 
-        var nombreAnuncioCasa = document.getElementById('nombreAnuncioCasa').value;
-        var ciudad = document.getElementById('ciudad').value;
-        var municipio = document.getElementById('municipio').value;
-        var calle = document.getElementById('calle').value;
-        var numeroHuespedesLibres = document.getElementById('numeroHuespedesLibres').value;
-        var descripcion = document.getElementById('descripcion').value;
-        var precio = document.getElementById('precio').value;
-        var totalImagenes = document.querySelectorAll('.image-preview-wrapper').length; 
+        let nombreAnuncioCasa = document.getElementById('nombreAnuncioCasa').value;
+        let ciudad = document.getElementById('ciudad').value;
+        let municipio = document.getElementById('municipio').value;
+        let calle = document.getElementById('calle').value;
+        let numeroHuespedesLibres = document.getElementById('numeroHuespedesLibres').value;
+        let descripcion = document.getElementById('descripcion').value;
+        let precio = document.getElementById('precio').value;
+        let totalImagenes = document.querySelectorAll('.image-preview-wrapper').length; 
 
         if (!nombreAnuncioCasa || !ciudad || !municipio || !calle || !numeroHuespedesLibres || !descripcion || !precio) {
             alert("All fields are required. Please fill out the entire form.");
