@@ -1,8 +1,8 @@
 function decodeSearchTermFromUrl() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var searchTermEncoded = urlParams.get('search');
+    let urlParams = new URLSearchParams(window.location.search);
+    let searchTermEncoded = urlParams.get('search');
     if (searchTermEncoded) {
-        var searchTermDecoded = decodeURIComponent(atob(searchTermEncoded));
+        let searchTermDecoded = decodeURIComponent(atob(searchTermEncoded));
         document.getElementById('voice-search').value = searchTermDecoded;
     }
 }
