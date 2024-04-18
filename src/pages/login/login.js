@@ -22,22 +22,21 @@ login.addEventListener('click',(e) => {
     
     var email = document.getElementById('emaillog');
     var password = document.getElementById('passwordlog');
-    //var emailErrorDiv = document.getElementById('email-error');
-   // var passwordErrorDiv = document.getElementById('password-error');
-/*
+    var emailErrorDiv = document.getElementById('email-error');
+    var passwordErrorDiv = document.getElementById('password-error');
+
     emailErrorDiv.textContent = '';
     emailErrorDiv.style.display = 'none';
     passwordErrorDiv.textContent = '';
     passwordErrorDiv.style.display = 'none';
-*/
+
     signInWithEmailAndPassword(auth,email.value,password.value).then(cred => {
-        console.error("error2");
         alert('Usuario logueado');
         console.log(cred.user);
-        window.open('https://google.com/')
+        window.location.href = "/src/index.html";
     }).catch(error => {
         const erroCode = error.code;
-        /*
+        
         console.error('error');
         if(erroCode == 'auth/invalid-email'){
             emailErrorDiv.textContent = 'El email o la contraseña están incorrectos';
@@ -50,7 +49,7 @@ login.addEventListener('click',(e) => {
             email.value = '';
             password.value = '';
         }
-    });*/
+    });
 });
 /*
 cerrar.addEventListener('click', (e) => {
@@ -74,5 +73,4 @@ auth.onAuthStateChanged(user => {
     }else{
         console.log("Usuario Inactivo");
     }
-})
 })

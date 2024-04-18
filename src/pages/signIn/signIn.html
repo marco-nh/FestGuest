@@ -34,6 +34,7 @@
     <script src="/src/utils/loadComponents/loadComponents.js"></script>
     <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
     <script src="signIn.js" type="module"></script>
+    <link rel="stylesheet" href="/src/pages/signIn/signIn.css">
 
 
     <header id="header"></header>
@@ -77,8 +78,10 @@
                                 <option value="comprador">Comprador</option>
                               </select>
                         </div>
-    
-              
+
+                        <button id="google_button" type="button" class="login-with-google-btn" style="margin-right: 80px;">
+                          Sign in with Google
+                        </button>
                         <!-- Botón Sign Up movido a la derecha -->
                       </div>
                   </form>

@@ -1,7 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js';
-import{sendEmailVerification, getAuth, signInWithPopup,
-    createUserWithEmailAndPassword, signInWithEmailAndPassword,
-    onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js';
+import{sendEmailVerification, getAuth,createUserWithEmailAndPassword,
+     signInWithPopup, GoogleAuthProvider} from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js';
 
     const firebaseConfig = {
         apiKey: "AIzaSyDc0OBSYcfUWHP9XpTd8QTtSXRh__irX9g",
@@ -15,6 +14,24 @@ import{sendEmailVerification, getAuth, signInWithPopup,
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+const google = document.getElementById('google_button');
+
+
+google.addEventListener("click", function(){
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const user = result.user;
+    window.location.href = "/src/pages/login/login.html";
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.customData.email;
+    const credential = GoogleAuthProvider.credentialFromError(error);
+  });
+})
 
 
 registro.addEventListener('click',(e) => {
