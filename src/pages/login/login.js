@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
       var email = document.getElementById('emaillog').value;
       var password = document.getElementById('passwordlog').value;
       try {
-        const credenciales = await signInWithEmail(email, password);
-        showMessage("Welcome " + email);
-        console.log(credenciales);
+        await signInWithEmail(email, password);
         window.location.href = "/src/index.html";
       } catch (error) {
         showMessage("Invalid email or password", "warning");
