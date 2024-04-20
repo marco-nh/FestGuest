@@ -6,3 +6,20 @@
 #search-container{
     place-content: center
 }
+
+#festGuestImage{
+    width: calc(1rem + 25vw);
+}
+
+@media (max-width: 768px) {
+        #searchButton {
+            display: block;
+        }
+        #container-form-input {
+            display: flex;
+        }
+        #searchButton {
+            width: 10vw;
+            margin: 0;   
+        }
+}

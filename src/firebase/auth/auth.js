@@ -5,6 +5,7 @@ import{ signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10
 
 const signInWithEmail = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
-  };
+};
 
-  export { signInWithEmail };
+
+export { signInWithEmail };
