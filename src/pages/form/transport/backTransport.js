@@ -1,6 +1,6 @@
 //Faltaria lo que tiene que ver con firebase: tanto el verificar que los usuarios registrados pueden entrar a esta url
 
-import { app } from "/src/firebase/initializeDatabase.js"; // Importa la instancia de Firebase desde initializeDatabase.js
+import { app } from "../../../firebase/initializeDatabase"; // Importa la instancia de Firebase desde initializeDatabase.js
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Importa las funciones necesarias de Firestore
 
 
