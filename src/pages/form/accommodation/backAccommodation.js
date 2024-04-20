@@ -1,6 +1,6 @@
-import { app, storage } from "/src/firebase/initializeDatabase.js"; // Importa la instancia de Firebase desde initializeDatabase.js
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js"; // Importa las funciones necesarias de Firestore
-import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-storage.js"; // Importa las funciones necesarias de Firebase Storage
+import { app, storage } from "../../../firebase/initializeDatabase"; 
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-storage.js"; 
 
 document.addEventListener('DOMContentLoaded', (event) => {
     let totalImagenes = 0; 
