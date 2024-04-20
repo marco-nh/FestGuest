@@ -40,9 +40,9 @@ registro.addEventListener('click',(e) => {
     let passwordactual = password.value;
 
     emailErrorDiv.textContent = '';
-    emailErrorDiv.style.display = 'none';
+    emailErrorDiv.classList.add('hidden');
     passwordErrorDiv.textContent = '';
-    passwordErrorDiv.style.display = 'none';
+    passwordErrorDiv.classList.add('hidden');
 
     const tieneNum = /\d/.test(passwordactual);
     const tieneSimbolo = /[!@#$%&*(),.?":{}|<>]/.test(passwordactual);
@@ -84,10 +84,10 @@ registro.addEventListener('click',(e) => {
 
         if(erroCode == 'auth/email-already-in-use'){
             emailErrorDiv.textContent = 'El correo ya está en uso.';
-            emailErrorDiv.style.display = 'block';
+            emailErrorDiv.classList.add('block');
         }else if(erroCode == 'auth/invalid-email'){
             emailErrorDiv.textContent = 'El formato del correo no es adecuado.';
-            emailErrorDiv.style.display = 'block';
+            emailErrorDiv.classList.add('block');
         }
     });
     
