@@ -1,4 +1,4 @@
-import { signInWithEmail } from "/src/firebase/auth/auth.js";
+import { signInWithEmail } from "../../firebase/auth/auth.js";
 import { showMessage } from "../../utils/toastMessage/toastMessage.js";
 
 document.addEventListener('DOMContentLoaded', () => {
