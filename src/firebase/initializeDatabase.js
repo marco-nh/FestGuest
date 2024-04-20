@@ -1,9 +1,7 @@
-// Dependencias de Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
-import { getStorage } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-storage.js"; 
-import{ getAuth } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js';
-
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDc0OBSYcfUWHP9XpTd8QTtSXRh__irX9g",
@@ -16,8 +14,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app); 
-const storage = getStorage(app);
 const auth = getAuth(app);
+const database = getDatabase(app);
+const storage = getStorage(app);
 
-export { app, database, storage, auth }; 
+
+export { app, database, storage, auth };
