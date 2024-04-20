@@ -21,29 +21,23 @@ const google = document.getElementById('google_button');
 google.addEventListener("click", function(){
     signInWithPopup(auth, provider)
   .then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    const user = result.user;
+    GoogleAuthProvider.credentialFromResult(result);
     window.location.href = "/src/pages/login/login.html";
   }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    const email = error.customData.email;
-    const credential = GoogleAuthProvider.credentialFromError(error);
+    GoogleAuthProvider.credentialFromError(error);
   });
 })
 
 
 registro.addEventListener('click',(e) => {
     
-    var email = document.getElementById('emailreg');
-    var password = document.getElementById('passwordreg');
-    var password2 = document.getElementById('password2reg');
-    var emailErrorDiv = document.getElementById('emailreg-error');
-    var passwordErrorDiv = document.getElementById('passwordreg-error');
+    let email = document.getElementById('emailreg');
+    let password = document.getElementById('passwordreg');
+    let password2 = document.getElementById('password2reg');
+    let emailErrorDiv = document.getElementById('emailreg-error');
+    let passwordErrorDiv = document.getElementById('passwordreg-error');
 
-    var emailactual = email.value;
-    var passwordactual = password.value;
+    let passwordactual = password.value;
 
     emailErrorDiv.textContent = '';
     emailErrorDiv.style.display = 'none';
