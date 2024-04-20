@@ -1,40 +1,40 @@
 <header class="header display-high-width z-50 relative">
-  <div class="bg-blue-900 py-4 px-6 md:px-12 lg:px-16 xl:px-20 flex justify-between items-center fixed top-0 left-0 right-0">
+  <div class="bg-blue-900 py-2 px-4 md:px-8 lg:px-12 xl:px-16 flex justify-between items-center fixed top-0 left-0 right-0">
     
     <!-- Selector de idioma -->
     <div class="flex items-center">
       <div class="dropdown">
         <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Language
-          <i class="fas fa-globe text-white ml-2"></i>
+          <i class="fas fa-globe text-white ml-1 md:ml-2"></i>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item"><div class="flex"><img src="/src/images/uk_flag.png" alt="uk_flag" class="w-10 h-auto"><p class="px-2">English</p></div></a>
-          <a class="dropdown-item"><div class="flex"><img src="/src/images/ca_flag.png" alt="ca_flag" class="w-10 h-auto"><p class="px-2">Catalá</p></div></a>
-          <a class="dropdown-item"><div class="flex"><img src="/src/images/nk_flag.png" alt="nk_flag" class="w-10 h-auto"><p class="px-2">한국인</p></div></a>
-          <a class="dropdown-item"><div class="flex"><img src="/src/images/sp_flag.png" alt="sp_flag" class="w-10 h-auto"><p class="px-2">Español</p></div></a>
+          <a class="dropdown-item"><div class="flex"><img src="/src/images/uk_flag.png" alt="uk_flag" class="w-8 h-auto"><p class="px-1 md:px-2 text-xs md:text-sm">English</p></div></a>
+          <a class="dropdown-item"><div class="flex"><img src="/src/images/ca_flag.png" alt="ca_flag" class="w-8 h-auto"><p class="px-1 md:px-2 text-xs md:text-sm">Catalá</p></div></a>
+          <a class="dropdown-item"><div class="flex"><img src="/src/images/nk_flag.png" alt="nk_flag" class="w-8 h-auto"><p class="px-1 md:px-2 text-xs md:text-sm">한국인</p></div></a>
+          <a class="dropdown-item"><div class="flex"><img src="/src/images/sp_flag.png" alt="sp_flag" class="w-8 h-auto"><p class="px-1 md:px-2 text-xs md:text-sm">Español</p></div></a>
         </div>
       </div>
     </div>
 
-    <div class="flex justify-center ml-32">
+    <div class="hidden md:flex justify-center md:ml-16">
       <a href="/src/index.html">
-        <img src="/src/images/logo.png" alt="Logo FestGest" class="w-32 h-auto">
+        <img src="/src/images/logo.png" alt="Logo FestGest" class="w-28 h-auto">
       </a>
     </div>
 
     <!-- Botones de inicio de sesión y registro -->
     <div class="flex items-center">
       <a href="/src/pages/signIn/signIn.html" class="no-underline">
-        <button id="signInBtn" class="button-secondary px-3 md:px-4 py-2 rounded-md mr-4 md:mr-6 flex items-center cursor-pointer" data-page="page1.html">
-          <i class="fas fa-user-plus mr-1"></i>
-          <span>Sign In</span>
+        <button id="signInBtn" class="button-secondary px-2 md:px-3 py-1 md:py-2 rounded-md mr-2 md:mr-4 flex items-center cursor-pointer">
+          <i class="fas fa-user-plus mr-1 text-sm"></i>
+          <span class="hidden md:inline-block text-sm md:text-base">Sign In</span>
         </button>
       </a>
       <a href="/src/pages/login/login.html" class="no-underline">
-        <button id="loginBtn" class="button-secondary px-3 md:px-4 py-2 rounded-md flex items-center cursor-pointer" data-page="page2.html">
-          <i class="fas fa-sign-in-alt mr-1"></i>
-          <span>Log in</span>
+        <button id="loginBtn" class="button-secondary px-2 md:px-3 py-1 md:py-2 rounded-md flex items-center cursor-pointer">
+          <i class="fas fa-sign-in-alt mr-1 text-sm"></i>
+          <span class="hidden md:inline-block text-sm md:text-base">Log in</span>
         </button>
       </a>
     </div>
