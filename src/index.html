@@ -9,13 +9,12 @@
     <meta name="keywords" content="fest guest, app, events, festivals, concerts, conferences, parties, houses, accommodations, transportation, ridesharing">
     <meta name="robots" content="index, follow">
 
+    <!--Home de Fest Guest-->
     <title>Home</title>
-    <!--Icono de Fest Guest-->
     <link rel="icon" href="FestGuest.ico" type="image/x-icon">
   
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -23,12 +22,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Tailwind -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" integrity="sha256-CAI/7ThhltsmP2L2zKBYa7FknB3ZwFbD0nqL8FCdxdc=" crossorigin="anonymous" />
-    <!-- Header Styles -->
-    <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
     <!-- Firebase -->
     <script type="module" src="/src/firebase/initializeDatabase.js"></script>
     <!-- Adding Styles -->
     <link rel="stylesheet" href="/src/style.css"/>
+    <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
     <!-- Adding Scripts -->
     <script src="/src/script.js"></script>
     <script src="/src/utils/voiceRecognition/voiceRecognition.js"></script>
@@ -70,13 +68,8 @@
                     </button>
                 </form>
             </div>
-            
-            
-            
-                        
-    
+                
             <div id="fun-message" class="absolute inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 text-white text-4xl font-bold z-10"></div>
-    
     
             <!-- Buttons "Search" and "I'm feeling lucky" -->
             <div class="flex justify-center mt-4" id="search-engine">
@@ -86,6 +79,5 @@
             </div>
             <div id="eventContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </div>
-
 </body>
 </html>
