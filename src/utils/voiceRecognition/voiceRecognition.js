@@ -1,6 +1,7 @@
 // Listening the voice of the user(USABILITY)
 function startVoiceRecognition() {
-    const recognition = new webkitSpeechRecognition();
+    const recognition = new (window.webkitSpeechRecognition || SpeechRecognition)();
+    
     recognition.lang = 'en-US';
     recognition.continuous = true;
     recognition.interimResults = true;
