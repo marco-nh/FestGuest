@@ -49,7 +49,7 @@ registro.addEventListener('click',(e) => {
 
     if(passwordactual.length < 8){
         passwordErrorDiv.textContent = 'La tiene menos de 8 caracteres.';
-        passwordErrorDiv.style.display = 'block';
+        passwordErrorDiv.classList.remove('hidden');
         password.value = '';
         password2.value = '';
         return;
@@ -57,7 +57,7 @@ registro.addEventListener('click',(e) => {
 
     if(!tieneNum || !tieneSimbolo){
         passwordErrorDiv.textContent = 'La contraseña no cumple el formato.';
-        passwordErrorDiv.style.display = 'block';
+        passwordErrorDiv.classList.remove('hidden');
         password.value = '';
         password2.value = '';
         return;
@@ -65,7 +65,7 @@ registro.addEventListener('click',(e) => {
 
     if(password.value !== password2.value){
         passwordErrorDiv.textContent = "Las contraseñas no coinciden.";
-        passwordErrorDiv.style.display = 'block';
+        passwordErrorDiv.classList.remove('hidden');
         password.value = '';
         password2.value = '';
         return;

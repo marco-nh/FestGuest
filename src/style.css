@@ -14,12 +14,10 @@
 @media (max-width: 768px) {
         #searchButton {
             display: block;
+            width: 10vw;
+            margin: 0;  
         }
         #container-form-input {
             display: flex;
-        }
-        #searchButton {
-            width: 10vw;
-            margin: 0;   
         }
 }
