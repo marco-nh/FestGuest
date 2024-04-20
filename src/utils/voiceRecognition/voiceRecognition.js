@@ -1,13 +1,13 @@
 // Listening the voice of the user(USABILITY)
 function startVoiceRecognition() {
-    const recognition = new WebkitSpeechRecognition() || SpeechRecognition;
+    const recognition = new webkitSpeechRecognition();
     recognition.lang = 'en-US';
     recognition.continuous = true;
     recognition.interimResults = true;
 
     let finalTranscript = '';
     let timeoutID = null; 
-
+    
     // Storing the transcription
     recognition.onresult = function(event) {
         let interimTranscript = ''; 
