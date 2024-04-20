@@ -1,5 +1,3 @@
-// backTransport.js
-
 import { app } from "../../../firebase/initializeDatabase.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
@@ -14,15 +12,12 @@ function initialize() {
 function agregarSugerencias(inputId, suggestionsId) {
   const input = document.getElementById(inputId);
   const suggestionsPanel = document.getElementById(suggestionsId);
-
   input.addEventListener('input', function() {
     const query = this.value;
-
     if (query.length < 3) {
       suggestionsPanel.innerHTML = '';
       return;
     }
-
     fetchSuggestions(query)
       .then(data => displaySuggestions(data, suggestionsPanel, input))
       .catch(error => console.log('Error:', error));
@@ -51,9 +46,7 @@ function displaySuggestions(data, suggestionsPanel, input) {
 function validacionFormulario() {
   document.getElementById('rutaForm').addEventListener('submit', async function(event) {
     event.preventDefault();
-
     const formValues = getFormValues();
-
     if (validateForm(formValues)) {
       await addTransportToFirestore(formValues);
     }
@@ -87,9 +80,7 @@ async function addTransportToFirestore(formValues) {
   try {
     const docRef = await addDoc(collection(db, 'transports'), formValues);
     console.log("Document written with ID: ", docRef.id);
-    // Aquí podrías redirigir a otra página o mostrar un mensaje de éxito
   } catch (error) {
     console.error("Error adding document: ", error);
-    // Aquí puedes manejar errores, como mostrar un mensaje de error al usuario
   }
 }

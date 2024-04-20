@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let searchButton = document.getElementById('searchButton');
     let searchInput = document.getElementById('voice-search');
 
-    // Encoding the search in 64 base
     function performSearch() {
         let searchTerm = searchInput.value;
         let encodedSearchTerm = btoa(searchTerm);
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Prevent default to the form
     searchForm.addEventListener('submit', function(event) {
         event.preventDefault();
     });

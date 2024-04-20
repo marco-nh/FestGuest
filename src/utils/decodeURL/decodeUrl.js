@@ -7,7 +7,6 @@ function decodeSearchTermFromUrl() {
     }
 }
 
-// Waiting the DOM content
 document.addEventListener("DOMContentLoaded", function() {
     decodeSearchTermFromUrl();
 });

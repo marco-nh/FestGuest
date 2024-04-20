@@ -1,4 +1,3 @@
-// Listening the voice of the user(USABILITY)
 function startVoiceRecognition() {
     const recognition = new (window.webkitSpeechRecognition || SpeechRecognition)();
     
@@ -9,7 +8,6 @@ function startVoiceRecognition() {
     let finalTranscript = '';
     let timeoutID = null; 
     
-    // Storing the transcription
     recognition.onresult = function(event) {
         let interimTranscript = ''; 
         for (let i = event.resultIndex; i < event.results.length; ++i) {
@@ -20,11 +18,9 @@ function startVoiceRecognition() {
             }
         }
 
-        // Voice record
         const resultWithoutLastChar = finalTranscript.slice(0, -1); 
         document.getElementById('voice-search').value = resultWithoutLastChar.trim();
         
-        // Timeout
         clearTimeout(timeoutID);
         timeoutID = setTimeout(function() {
             recognition.stop();
@@ -38,6 +34,5 @@ function startVoiceRecognition() {
     recognition.onend = function() {
         console.log('Recognition ended');
     };
-
     recognition.start();
 }

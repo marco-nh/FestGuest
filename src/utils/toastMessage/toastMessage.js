@@ -1,4 +1,3 @@
-// Función para mostrar mensajes
 export function showMessage(message, type = "success") {
     Toastify({
       text: message,
