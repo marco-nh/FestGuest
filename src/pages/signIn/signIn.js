@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const tieneNum = /\d/.test(password.value);
         const tieneSimbolo = /[!@#$%&*(),.?":{}|<>]/.test(password.value);
-
+        const minCharacters = "Password is less than 8 characters."
         if (password.value.length < 8 || !tieneNum || !tieneSimbolo || password.value !== password2.value) {
             if (password.value.length < 8) {
-                passwordErrorDiv.textContent = 'Password is less than 8 characters.';
+                passwordErrorDiv.textContent = minCharacters;
             } else if (!tieneNum || !tieneSimbolo) {
                 passwordErrorDiv.textContent = 'Password does not meet the format requirements.';
             } else {
