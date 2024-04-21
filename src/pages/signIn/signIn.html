@@ -22,16 +22,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" integrity="sha256-CAI/7ThhltsmP2L2zKBYa7FknB3ZwFbD0nqL8FCdxdc=" crossorigin="anonymous" />
     <!-- Header Styles -->
     <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
+    <!-- Sign in script and styles -->
+    <script type="module" src="/src/pages/signIn/signIn.js"></script>
+    <link rel="stylesheet" href="/src/pages/signIn/signIn.css">
 </head>
 
 <body class="bg-transparent">
     <!-- Header dynamic load -->
     <script src="/src/utils/loadComponents/loadComponents.js"></script>
     <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
-    <script src="signIn.js" type="module"></script>
-    <link rel="stylesheet" href="/src/pages/signIn/signIn.css">
-    <header id="header"></header>
 
+    <div class="header">
+      <header id="header"></header>
+    </div>
+    
     <div id="content">
         <div style="display: flex; width: 100%; height: 100vh;">
             <div style="width: 70%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">

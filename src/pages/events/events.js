@@ -1,16 +1,16 @@
 let eventos = [];
 
 function initializeEvents() {
-    fetch('/src/events.json')
+    fetch('/src/static/events.json')
         .then(response => response.json())
         .then(data => {
             eventos = data.eventos;
             setupSearch();
-            handleSearch(); // Call handleSearch when events are loaded
+            handleSearch();
         })
         .catch(error => console.error('Error loading events:', error));
 
-    // Define handleSearch function outside of setupSearch
+    
     function handleSearch(event) {
         if (event) {
             event.preventDefault();
@@ -39,55 +39,62 @@ function initializeEvents() {
     function renderEvents(events) {
         const searchResults = document.getElementById('searchResults');
         searchResults.innerHTML = '';
-
+    
         if (events.length === 0) {
             searchResults.innerHTML = '<p class="text-gray-600 text-center py-4 border border-gray-300 rounded-md shadow-md bg-white p-6">No events found. Keep exploring!</p>';
             return;
         }
-
+    
         const container = document.createElement('div');
-        container.classList.add('grid', 'gap-4', 'grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3');
-
+        container.classList.add('grid', 'gap-4');
+    
         events.forEach(evento => {
             const card = createEventCard(evento);
             container.appendChild(card);
         });
-
+    
         searchResults.appendChild(container);
     }
+    
 
     function createEventCard(evento) {
-        const card = document.createElement('div');
-        card.classList.add('bg-white', 'overflow-hidden', 'shadow-md', 'rounded-lg');
-        
+        const card = document.createElement('a');
+        card.href = '#';
+        card.classList.add('flex', 'items-center', 'bg-white', 'border', 'border-gray-200', 'rounded-lg', 'shadow', 'hover:bg-gray-100', 'dark:border-gray-700', 'dark:bg-gray-800', 'dark:hover:bg-gray-700',"hover:shadow-2xl","hover:contrast-125","transition-all","hover:scale-105");
+    
         card.addEventListener('click', () => {
             showEventDetails(evento);
         });
-
+    
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('flex-shrink-0', 'h-48', 'w-48', 'rounded-l-lg', 'overflow-hidden');
+    
         const img = document.createElement('img');
-        img.classList.add('w-full', 'h-64', 'object-cover', 'object-center');
+        img.classList.add('object-cover', 'w-full', 'h-full');
         img.src = evento.images;
         img.alt = evento.nombre;
-
+    
+        imgContainer.appendChild(img);
+        card.appendChild(imgContainer);
+    
         const content = document.createElement('div');
-        content.classList.add('p-4');
-
-        const title = document.createElement('h3');
-        title.classList.add('text-xl', 'font-medium', 'text-gray-900');
+        content.classList.add('flex', 'flex-col', 'p-4', 'flex-grow');
+    
+        const title = document.createElement('h5');
+        title.classList.add('mb-2', 'text-xl', 'font-bold', 'text-gray-900', 'dark:text-white');
         title.textContent = evento.nombre;
-
-        const location = document.createElement('p');
-        location.classList.add('mt-2', 'text-sm', 'text-gray-600');
-        location.textContent = `Ciudad: ${evento.ubicacion.ciudad}`;
-
+    
+        const description = document.createElement('p');
+        description.classList.add('mb-3', 'text-sm', 'text-gray-700', 'dark:text-gray-400');
+        description.textContent = evento.descripcion;
+    
         content.appendChild(title);
-        content.appendChild(location);
-
-        card.appendChild(img);
+        content.appendChild(description);
         card.appendChild(content);
-
+    
         return card;
     }
+    
 }
 
 document.addEventListener('DOMContentLoaded', initializeEvents);
