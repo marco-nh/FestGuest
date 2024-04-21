@@ -18,14 +18,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const tieneNum = /\d/.test(password.value);
         const tieneSimbolo = /[!@#$%&*(),.?":{}|<>]/.test(password.value);
-        const minCharacters = "Password is less than 8 characters."
+        const minCharacters = "Password is less than 8 characters.";
+        const formatPass = "Password does not meet the format requirements.";
+        const notMatch ="Passwords do not match.";
+
         if (password.value.length < 8 || !tieneNum || !tieneSimbolo || password.value !== password2.value) {
             if (password.value.length < 8) {
                 passwordErrorDiv.textContent = minCharacters;
             } else if (!tieneNum || !tieneSimbolo) {
-                passwordErrorDiv.textContent = 'Password does not meet the format requirements.';
+                passwordErrorDiv.textContent = formatPass;
             } else {
-                passwordErrorDiv.textContent = 'Passwords do not match.';
+                passwordErrorDiv.textContent = notMatch;
             }
             passwordErrorDiv.classList.remove('hidden');
             password.value = '';
