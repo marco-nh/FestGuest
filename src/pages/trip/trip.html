@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="description" content="Fest Guest App">
+    <meta name="viewport" content="width=device-width" />
+    <meta name="view-transition" content="same-origin" />
+    <meta name="keywords" content="fest guest, app, events, festivals, concerts, conferences, parties, houses, accommodations, transportation, ridesharing">
+    <meta name="robots" content="index, follow">
+
+    <!--Profile-->
+    <title>Trip</title>
+    <link rel="icon" href="/src/FestGuest.ico" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" integrity="sha256-CAI/7ThhltsmP2L2zKBYa7FknB3ZwFbD0nqL8FCdxdc=" crossorigin="anonymous" />
+    <!-- Header Styles -->
+    <link rel="stylesheet" href="/src/pages/components/header/header.css" />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/src/pages/trip/trip.css" />
+</head>
+
+<body class="bg-transparent">
+    <!-- Header dynamic load -->
+    <script src="/src/utils/loadComponents/loadComponents.js"></script>
+    <script>
+        loadComponents("/src/pages/components/header/header.html", "header")
+    </script>
+    <div style="display: block; margin: 6rem;">
+        <header id="header"></header>
+    </div>
+
+    <div class="flex">
+        <div class="w-1/3 px-2">
+            <img id="festGuestImage" src="/src/images/FestGuest.jpg" class="max-w-xxl h-auto max-h-32 mx-auto" alt="FestGuest Logo">
+            <!-- Aquí van los filtros -->
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="w-2/3 px-4">
+            <div id="content">
+                <!-- Navbar -->
+                <nav class="bg-gray-800 text-white py-4 px-8">
+                    <div class="container mx-auto flex justify-between items-center">
+                        <h1 class="text-xl font-semibold">Event Details</h1>
+                        <!-- Add any additional navigation items if needed -->
+                    </div>
+                </nav>
+
+                <!-- Main Content -->
+                <div class="container mx-auto mt-8">
+                    <div class="bg-white shadow-md rounded-lg p-8">
+                        <!-- Event Name -->
+                        <h2 class="text-2xl font-bold mb-4" id="eventName">Event Name</h2>                
+
+                        <div class="event-info">
+                            <img id="eventImage" class="w-3/4 mx-auto mb-4 rounded" src="" alt="Event Image">
+                            <p id="eventStart" class="mb-2 text-gray-600"></p>
+                            <p id="eventEnd" class="mb-2 text-gray-600"></p>
+                            <p id="eventCountry" class="mb-2 text-gray-600"></p>
+                            <p id="eventUpdated" class="mb-2 text-gray-600"></p>
+                        </div>
+
+<!-- Botones de Chat y Suscripción -->
+<div class="btn-group flex justify-between mb-4">
+    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center">
+        <span>Chat </span>
+        <i class="fas fa-comments ml-2"></i>
+    </button>
+    <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center">
+        <span>Subscribe </span>
+        <i class="fas fa-bell ml-2"></i>
+    </button>
+</div>
+
+<!-- Botones de Transporte y Alojamiento -->
+<div class="btn-group flex justify-between">
+    <button class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 flex items-center">
+        <span>Transport </span>
+        <i class="fas fa-shuttle-van ml-2"></i>
+    </button>
+    <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 flex items-center">
+        <span>Accommodations </span>
+        <i class="fas fa-bed ml-2"></i>
+    </button>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/src/pages/trip/trip.js"></script>
+</body>
+
+</html>
