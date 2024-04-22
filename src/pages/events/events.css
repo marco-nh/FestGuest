@@ -1,0 +1,13 @@
+.loader {
+    border: 8px solid #3B82F6; /* Cambia el color a tu gusto */
+    border-top: 8px solid #ffda07; /* Cambia el color a tu gusto */
+    border-radius: 50%;
+    width: 80px; /* Cambia el tamaño a tu gusto */
+    height: 80px; /* Cambia el tamaño a tu gusto */
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
