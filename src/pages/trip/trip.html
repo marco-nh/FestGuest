@@ -26,16 +26,18 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/src/pages/trip/trip.css" />
     <script type="module" src="/src/pages/trip/trip.js"></script>
+    <script type="module" src="/src/firebase/auth/verificationLogged.js"></script>
 </head>
 
 <body class="bg-transparent">
     <!-- Header dynamic load -->
     <script src="/src/utils/loadComponents/loadComponents.js"></script>
-    <script>
-        loadComponents("/src/pages/components/header/header.html", "header")
-    </script>
-    <div style="display: block; margin: 6rem;">
-        <header id="header"></header>
+    <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
+    <script>loadComponents("/src/pages/components/header/logged/header.html", "headerLogged")</script>
+    
+    <div class="header">
+        <header class="hidden" id="header"></header>
+        <header class="hidden" id="headerLogged"></header>
     </div>
 
     <div class="flex">
