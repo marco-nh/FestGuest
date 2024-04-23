@@ -1,3 +1,5 @@
+import { categoryImages } from "../../utils/category/category.js"
+
 let eventos = [];
 
 function initializeEvents() {
@@ -58,29 +60,6 @@ function getRandomImageURL(category) {
     // Define el directorio base donde se encuentran las imágenes
     const baseURL = '/src/images/categoriesEvents/';
 
-    // Define el objeto que mapea cada categoría con la cantidad de imágenes disponibles
-    const categoryImages = {
-        'school-holidays': 5,
-        'public-holidays': 5,
-        'observances': 1,
-        'politics': 1,
-        'conferences': 1,
-        'expos': 1,
-        'concerts': 1,
-        'festivals': 1,
-        'performing-arts': 1,
-        'sports': 1,
-        'community': 1,
-        'daylight-savings': 1,
-        'airport-delays': 1,
-        'severe-weather': 1,
-        'disasters': 1,
-        'terror': 1,
-        'health-warnings': 1,
-        'academic': 1
-    };
-    
-
     // Verifica si la categoría está definida en el objeto categoryImages
     if (category in categoryImages) {
         // Genera un número aleatorio entre 1 y el número de imágenes disponibles para esa categoría
@@ -108,26 +87,41 @@ function renderEvents(events) {
 
     events.forEach(evento => {
         const card = createEventCard(evento);
-        container.appendChild(card);
+        if (card) {
+            container.appendChild(card);
+        }
     });
 
     searchResults.appendChild(container);
 }
 
+
 function createEventCard(evento) {
+    let localization = getLocation(evento)
+    // Verificar si hay información de ubicación disponible
+    if (!localization) {
+        return null; // Si no hay ubicación, retornar null para omitir la creación de la tarjeta
+    }
+
     const card = document.createElement('a');
     card.classList.add('flex', 'items-center', 'bg-white', 'border', 'border-gray-200', 'rounded-lg', 'shadow', 'hover:bg-gray-100', 'dark:border-gray-700', 'dark:bg-gray-800', 'dark:hover:bg-gray-700', 'hover:shadow-2xl', 'hover:contrast-125', 'transition-all', 'hover:scale-105');
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('click', openEventDetails);
+    card.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            openEventDetails();
+        }
+    });
 
-    card.addEventListener('click', () => {
-        // Guarda el evento y la URL de la imagen en el localStorage
+    function openEventDetails() {
         const selectedEventData = {
             event: evento,
             imageURL: getRandomImageURL(evento.category)
         };
         localStorage.setItem('selectedEvent', JSON.stringify(selectedEventData));
         window.location.href = `/src/pages/trip/trip.html?eventName=${encodeURIComponent(evento.title)}`;
-    });
-    
+    }
+
     card.addEventListener('mouseenter', () => {
         card.classList.add('transform', 'scale-100', 'shadow-lg');
     });
@@ -153,14 +147,26 @@ function createEventCard(evento) {
     const title = document.createElement('h5');
     title.classList.add('mb-2', 'text-xl', 'font-bold', 'text-gray-900', 'dark:text-white');
     title.textContent = evento.title;
+    title.setAttribute('tabindex', '0');
 
     const dateLocation = document.createElement('p');
     dateLocation.classList.add('mb-1', 'text-sm', 'text-gray-600', 'dark:text-gray-400');
-    dateLocation.textContent = `${new Date(evento.start).toLocaleDateString()} - ${getLocation(evento)}`;
+    dateLocation.textContent = `${new Date(evento.start).toLocaleDateString()} - ${localization}`;
+    dateLocation.setAttribute('tabindex', '0');
 
     const description = document.createElement('p');
     description.classList.add('mb-3', 'text-sm', 'text-gray-700', 'dark:text-gray-400');
-    description.textContent = evento.description || 'No description available';
+    description.setAttribute('tabindex', '0');
+    // Verificar si hay descripción disponible y quitar la parte inicial si existe
+    const cleanedDescription = evento.description.replace(/^Sourced from predicthq\.com\s* \-/, '');
+    const descriptionLines = cleanedDescription.split('\n\n');
+    const shortenedDescription = descriptionLines.length > 4 ?
+        descriptionLines.slice(0, 3).join('\n\n') + '...' :
+        cleanedDescription.split(' ').length > 40 ?
+        cleanedDescription.split(' ').slice(0, 40).join(' ') + '...' :
+        cleanedDescription;
+
+    description.textContent = shortenedDescription.replace(/^Sourced from predicthq\.com\s*/, '');
 
     content.appendChild(title);
     content.appendChild(dateLocation);

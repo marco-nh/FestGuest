@@ -29,18 +29,22 @@
     <link rel="stylesheet" href="/src/pages/events/events.css"/>
     <!-- Adding scripts -->
     <script src="/src/utils/voiceRecognition/voiceRecognition.js" id="voiceRecognitionScript"></script>
-    <script src="/src/pages/events/events.js" id="eventsScript"></script>
-    <script src="/src/utils/decodeURL/decodeUrl.js" id="decodeUrlScript"></script>    
+    <script type="module" src="/src/pages/events/events.js" id="eventsScript"></script>
+    <script src="/src/utils/decodeURL/decodeUrl.js" id="decodeUrlScript"></script>
+    <script type="module" src="/src/firebase/auth/verificationLogged.js"></script>    
 </head>
 
 <body class="bg-transparent">
     <!-- Header dynamic load -->
     <script src="/src/utils/loadComponents/loadComponents.js"></script>
     <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
+    <script>loadComponents("/src/pages/components/header/logged/header.html", "headerLogged")</script>
     
     <div class="header">
-        <header id="header"></header>
+        <header class="hidden" id="header"></header>
+        <header class="hidden" id="headerLogged"></header>
     </div>
+
 
     <div class="flex">
         <div class="w-1/3 px-4">
@@ -66,7 +70,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <button type="submit" id="searchButton" class="inline-flex items-center py-3 px-5 text-lg font-bold text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-4">
+                            <button type="submit" id="searchButton" class="inline-flex items-center py-3 px-5 text-lg font-bold text-white bg-blue-700 rounded-lg border border-blue-700 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-4">
                                 <svg class="w-6 h-6 me-2 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                 </svg> Search
