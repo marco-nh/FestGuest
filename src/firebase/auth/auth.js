@@ -1,5 +1,5 @@
 import { auth } from "../initializeDatabase.js";
-import{ signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js';
+import{ signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js';
 
 const signInWithEmail = async (email, password) => {
     console.log(email,password)
@@ -23,4 +23,9 @@ const signInWithGoogle = async () => {
   }
 }
 
-export { signInWithEmail, createUserEmail, signInWithGoogle , sendMessageVerification};
+const signOutSession = async() => {
+  return await signOut(auth);
+}; 
+
+
+export { signInWithEmail, createUserEmail, signInWithGoogle , sendMessageVerification, signOutSession};
