@@ -15,6 +15,30 @@
     font-weight: bold;
 }
 
-.button-secondary:hover {
+.button-secondary:hover, #button-movil {
     background-color: #D3870A;
 }
+
+.header{
+    display: block; 
+    margin: 6rem;
+}
+#right-content-header{
+    width: -webkit-fill-available;
+}
+
+
+
+/* Mostrar el botón de la hamburguesa solo en dispositivos móviles */
+@media (max-width: 767.98px) {
+    .navbar-toggler-container {
+      display: block !important;
+    }
+  }
+  
+  /* Ocultar el botón de la hamburguesa en dispositivos que no sean móviles */
+  @media (min-width: 768px) {
+    .navbar-toggler-container {
+      display: none !important;
+    }
+  }

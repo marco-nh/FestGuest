@@ -1,24 +1,35 @@
-<header class="header display-high-width">
-  <div class="bg-blue-900 py-4 px-6 md:px-12 lg:px-16 xl:px-20 flex justify-between items-center fixed top-0 left-0 right-0">
-    
-    <!-- Selector de idioma -->
-    <div class="flex items-center">
-      <p class="text-white text-sm md:text-base">Idioma</p>
-      <i class="fas fa-globe text-white ml-2"></i>
-    </div>
-
-    <!-- Logo y Perfil -->
-    <div class="flex items-center">
+<header class="header display-high-width z-50 relative">
+  <div class="bg-blue-900 py-2 px-4 md:px-8 lg:px-12 xl:px-16 flex justify-between items-center fixed top-0 left-0 right-0">
+  
+    <div class="flex justify-center md:justify-start items-center">
       <a href="/src/index.html">
-        <img src="/src/images/logo.png" alt="Logo FestGest" class="w-32 h-auto">
+        <img src="/src/images/logo.png" alt="Logo FestGest" class="h-auto max-w-xs w-32" />
       </a>
-      
+
+      <div class="hidden md:flex justify-left md:ml-8 items-center">
+        <div class="dropdown">
+          <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Language
+            <i class="fas fa-globe text-white ml-1 md:ml-2"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item"><div class="flex"><img src="/src/images/uk_flag.png" alt="uk_flag" class="w-8 h-auto"><p class="px-1 md:px-2 text-xs md:text-sm">English</p></div></a>
+            <a class="dropdown-item"><div class="flex"><img src="/src/images/ca_flag.png" alt="ca_flag" class="w-8 h-auto"><p class="px-1 md:px-2 text-xs md:text-sm">Catalá</p></div></a>
+            <a class="dropdown-item"><div class="flex"><img src="/src/images/nk_flag.png" alt="nk_flag" class="w-8 h-auto"><p class="px-1 md:px-2 text-xs md:text-sm">한국인</p></div></a>
+            <a class="dropdown-item"><div class="flex"><img src="/src/images/sp_flag.png" alt="sp_flag" class="w-8 h-auto"><p class="px-1 md:px-2 text-xs md:text-sm">Español</p></div></a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="flex items-center justify-end space-x-4">
+    <button class="navbar-toggler md:hidden" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="right-content-header" class="hidden md:flex md:w-auto flex items-center justify-center md:justify-end space-x-4"> <!-- Modificado para centrar en dispositivos móviles -->
       <div class="dropdown">
         <button class="btn button-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown button
+          Service
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="/src/pages/form/transport/transport.html">Transport</a>
@@ -26,12 +37,11 @@
         </div>
       </div>
 
-      <button class="button-secondary px-3 py-2 rounded-xl flex items-center cursor-pointer">
-        <a href="/src/pages/profile/profile.html" class="flex items-center text-white">
-          <img src="/src/images/profilePhoto.png" alt="Foto de Perfil" class="w-10 h-10 rounded-full">
-          <span class="ml-2">SoryKaba69</span>
-        </a>
-      </button>
+      <a href="/src/pages/profile/profile.html" class="px-3 py-2 rounded-xl rounded-lg cursor-pointer button-secondary flex items-center text-white no-underline hover:no-underline">
+        <img src="/src/images/profilePhoto.png" alt="Foto de Perfil" class="w-10 h-10 rounded-full">
+        <span class="ml-2">SoryKaba69</span>
+      </a>        
+
       <div class="px-1 py-1 rounded-xl flex items-center">
         <p class="flex items-center text-white">
           <img src="/src/images/VirtualMoney.png" alt="Monedas" class="w-10 h-10 rounded-full">
@@ -39,5 +49,28 @@
         </p>
       </div>
     </div>
+
+    <nav class="navbar navbar-dark justify-content-end navbar-expand-md">
+      <div class="d-flex justify-content-end d-md-none d-lg-none">
+        <button class="navbar-toggler bg-warning" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+  
+  <!-- Menú desplegable para dispositivos móviles -->
+  <div class="collapse navbar-collapse justify-content-end" id="navbarToggleExternalContent">
+    <ul class="navbar-nav mr-auto items-center">
+      <li class="nav-item">
+        <a class="nav-link" href="/src/pages/profile/profile.html">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/src/pages/form/transport/transport.html">Transport</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/src/pages/form/accommodation/accommodation.html">Accommodation</a>
+      </li>
+    </ul>
   </div>
 </header>
