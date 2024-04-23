@@ -1,4 +1,7 @@
-import { signInWithGoogle, createUserEmail, sendMessageVerification } from "../../firebase/auth/auth.js";
+import { app } from "../../firebase/initializeDatabase.js";
+import { signInWithGoogle, createUserEmail, sendMessageVerification } from "../../firebase/auth/auth.js"; 
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const google = document.getElementById('google_button');
@@ -6,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     google.addEventListener("click", function () {
         signInWithGoogle();
+        // FALTA añadir que obtener el email del usuario
     });
 
     registro.addEventListener('click', async (e) => {
@@ -39,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             await createUserEmail(email.value, password.value);
             await sendMessageVerification();
+            await addAccommodation(email.value, password.value); // adding user in firestore
         } catch (error) {
             emailErrorDiv.textContent = 'Invalid email or password.';
             emailErrorDiv.classList.add('block');
@@ -46,3 +51,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+async function addAccommodation(emailValue, passwordValue) {
+    try {
+        const db = getFirestore(app);
+        const rol = "Buyer";
+        const photoPred = "/src/images/photoPred.png";
+        const docRef = await addDoc(collection(db, 'users'), {
+            userEmail: emailValue,
+            photo: photoPred,
+            rol: rol
+        });
+        console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+        console.error("Error adding document: ", error);
+    }
+}   
