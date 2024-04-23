@@ -63,9 +63,12 @@ function getRandomImageURL(category) {
     // Verifica si la categoría está definida en el objeto categoryImages
     if (category in categoryImages) {
         // Genera un número aleatorio entre 1 y el número de imágenes disponibles para esa categoría
-        const randomImageNumber = Math.floor(Math.random() * categoryImages[category]) + 1;
+        const crypto = window.crypto || window.Crypto;
+        const array = new Uint32Array(1);
+        crypto.getRandomValues(array); // Generar un valor aleatorio seguro
+        const randomIndex = array[0] % categoryImages[category] + 1;
         // Construye la URL de la imagen aleatoria seleccionada
-        const imageURL = `${baseURL}${category}/${randomImageNumber}.jpg`;
+        const imageURL = `${baseURL}${category}/${randomIndex}.jpg`;
         return imageURL;
     } else {
         // Si la categoría no está definida en categoryImages, devuelve una imagen por defecto
