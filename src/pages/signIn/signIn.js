@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     google.addEventListener("click", function () {
         signInWithGoogle();
-        // FALTA añadir que obtener el email del usuario
+        window.location.href = "/src/index.html";
     });
+    
 
     registro.addEventListener('click', async (e) => {
 
@@ -62,6 +63,7 @@ async function addAccommodation(emailValue, passwordValue) {
             rol: rol
         });
         console.log("Document written with ID: ", docRef.id);
+        window.location.href = "/src/index.html";
     } catch (error) {
         console.error("Error adding document: ", error);
     }
