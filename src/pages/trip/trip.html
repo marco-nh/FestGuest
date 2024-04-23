@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Meta tags -->
     <meta charset="UTF-8" />
@@ -26,6 +25,7 @@
     <link rel="stylesheet" href="/src/pages/components/header/header.css" />
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/src/pages/trip/trip.css" />
+    <script type="module" src="/src/pages/trip/trip.js"></script>
 </head>
 
 <body class="bg-transparent">
@@ -66,40 +66,38 @@
                             <p id="eventStart" class="mb-2 text-gray-600"></p>
                             <p id="eventEnd" class="mb-2 text-gray-600"></p>
                             <p id="eventCountry" class="mb-2 text-gray-600"></p>
+                            <p id="eventLocation" class="mb-2 text-gray-600"></p>
                             <p id="eventUpdated" class="mb-2 text-gray-600"></p>
                         </div>
 
-<!-- Botones de Chat y Suscripción -->
-<div class="btn-group flex justify-between mb-4">
-    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center">
-        <span>Chat </span>
-        <i class="fas fa-comments ml-2"></i>
-    </button>
-    <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center">
-        <span>Subscribe </span>
-        <i class="fas fa-bell ml-2"></i>
-    </button>
-</div>
+                        <!-- Botones de Chat y Suscripción -->
+                        <div class="btn-group flex justify-between mb-4">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center">
+                                <span>Chat </span>
+                                <i class="fas fa-comments ml-2"></i>
+                            </button>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center">
+                                <span>Subscribe </span>
+                                <i class="fas fa-bell ml-2"></i>
+                            </button>
+                        </div>
 
-<!-- Botones de Transporte y Alojamiento -->
-<div class="btn-group flex justify-between">
-    <button class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 flex items-center">
-        <span>Transport </span>
-        <i class="fas fa-shuttle-van ml-2"></i>
-    </button>
-    <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 flex items-center">
-        <span>Accommodations </span>
-        <i class="fas fa-bed ml-2"></i>
-    </button>
-</div>
+                        <!-- Botones de Transporte y Alojamiento -->
+                        <div class="btn-group flex justify-between">
+                            <button id="transportButton" class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 flex items-center">
+                                <span>Transport </span>
+                                <i class="fas fa-shuttle-van ml-2"></i>
+                            </button>
+                            <button id="accommodationsButton" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 flex items-center">
+                                <span>Accommodations </span>
+                                <i class="fas fa-bed ml-2"></i>
+                            </button>
+                        </div>
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="/src/pages/trip/trip.js"></script>
 </body>
-
 </html>
