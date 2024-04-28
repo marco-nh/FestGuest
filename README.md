@@ -12,11 +12,11 @@ Our proposed venture aims to develop a social festival reservation application (
     <img src="https://github.com/marco-nh/FestGuest/assets/90756437/fb80a7c2-e8d2-4674-ba5d-f07f18e50e37"/>
 </p>
 <p align="center">
-  <a href="https://github.com/user-nizan"><img src="https://img.shields.io/badge/GitHub-Nizan-purple?style=flat-square&logo=github"/></a>
-  <a href="https://github.com/marco-nh"><img src="https://img.shields.io/badge/GitHub-Marco-blue?style=flat-square&logo=github"/></a>
+  <a href="https://github.com/AlejandroDavidArzolaSaavedra"><img src="https://img.shields.io/badge/GitHub-Alejandro-red?style=flat-square&logo=github"/></a>
   <a href="https://github.com/DavidDenoia"><img src="https://img.shields.io/badge/GitHub-David-green?style=flat-square&logo=github"/></a>
   <a href="https://github.com/Roichu5k"><img src="https://img.shields.io/badge/GitHub-Roi-orange?style=flat-square&logo=github"/></a>
-  <a href="https://github.com/AlejandroDavidArzolaSaavedra"><img src="https://img.shields.io/badge/GitHub-Alejandro-red?style=flat-square&logo=github"/></a>
+  <a href="https://github.com/marco-nh"><img src="https://img.shields.io/badge/GitHub-Marco-blue?style=flat-square&logo=github"/></a>
+  <a href="https://github.com/user-nizan"><img src="https://img.shields.io/badge/GitHub-Nizan-purple?style=flat-square&logo=github"/></a>
 </p>
 
 
