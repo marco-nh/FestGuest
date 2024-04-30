@@ -44,13 +44,21 @@ function displaySuggestions(data, suggestionsPanel, input) {
 }
 
 function validacionFormulario() {
-  document.getElementById('rutaForm').addEventListener('submit', async function(event) {
+  document.getElementById('rutaForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const formValues = getFormValues();
-    if (validateForm(formValues)) {
-      await addTransportToFirestore(formValues);
-    }
+    handleSubmit(event); // Call an async function inside here if needed
   });
+}
+
+async function handleSubmit(event) {
+  const formValues = getFormValues();
+  if (validateForm(formValues)) {
+    try {
+      await addTransportToFirestore(formValues);
+    } catch (error) {
+      console.error("Error adding transport: ", error);
+    }
+  }
 }
 
 function getFormValues() {

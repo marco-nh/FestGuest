@@ -31,12 +31,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    window.addEventListener('load', async () => {
+    window.addEventListener('load', () => {
         const userEmail = localStorage.getItem('userEmail');
         if (userEmail) {
             updateProfilePhoto();
         }
     });
+    
 
     onAuthStateChanged(auth, async (user) => {
         if (user) { // Usuario logeado

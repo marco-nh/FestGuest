@@ -31,12 +31,13 @@ function searchEvents(city) {
         "Accept": "application/json"
     };
     const url = `${baseURL}?q=${encodeURIComponent(city)}`;
-
+    console.log(url)
     const loader = document.getElementById('loader');
     loader.style.display = 'flex'; 
     searchResults.innerHTML = '';
     fetch(url, { headers })
         .then(response => {
+            console.log(response)
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
