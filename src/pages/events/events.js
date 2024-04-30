@@ -154,13 +154,8 @@ function createEventCard(evento) {
     description.classList.add('mb-3', 'text-sm', 'text-gray-700', 'dark:text-gray-400');
     description.setAttribute('tabindex', '0');
 
-    const cleanedDescription = evento.description.replace(/^Sourced from predicthq\.com\s* \-/, '');
-    const descriptionLines = cleanedDescription.split('\n\n');
-    const shortenedDescription = descriptionLines.length > 4 ?
-        descriptionLines.slice(0, 3).join('\n\n') + '...' :
-        cleanedDescription.split(' ').length > 40 ?
-        cleanedDescription.split(' ').slice(0, 40).join(' ') + '...' :
-        cleanedDescription;
+    const cleanedDescription = evento.description.replace(/^Sourced from predicthq\.com\s* -/, '');
+    const shortenedDescription = shortenDescription(cleanedDescription)
 
     description.textContent = shortenedDescription.replace(/^Sourced from predicthq\.com\s*/, '');
 
@@ -171,6 +166,27 @@ function createEventCard(evento) {
 
     return card;
 }
+
+function shortenDescription(description, maxLines = 4, maxWords = 40) {
+    const descriptionLines = description.split('\n');
+    const cleanedDescription = description.replace(/\n/g, ' ');
+    
+    let shortenedDescription;
+  
+    if (descriptionLines.length > maxLines) {
+      shortenedDescription = descriptionLines.slice(0, maxLines - 1).join('\n\n') + '...';
+    } else {
+      const wordCount = cleanedDescription.split(' ').length;
+      if (wordCount > maxWords) {
+        shortenedDescription = cleanedDescription.split(' ').slice(0, maxWords - 1).join(' ') + '...';
+      } else {
+        shortenedDescription = cleanedDescription;
+      }
+    }
+  
+    return shortenedDescription;
+  }
+
 
 function getLocation(event) {
     let locationString = '';
