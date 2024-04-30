@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
             password2.value = '';
             return;
         }
-
         try {
             await createUserEmail(email.value, password.value);
             await sendMessageVerification();
@@ -72,7 +71,7 @@ async function addUser(emailValue) {
             photo: photoPred,
             rol: rol
         });
-        await saveUserInfoToLocal(email);
+        await saveUserInfoToLocal(emailValue);
         console.log("Document written with ID: ", docRef.id);
         window.location.href = "/src/index.html";
     } catch (error) {
