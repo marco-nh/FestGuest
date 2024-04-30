@@ -35,10 +35,12 @@
 <body class="bg-transparent">
     <!-- Header dynamic load -->
     <script src="/src/utils/loadComponents/loadComponents.js"></script>
+    <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
     <script>loadComponents("/src/pages/components/header/logged/header.html", "headerLogged")</script>
     
     <div class="header">
-        <header id="headerLogged"></header>
+        <header class="hidden" id="header"></header>
+        <header class="hidden" id="headerLogged"></header>
     </div>
 
     <div id="content">
