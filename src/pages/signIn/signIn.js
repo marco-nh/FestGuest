@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', function () {
             let password2 = document.getElementById('password2reg');
             let emailErrorDiv = document.getElementById('emailreg-error');
             let passwordErrorDiv = document.getElementById('passwordreg-error');
-
+    
             const tieneNum = /\d/.test(password.value);
             const tieneSimbolo = /[!@#$%&*(),.?":{}|<>]/.test(password.value);
             const minCharacters = "Password is less than 8 characters.";
             const formatPass = "Password does not meet the format requirements.";
-            const notMatch ="Passwords do not match.";
-
+            const notMatch = "Passwords do not match.";
+    
             if (password.value.length < 8 || !tieneNum || !tieneSimbolo || password.value !== password2.value) {
                 if (password.value.length < 8) {
                     passwordErrorDiv.textContent = minCharacters;
@@ -41,16 +41,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 password2.value = '';
                 return;
             }
-
+    
             await createUserEmail(email.value, password.value);
             await sendMessageVerification();
-            await addUser(email.value); 
+            await addUser(email.value);
         } catch (error) {
             console.error("Error during registration:", error);
             emailErrorDiv.textContent = 'Invalid email or password.';
             emailErrorDiv.classList.add('block');
         }
-    });
+    });    
 });
 
 async function handleGoogleButtonClick() {
