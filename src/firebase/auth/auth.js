@@ -14,12 +14,13 @@ const sendMessageVerification = async() => {
   return await sendEmailVerification(auth.currentUser);
 }; 
 
+
 const signInWithGoogle = async () => {
   try {
-    const result = await signInWithPopup(auth, new GoogleAuthProvider());
-    return await GoogleAuthProvider.credentialFromResult(result);
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
+      return result;
   } catch (error) {
-    return await GoogleAuthProvider.credentialFromError(error);
+      throw error;
   }
 }
 
