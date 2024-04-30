@@ -8,16 +8,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const google = document.getElementById('google_button');
     const registro = document.getElementById('registro');
     google.addEventListener("click", async function () {
-        const result = await signInWithGoogle();
-        const userCredential = result.user;
-        const email = userCredential.email;
-
-        const userExists = await checkIfExists('users', 'userEmail', email);
-        if (!userExists) {
-            await addUser(email); 
-            await saveUserInfoToLocal(email);
+        try {
+            const result = await signInWithGoogle();
+            const userCredential = result.user;
+            const email = userCredential.email;
+    
+            const userExists = await checkIfExists('users', 'userEmail', email);
+            if (!userExists) {
+                await addUser(email); 
+                await saveUserInfoToLocal(email);
+            }
+            window.location.href = "/src/index.html";
+        } catch (error) {
+            console.error("Error signing in with Google:", error);
         }
-        window.location.href = "/src/index.html";
     });
     
 

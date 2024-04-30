@@ -4,16 +4,19 @@ import { saveUserInfoToLocal } from "../../firebase/firestore/saveUserInfoToLoca
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('login-form').addEventListener('submit', async (e) => {
-        e.preventDefault(); 
-        let email = document.getElementById('emaillog').value;
-        let password = document.getElementById('passwordlog').value;
+        e.preventDefault();
         try {
-            await signInWithEmail(email, password);
-            await saveUserInfoToLocal(email);
-            window.location.href = "/src/index.html";
+            await handleLogin();
         } catch (error) {
             showMessage("Invalid email or password", "warning");
         }
     });
 });
 
+async function handleLogin() {
+    let email = document.getElementById('emaillog').value;
+    let password = document.getElementById('passwordlog').value;
+    await signInWithEmail(email, password);
+    await saveUserInfoToLocal(email);
+    window.location.href = "/src/index.html";
+}
