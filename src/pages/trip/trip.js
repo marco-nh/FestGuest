@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', function() {
     const storedEvent = JSON.parse(localStorage.getItem('selectedEvent'));
     const infoEvent = storedEvent.event;
     
