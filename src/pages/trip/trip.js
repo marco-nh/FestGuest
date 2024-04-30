@@ -1,43 +1,43 @@
-
 document.addEventListener('DOMContentLoaded', async function() {
-    const storedEvent = JSON.parse(localStorage.getItem('selectedEvent'));
-    const infoEvent = storedEvent.event;
+    try {
+        const storedEvent = JSON.parse(localStorage.getItem('selectedEvent'));
+        const infoEvent = storedEvent.event;
+        
+        const transportButton = document.getElementById('transportButton');
+        transportButton.addEventListener('click', async function() {
+            // Pendiente implementar Buscar los transportes relacionados con el evento(Revisar local storage)        
+        });
     
-    const transportButton = document.getElementById('transportButton');
-    transportButton.addEventListener('click', function() {
-        // Pendiente implementar Buscar los transportes relacionados con el evento(Revisar local storage)        
-    });
-
-
-    const accommodationsButton = document.getElementById('accommodationsButton');
-    accommodationsButton.addEventListener('click', function() {
-        // Pendiente implementar Buscar las acomodaciones relacionados con el evento(Revisar local storage)
-    });
-
-    if (storedEvent) {
-        const eventNameElement = document.getElementById('eventName');
-        const eventImageElement = document.getElementById('eventImage');
-        const eventStartElement = document.getElementById('eventStart');
-        const eventEndElement = document.getElementById('eventEnd');
-        const eventUpdatedElement = document.getElementById('eventUpdated');
-        const eventCountryElement = document.getElementById('eventCountry');
-        const eventLocationElement = document.getElementById('eventLocation');
-        
-        eventNameElement.textContent = infoEvent.title;
-        eventImageElement.src = storedEvent.imageURL;
-        eventStartElement.textContent = `Start Date: ${new Date(infoEvent.start).toLocaleDateString()}`;
-        eventEndElement.textContent = `End Date: ${new Date(infoEvent.end).toLocaleDateString()}`;
-        eventUpdatedElement.textContent = `Updated: ${new Date(infoEvent.updated).toLocaleDateString()}`;
-        eventCountryElement.textContent = `Country: ${infoEvent.country}`;
-        
-        if(storedEvent.event)
-        
-        try {
-            const location = await getLocationFromAPI(storedEvent.event);
-            eventLocationElement.textContent = `Location: ${location}`;
-        } catch (error) {
-            console.error('Error al obtener la ubicación:', error);
+        const accommodationsButton = document.getElementById('accommodationsButton');
+        accommodationsButton.addEventListener('click', async function() {
+            // Pendiente implementar Buscar las acomodaciones relacionados con el evento(Revisar local storage)
+        });
+    
+        if (storedEvent) {
+            const eventNameElement = document.getElementById('eventName');
+            const eventImageElement = document.getElementById('eventImage');
+            const eventStartElement = document.getElementById('eventStart');
+            const eventEndElement = document.getElementById('eventEnd');
+            const eventUpdatedElement = document.getElementById('eventUpdated');
+            const eventCountryElement = document.getElementById('eventCountry');
+            const eventLocationElement = document.getElementById('eventLocation');
+            
+            eventNameElement.textContent = infoEvent.title;
+            eventImageElement.src = storedEvent.imageURL;
+            eventStartElement.textContent = `Start Date: ${new Date(infoEvent.start).toLocaleDateString()}`;
+            eventEndElement.textContent = `End Date: ${new Date(infoEvent.end).toLocaleDateString()}`;
+            eventUpdatedElement.textContent = `Updated: ${new Date(infoEvent.updated).toLocaleDateString()}`;
+            eventCountryElement.textContent = `Country: ${infoEvent.country}`;
+            
+            try {
+                const location = await getLocationFromAPI(storedEvent.event);
+                eventLocationElement.textContent = `Location: ${location}`;
+            } catch (error) {
+                console.error('Error al obtener la ubicación:', error);
+            }
         }
+    } catch (error) {
+        console.error('Error during DOMContentLoaded event:', error);
     }
 });
 
