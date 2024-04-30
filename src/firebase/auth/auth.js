@@ -17,10 +17,11 @@ const sendMessageVerification = async() => {
 
 const signInWithGoogle = async () => {
   try {
-      const result = await signInWithPopup(auth, new GoogleAuthProvider());
-      return result;
+    const result = await signInWithPopup(auth, new GoogleAuthProvider());
+    return result;
   } catch (error) {
-      throw error;
+    console.error("Error signing in with Google:", error);
+    throw error; 
   }
 }
 

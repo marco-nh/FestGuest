@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', async () => {
         const userEmail = localStorage.getItem('userEmail');
         if (userEmail) {
-            updateProfilePhoto(userEmail);
+            updateProfilePhoto();
         }
     });
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 userEmailElement.textContent = userEmail;
             }
 
-            updateProfilePhoto(userEmail);
+            updateProfilePhoto();
         } else {
             header.classList.remove('hidden');
             headerLogged.classList.add('hidden');

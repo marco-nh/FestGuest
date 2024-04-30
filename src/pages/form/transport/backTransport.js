@@ -25,7 +25,7 @@ function agregarSugerencias(inputId, suggestionsId) {
 }
 
 async function fetchSuggestions(query) {
-  const response = await fetch(`https://api.tomtom.com/search/2/search/${encodeURIComponent(query)}.json?key=BsJ3AWQpgcXR8jiUM4E6AAYYgjNopDLy&limit=3&countrySet=ES`);
+  const response = await fetch(`https://api.tomtom.com/search/2/search/${encodeURIComponent(query)}.json?key=BsJ3AWQpgcXR8jiUM4E6AAYYgjNopDLy&limit=3`);
   return await response.json();
 }
 
