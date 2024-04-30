@@ -1,4 +1,3 @@
-/* Estilos adicionales */
 .button-primary {
     background-color: #F39910;
     color: white;
@@ -19,14 +18,19 @@
     background-color: #D3870A;
 }
 
+
 .header{
     display: block; 
     margin: 6rem;
 }
+
 #right-content-header{
     width: -webkit-fill-available;
 }
 
+.linksBtn, .linksBtn:hover {
+  text-decoration: none;
+}
 
 
 /* Mostrar el botón de la hamburguesa solo en dispositivos móviles */
