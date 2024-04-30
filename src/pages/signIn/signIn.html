@@ -39,16 +39,16 @@
     <div id="content">
         <div style="display: flex; width: 100%; height: 100vh;">
             <div style="width: 70%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <form style="width: 100%; max-width: 800px;">
+                <form class="w-full max-w-xl px-4 py-6 mx-auto border rounded-lg shadow-md">
                     <div class="mb-8">
-                        <p class="text-3xl font-bold text-blue-900">Crear cuenta</p>
+                        <p class="text-3xl font-bold text-blue-900">Create account</p>
                         <hr style="height:3px; background-color: #0D47A1; border: none;"/>
                       </div>
                     <div class="mb-10">
                       <label class="block text-blue-900 text-xl font-bold mb-2 " for="username">
-                        <p>Username</p>
+                        <p>Email</p>
                       </label>
-                      <input class="justify-center shadow appearance-none rounded-xl w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-700 focus:border-2 transition duration-1000" id="emailreg" type="email" placeholder="Username">
+                      <input class="justify-center shadow appearance-none rounded-xl w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-700 focus:border-2 transition duration-1000" id="emailreg" type="email" placeholder="example@example.com">
                       <div id="emailreg-error" class="hidden" style = 'color: red;'></div>
                     </div>
                     <div class="mb-4">
@@ -65,23 +65,30 @@
                         </label>
                         <input class="justify-center shadow appearance-none rounded-xl w-full py-3 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-700 focus:border-2 transition duration-1000" id="password2reg" type="password" placeholder="****">
                     </div>
-                    <div class="flex justify-between items-center mb-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <p class="font-bold text-blue-900">ROL -></p>
-                            <select class="bg-blue-900 hover:bg-blue-700 shadow appearance-none rounded-xl py-2 px-4 text-white font-bold leading-tight focus:outline-none focus:shadow-outline border border-gray-300" id="role" name="role">
-                                <option value="ROL"></option>
-                                <option value="vendedor">Vendedor</option>
-                                <option value="comprador">Comprador</option>
-                              </select>
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="mb-3">
+                          <label class="block text-blue-900 text-xl font-bold mb-2" for="password">
+                            <p>Rol</p>
+                          </label>
+                          <select class="bg-blue-900 hover:bg-blue-700 shadow appearance-none rounded-xl my-2 py-2 px-4 text-white font-bold leading-tight focus:outline-none focus:shadow-outline border border-gray-300" id="role" name="role">
+                            <option selected value="comprador">Comprador</option>
+                            <option value="vendedor">Vendedor</option>
+                          </select>
                         </div>
-                        <button id="google_button" type="button" class="login-with-google-btn" style="margin-right: 80px;">
-                          Sign in with Google
-                        </button>
+                      </div>
+                      <div class="flex justify-center items-center mb-3">
+                        <div class="flex justify-between items-center mb-3">
+                          <button id="registro" class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline" type="submit">
+                            Sign In
+                          </button>
+                          <button id="google_button" type="button" class="login-with-google-btn">
+                            Sign in with Google
+                          </button>
+                        </div>
                       </div>
                   </form>
-                  <button id="registro" class="bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline" type="submit">
-                    Sign In
-                  </button>
+                  
+                  
             </div>
             <div style="width: 30%; display: flex; height: 100vh;flex-direction: column;justify-content: center;align-items: center; background-color: gray;">
                 <p>QUEVEDO</p>
