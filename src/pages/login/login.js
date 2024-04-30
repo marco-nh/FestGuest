@@ -3,13 +3,17 @@ import { showMessage } from "../../utils/toastMessage/toastMessage.js";
 import { saveUserInfoToLocal } from "../../firebase/firestore/saveUserInfoToLocal.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
+    document.getElementById('login-form').addEventListener('submit', (e) => {
         e.preventDefault();
-        try {
-            await handleLogin();
-        } catch (error) {
-            showMessage("Invalid email or password", "warning");
-        }
+        handleLogin()
+            .then(() => {
+                // Éxito
+                window.location.href = "/src/index.html";
+            })
+            .catch((error) => {
+                // Error
+                showMessage("Invalid email or password", "warning");
+            });
     });
 });
 
