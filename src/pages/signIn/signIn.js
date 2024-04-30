@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
             let email = document.getElementById('emailreg');
             let password = document.getElementById('passwordreg');
             let password2 = document.getElementById('password2reg');
-            let emailErrorDiv = document.getElementById('emailreg-error');
             let passwordErrorDiv = document.getElementById('passwordreg-error');
     
             const tieneNum = /\d/.test(password.value);
