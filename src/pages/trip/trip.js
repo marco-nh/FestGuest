@@ -60,7 +60,7 @@ async function getLocationFromAPI(event) {
             const response = await fetch(`https://api.tomtom.com/search/2/reverseGeocode/crossStreet/${longitude}%2C${latitude}.json?limit=1&radius=10000&allowFreeformNewLine=false&view=Unified&key=BsJ3AWQpgcXR8jiUM4E6AAYYgjNopDLy&limit=1`);
             const data = await response.json();
             console.log("Cogio la remota");
-            if (data && data.addresses && data.addresses.length > 0) {
+            if (data?.addresses?.length > 0) {
                 const address = data.addresses[0].address;
                 locationString = `${address.streetName}, ${address.municipality}, ${address.country}`;
             }
