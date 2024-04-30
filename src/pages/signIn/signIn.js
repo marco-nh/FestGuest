@@ -14,43 +14,56 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    registro.addEventListener('click', async (e) => {
-        try {
-            let email = document.getElementById('emailreg');
-            let password = document.getElementById('passwordreg');
-            let password2 = document.getElementById('password2reg');
-            let passwordErrorDiv = document.getElementById('passwordreg-error');
-    
-            const tieneNum = /\d/.test(password.value);
-            const tieneSimbolo = /[!@#$%&*(),.?":{}|<>]/.test(password.value);
-            const minCharacters = "Password is less than 8 characters.";
-            const formatPass = "Password does not meet the format requirements.";
-            const notMatch = "Passwords do not match.";
-    
-            if (password.value.length < 8 || !tieneNum || !tieneSimbolo || password.value !== password2.value) {
-                if (password.value.length < 8) {
-                    passwordErrorDiv.textContent = minCharacters;
-                } else if (!tieneNum || !tieneSimbolo) {
-                    passwordErrorDiv.textContent = formatPass;
-                } else {
-                    passwordErrorDiv.textContent = notMatch;
-                }
-                passwordErrorDiv.classList.remove('hidden');
-                password.value = '';
-                password2.value = '';
-                return;
-            }
-    
-            await createUserEmail(email.value, password.value);
-            await sendMessageVerification();
-            await addUser(email.value);
-        } catch (error) {
+    registro.addEventListener('click', () => {
+        handleRegistroClick().catch(error => {
             console.error("Error during registration:", error);
+            const emailErrorDiv = document.getElementById('emailreg-error');
             emailErrorDiv.textContent = 'Invalid email or password.';
             emailErrorDiv.classList.add('block');
-        }
+        });
     });    
 });
+
+async function handleRegistroClick(event) {
+    try {
+        event.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+        const email = document.getElementById('emailreg').value;
+        const password = document.getElementById('passwordreg').value;
+        const password2 = document.getElementById('password2reg').value;
+        const passwordErrorDiv = document.getElementById('passwordreg-error');
+
+        const tieneNum = /\d/.test(password);
+        const tieneSimbolo = /[!@#$%&*(),.?":{}|<>]/.test(password);
+        const minCharacters = "Password is less than 8 characters.";
+        const formatPass = "Password does not meet the format requirements.";
+        const notMatch = "Passwords do not match.";
+
+        if (password.length < 8 || !tieneNum || !tieneSimbolo || password !== password2) {
+            if (password.length < 8) {
+                passwordErrorDiv.textContent = minCharacters;
+            } else if (!tieneNum || !tieneSimbolo) {
+                passwordErrorDiv.textContent = formatPass;
+            } else {
+                passwordErrorDiv.textContent = notMatch;
+            }
+            passwordErrorDiv.classList.remove('hidden');
+            return;
+        }
+
+        // Crear usuario con correo electrónico
+        await createUserEmail(email, password);
+        await sendMessageVerification();
+        await addUser(email);
+
+    } catch (error) {
+        console.error("Error during registration:", error);
+        const emailErrorDiv = document.getElementById('emailreg-error');
+        emailErrorDiv.textContent = 'Invalid email or password.';
+        emailErrorDiv.classList.add('block');
+    }
+}
+
 
 async function handleGoogleButtonClick() {
     try {
