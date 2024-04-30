@@ -32,9 +32,8 @@ function searchEvents(city) {
     };
     const url = `${baseURL}?q=${encodeURIComponent(city)}`;
 
-    // Mostrar la pantalla de carga
     const loader = document.getElementById('loader');
-    loader.style.display = 'flex'; // Cambiar a 'flex' para mostrar
+    loader.style.display = 'flex'; 
     searchResults.innerHTML = '';
     fetch(url, { headers })
         .then(response => {
@@ -52,26 +51,21 @@ function searchEvents(city) {
             searchResults.innerHTML = '<p class="text-red-500 text-center py-4">An error occurred while fetching events.</p>';
         })
         .finally(() => {
-            loader.style.display = 'none'; // Ocultar nuevamente
+            loader.style.display = 'none';
         });
 }
 
 function getRandomImageURL(category) {
-    // Define el directorio base donde se encuentran las imágenes
     const baseURL = '/src/images/categoriesEvents/';
 
-    // Verifica si la categoría está definida en el objeto categoryImages
     if (category in categoryImages) {
-        // Genera un número aleatorio entre 1 y el número de imágenes disponibles para esa categoría
         const crypto = window.crypto || window.Crypto;
         const array = new Uint32Array(1);
-        crypto.getRandomValues(array); // Generar un valor aleatorio seguro
+        crypto.getRandomValues(array);
         const randomIndex = array[0] % categoryImages[category] + 1;
-        // Construye la URL de la imagen aleatoria seleccionada
         const imageURL = `${baseURL}${category}/${randomIndex}.jpg`;
         return imageURL;
     } else {
-        // Si la categoría no está definida en categoryImages, devuelve una imagen por defecto
         return 'https://via.placeholder.com/150';
     }
 }
@@ -101,9 +95,8 @@ function renderEvents(events) {
 
 function createEventCard(evento) {
     let localization = getLocation(evento)
-    // Verificar si hay información de ubicación disponible
     if (!localization) {
-        return null; // Si no hay ubicación, retornar null para omitir la creación de la tarjeta
+        return null; 
     }
 
     const card = document.createElement('a');
@@ -138,7 +131,7 @@ function createEventCard(evento) {
 
     const img = document.createElement('img');
     img.classList.add('object-cover', 'w-full', 'h-full');
-    img.src = getRandomImageURL(evento.category); // Obtener la URL de la imagen aleatoria
+    img.src = getRandomImageURL(evento.category);
     img.alt = evento.title;
 
     imgContainer.appendChild(img);
@@ -160,7 +153,7 @@ function createEventCard(evento) {
     const description = document.createElement('p');
     description.classList.add('mb-3', 'text-sm', 'text-gray-700', 'dark:text-gray-400');
     description.setAttribute('tabindex', '0');
-    // Verificar si hay descripción disponible y quitar la parte inicial si existe
+
     const cleanedDescription = evento.description.replace(/^Sourced from predicthq\.com\s* \-/, '');
     const descriptionLines = cleanedDescription.split('\n\n');
     const shortenedDescription = descriptionLines.length > 4 ?
