@@ -7,12 +7,13 @@ import { checkIfExists } from "../../firebase/firestore/checkIfDocExists.js";
 document.addEventListener('DOMContentLoaded', function () {
     const google = document.getElementById('google_button');
     const registro = document.getElementById('registro');
+
     google.addEventListener("click", async function () {
         try {
             const result = await signInWithGoogle();
             const userCredential = result.user;
             const email = userCredential.email;
-    
+
             const userExists = await checkIfExists('users', 'userEmail', email);
             if (!userExists) {
                 await addUser(email); 
@@ -23,10 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error("Error signing in with Google:", error);
         }
     });
-    
 
     registro.addEventListener('click', async (e) => {
-
         let email = document.getElementById('emailreg');
         let password = document.getElementById('passwordreg');
         let password2 = document.getElementById('password2reg');
@@ -68,7 +67,7 @@ async function addUser(emailValue) {
         const db = getFirestore(app);
         const rol = "Buyer";
         const photoPred = "/src/images/photoPred.png";
-        const userName = emailValue.split('@')[0]; // Como nombre pondremos lo que tenga antes del @s
+        const userName = emailValue.split('@')[0]; 
         const docRef = await addDoc(collection(db, 'users'), {
             userEmail: emailValue,
             userName: userName, 
@@ -81,4 +80,4 @@ async function addUser(emailValue) {
     } catch (error) {
         console.error("Error adding document: ", error);
     }
-}   
+}  
