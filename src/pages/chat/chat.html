@@ -46,19 +46,21 @@
         <div class="container-fluid">
             <div class="row">
                 
-                <div class="col-4">
+                <div class="col">
                     <div id="chatList" class="overflow-auto" style="height: 90vh;">
-                        
+                        <h2 class="text-center py-1 my-2 font-weight-bold bg-blue-900 text-white">Lista de festivales</h3>
                     </div>
                 </div>
-                
+                <div class="px-1 shadow"></div>
                 <div class="col-8">
                     <div id="chatArea" class="d-flex flex-column justify-content-end" style="height: 90vh;">
                         <div id="messages" class="overflow-auto mb-3">
                             
                         </div>
-                        <textarea id="messageInput" class="form-control" placeholder="Escribe un mensaje..."></textarea>
-                        <button id="sendMessageButton" class="btn btn-primary mt-2">Enviar</button>
+                        <div class="flex flex-row my-2">
+                            <textarea id="messageInput" class="form-control" placeholder="Escribe un mensaje..."></textarea>
+                            <button id="sendMessageButton" class="btn btn-primary mx-1 px-3">Enviar</button>
+                        </div>
                     </div>
                 </div>
             </div>
