@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", function() {
     fetchChat();
     const sendMessageButton = document.getElementById("sendMessageButton");
     sendMessageButton.addEventListener("click", sendMessage);
+    const urlParams = new URLSearchParams(window.location.search);
+    const chatName = urlParams.get('chatName');
+    if(chatName == "Global"){
+        createChat("Global")
+    }
 });
 
 export async function createChat(name) {
@@ -24,14 +29,14 @@ export async function createChat(name) {
         console.error("Error al crear o verificar la carpeta 'messages' en el chat:", error);
     }
 
-    window.location.href = `/src/pages/chat/chat.html?chatName=${name}`;
+    //window.location.href = `/src/pages/chat/chat.html?chatName=${name}`;
 }
 
 
 function sendMessage() {
     const urlParams = new URLSearchParams(window.location.search);
     const chatName = urlParams.get('chatName');
-
+   
     var user=auth.currentUser;
     if(user){
         console.log("Usuario autenticado")
@@ -66,6 +71,67 @@ function fetchChat(){
         document.getElementById("messages").innerHTML += messageHTML; 
     })
 }
+
+
+
+function loadUserMessages() {
+    auth.onAuthStateChanged(function(user) {
+        if (user){ 
+            const userEmail = user.email;
+            console.log(userEmail);
+            const chatRef = ref(database, 'chats');
+        
+            
+            get(chatRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    snapshot.forEach((chatSnapshot) => {
+                        const chatData = chatSnapshot.val();
+        
+                        
+                        if (chatData.messages) {
+                            
+                            Object.values(chatData.messages).some((message) => {
+                                
+                                if (message.sender === userEmail) {
+                                    
+                                    console.log("Se encontró un mensaje del usuario actual en el chat:", chatSnapshot.key, "Mensaje:", message);
+                                    const chatElement = document.createElement('div');
+                                    chatElement.classList.add('chat-box');
+                                    chatElement.textContent = chatSnapshot.key;
+
+                                    chatElement.addEventListener('click', function() {
+                                        window.location.href = `/src/pages/chat/chat.html?chatName=${chatSnapshot.key}`;
+                                    });
+
+                                    document.getElementById("chatList").appendChild(chatElement);
+                                    
+                                    return true;
+                                }
+                                
+                                return false;
+                            });
+                        }
+                    });
+                } else {
+                    console.log("No se encontraron chats en la base de datos.");
+                }
+            }).catch((error) => {
+                console.error("Error al cargar los chats:", error);
+            });
+          
+        } else {
+          console.log("Fallo");
+        }
+      });
+
+    
+}
+
+
+loadUserMessages();
+
+
+
 
 
 
