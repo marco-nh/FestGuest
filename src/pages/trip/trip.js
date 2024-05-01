@@ -134,6 +134,7 @@ document.getElementById('chatBoton').addEventListener('click', function(){
     const infoEvent = storedEvent.event;
     const nombre = infoEvent.title;
     createChat(nombre);
+    window.location.href = `/src/pages/chat/chat.html?chatName=${nombre}`
 });
 
 
