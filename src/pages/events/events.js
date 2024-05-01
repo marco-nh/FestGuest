@@ -1,12 +1,15 @@
 import { categoryImages } from "../../utils/category/category.js"
 
+//DATABASE
+import { app } from "../../firebase/initializeDatabase.js";
+import { getDocs, query, where, getFirestore, collection, addDoc} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
 let eventos = [];
 
 function initializeEvents() {
     setupSearch();
     handleSearch();
 }
-
 function handleSearch(event) {
     if (event) {
         event.preventDefault();
@@ -56,6 +59,34 @@ function searchEvents(city) {
         });
 }
 
+async function guardarEventoFirestore(evento) {
+    const db = getFirestore(app);
+    const querySnapshot = await getDocs(collection(db, "events"));
+    let checkExists = false
+    try {querySnapshot.forEach((doc) => {
+        checkExists = doc.data().localization.includes(getLocation(evento));
+        if (checkExists){
+            throw BreakException
+        }
+    })} catch (e) {
+        console.log("Fallo: Existe el evento en los datos")
+        return false
+    };
+    console.log(getLocation(evento))
+        /*
+        addDoc(collection(db, 'events'), {
+            titulo: evento.title,
+            fecha: `${new Date(evento.start).toLocaleDateString()}`,
+            localization: getLocation(evento)
+        }).then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+        }).catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+        */
+    
+}
+
 function getRandomImageURL(category) {
     const baseURL = '/src/images/categoriesEvents/';
 
@@ -85,6 +116,7 @@ function renderEvents(events) {
 
     events.forEach(evento => {
         const card = createEventCard(evento);
+        guardarEventoFirestore(evento);
         if (card) {
             container.appendChild(card);
         }
@@ -118,7 +150,6 @@ function createEventCard(evento) {
         localStorage.setItem('selectedEvent', JSON.stringify(selectedEventData));
         window.location.href = `/src/pages/trip/trip.html?eventName=${encodeURIComponent(evento.title)}`;
     }
-
     card.addEventListener('mouseenter', () => {
         card.classList.add('transform', 'scale-100', 'shadow-lg');
     });
@@ -150,7 +181,6 @@ function createEventCard(evento) {
     dateLocation.classList.add('mb-1', 'text-sm', 'text-gray-600', 'dark:text-gray-400');
     dateLocation.textContent = `${new Date(evento.start).toLocaleDateString()} - ${localization}`;
     dateLocation.setAttribute('tabindex', '0');
-
     const description = document.createElement('p');
     description.classList.add('mb-3', 'text-sm', 'text-gray-700', 'dark:text-gray-400');
     description.setAttribute('tabindex', '0');
