@@ -10,8 +10,9 @@ async function getTransport(container,location){
     const querySnapshot = await getDocs(collection(db, "transports"));
     let checkExists = false
     querySnapshot.forEach((doc) => {
-            const regexMatch = location.substring(0,location.indexOf("\n")).match('[a-zA-Z]+.+')
+            const regexMatch = location.substring(0,location.indexOf("\n")).match('[a-zA-Z]{2}.+')
             checkExists = doc.data().destino.includes(regexMatch);
+            console.log(regexMatch)
             if (checkExists){
                 const card = createTransportCard(doc.data())
                 container.appendChild(card)
