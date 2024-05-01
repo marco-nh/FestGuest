@@ -73,17 +73,15 @@ async function guardarEventoFirestore(evento) {
         return false
     };
     console.log(getLocation(evento))
-        /*
-        addDoc(collection(db, 'events'), {
-            titulo: evento.title,
-            fecha: `${new Date(evento.start).toLocaleDateString()}`,
-            localization: getLocation(evento)
-        }).then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
-        }).catch(function(error) {
-            console.error("Error adding document: ", error);
-        });
-        */
+    addDoc(collection(db, 'events'), {
+        titulo: evento.title,
+        fecha: `${new Date(evento.start).toLocaleDateString()}`,
+        localization: getLocation(evento)
+    }).then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+    }).catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
     
 }
 
