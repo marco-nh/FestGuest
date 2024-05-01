@@ -62,14 +62,25 @@ async function handleSubmit(event) {
 }
 
 function getFormValues() {
-  return {
-    nombreAnuncioCoche: document.getElementById('nombreAnuncioCoche').value,
-    origen: document.getElementById('origen').value,
-    destino: document.getElementById('destino').value,
-    numeroAsientosLibres: document.getElementById('numeroAsientosLibres').value,
-    descripcion: document.getElementById('descripcion').value,
-    precio: document.getElementById('precio').value
-  };
+  const userDocString = localStorage.getItem('userDoc');
+  if (userDocString) {
+    const userDoc = JSON.parse(userDocString);            
+    const userName = userDoc.userName;
+    console.log(userName)
+    return {
+      nombreAnuncioCoche: document.getElementById('nombreAnuncioCoche').value,
+      origen: document.getElementById('origen').value,
+      destino: document.getElementById('destino').value,
+      numeroAsientosLibres: document.getElementById('numeroAsientosLibres').value,
+      descripcion: document.getElementById('descripcion').value,
+      precio: document.getElementById('precio').value,
+      usuario: userName
+    };
+  } else {
+    return false 
+  }
+
+  
 }
 
 function validateForm(formValues) {
