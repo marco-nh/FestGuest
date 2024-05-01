@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="description" content="Fest Guest App">
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="view-transition" content="same-origin" />
+    <meta name="keywords" content="fest guest, app, events, festivals, concerts, conferences, parties, houses, accommodations, transportation, ridesharing">
+    <meta name="robots" content="index, follow">
+    
+    <title>Chat</title>
+
+    <!--Icono de Fest Guest-->
+    <link rel="icon" href="/src/FestGuest.ico" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" integrity="sha256-CAI/7ThhltsmP2L2zKBYa7FknB3ZwFbD0nqL8FCdxdc=" crossorigin="anonymous" />
+    <!-- Header Styles -->
+    <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
+    <link rel="stylesheet" href="/src/pages/form/accommodation/accommodation.css"/>
+    <!-- Adding Styles -->
+    <link rel="stylesheet" href="/src/style.css"/>
+     <!--ChatScript-->
+    <script src="/src/pages/chat/chat.js" type="module"></script>
+</head>
+
+<body class="bg-transparent">
+    <!-- Header dynamic load -->
+    <script src="/src/utils/loadComponents/loadComponents.js"></script>
+    <script>loadComponents("/src/pages/components/header/logged/header.html", "headerLogged")</script>
+    
+    <div class="header">
+        <header id="headerLogged"></header>
+    </div>
+
+    <div id="content">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <div class="col-4">
+                    <div id="chatList" class="overflow-auto" style="height: 90vh;">
+                        
+                    </div>
+                </div>
+                
+                <div class="col-8">
+                    <div id="chatArea" class="d-flex flex-column justify-content-end" style="height: 90vh;">
+                        <div id="messages" class="overflow-auto mb-3">
+                            
+                        </div>
+                        <textarea id="messageInput" class="form-control" placeholder="Escribe un mensaje..."></textarea>
+                        <button id="sendMessageButton" class="btn btn-primary mt-2">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+</body>
+</html>

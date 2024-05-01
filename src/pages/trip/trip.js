@@ -39,7 +39,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         }
     }
+
+    
+        
 });
+
+import { createChat } from "../chat/chat.js";
+
+document.getElementById('chatBoton').addEventListener('click', function(){
+    const storedEvent = JSON.parse(localStorage.getItem('selectedEvent'));
+    const infoEvent = storedEvent.event;
+    const nombre = infoEvent.title;
+    createChat(nombre);
+});
+
+
 
 async function getLocationFromAPI(event) {
     let locationString = '';
