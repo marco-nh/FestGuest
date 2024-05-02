@@ -1,5 +1,5 @@
-import { categoryImages } from "../../utils/category/category.js"
-
+import { categoryImages } from "../../utils/category/category.js";
+import { countries } from '../../pages/events/arrayPaises.js';
 //DATABASE
 import { app } from "../../firebase/initializeDatabase.js";
 import { getDocs, query, where, getFirestore, collection, addDoc} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
@@ -15,7 +15,8 @@ function handleSearch(event) {
         event.preventDefault();
     }
     const city = document.getElementById('voice-search').value.trim();
-    searchEvents(city);
+    const country = document.getElementById('country').value;
+    searchEvents(city, country);
 }
 
 function setupSearch() {
@@ -26,14 +27,45 @@ function setupSearch() {
     searchButton.addEventListener('click', handleSearch);
 }
 
-function searchEvents(city) {
+function searchEvents(city, country) {
     const ACCESS_TOKEN = "jYkS1XaVpIN7oTCR0t2Tx9y4MmNENq4IzQ71mWCT";
     const baseURL = "https://api.predicthq.com/v1/events";
     const headers = {
         "Authorization": `Bearer ${ACCESS_TOKEN}`,
         "Accept": "application/json"
     };
-    const url = `${baseURL}?q=${encodeURIComponent(city)}`;
+    let url = `${baseURL}?${encodeURIComponent(city)}`;
+
+    const checkbox = document.getElementById('festival');
+    const checkbox2 = document.getElementById('diaFestivo');
+    const checkbox3 = document.getElementById('concierto');
+    const checkbox4 = document.getElementById('sports');
+    
+    if (checkbox.checked) {
+        url += 'category=festivals'
+    }
+    if (checkbox3.checked) {
+        url += '%2Cconcerts'
+    }
+    if (checkbox2.checked) {
+        url += '%2Cschool-holidays%2Cpublic-holidays'
+    }
+    if (checkbox4.checked) {
+        url += '%2Csports'
+    }
+
+    if (country) {
+        url += `&country=${encodeURIComponent(country)}`;
+        url += `&limit=${encodeURIComponent(20)}`
+    }
+
+    const rankGrade = document.getElementById('rankGrade').value;
+
+    if (rankGrade) {
+        url += `&local_rank.gte=${encodeURIComponent(rankGrade)}`;
+        console.log(rankGrade);
+    }
+
     console.log(url)
     const loader = document.getElementById('loader');
     loader.style.display = 'flex'; 
@@ -237,5 +269,17 @@ function getLocation(event) {
     }
     return locationString;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    const selectElement = document.getElementById('country');
+
+    countries .forEach(country => {
+        const option = document.createElement('option');
+        option.value = country.code;
+        option.textContent = country.name;
+        selectElement.appendChild(option);
+    });
+});
 
 document.addEventListener('DOMContentLoaded', initializeEvents);
