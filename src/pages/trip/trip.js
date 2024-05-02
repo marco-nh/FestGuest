@@ -7,9 +7,9 @@ function initiateRender(){
 }
 async function getTransport(container,location){
     const db = getFirestore(app);
-    const querySnapshot = await getDocs(collection(db, "transports"));
+    /*const querySnapshot = await getDocs(collection(db, "transports"));*/
     let checkExists = false
-    querySnapshot.forEach((doc) => {
+    /*querySnapshot.forEach((doc) => {
             const regexMatch = location.substring(0,location.indexOf("\n")).match('[a-zA-Z]{2}.+')
             checkExists = doc.data().destino.includes(regexMatch);
             console.log(regexMatch)
@@ -17,7 +17,7 @@ async function getTransport(container,location){
                 const card = createTransportCard(doc.data())
                 container.appendChild(card)
             }
-        })
+        })*/
 }
 function renderTransport(location){
     const base = document.getElementById("base")

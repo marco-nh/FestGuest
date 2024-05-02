@@ -61,9 +61,9 @@ function searchEvents(city) {
 
 async function guardarEventoFirestore(evento) {
     const db = getFirestore(app);
-    const querySnapshot = await getDocs(collection(db, "events"));
+    /*const querySnapshot = await getDocs(collection(db, "events"));*/
     let checkExists = false
-    try {querySnapshot.forEach((doc) => {
+    /*try {querySnapshot.forEach((doc) => {
         checkExists = doc.data().localization.includes(getLocation(evento));
         if (checkExists){
             throw BreakException
@@ -81,7 +81,7 @@ async function guardarEventoFirestore(evento) {
         console.log("Document written with ID: ", docRef.id);
     }).catch(function(error) {
         console.error("Error adding document: ", error);
-    });
+    });*/
     
 }
 
