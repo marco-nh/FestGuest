@@ -91,12 +91,31 @@ function searchEvents(city, country) {
         });
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 async function guardarEventoFirestore(evento) {
     const db = getFirestore(app);
-    /*const querySnapshot = await getDocs(collection(db, "events"));*/
+    let querySnapshot;
     let checkExists = false
-    /*try {querySnapshot.forEach((doc) => {
-        checkExists = doc.data().localization.includes(getLocation(evento));
+    if (localStorage.getItem('eventUpdated') == "false"){
+        querySnapshot = await getDocs(collection(db, "events"));
+        localStorage.setItem('eventUpdated',"true")
+        const array = []
+        querySnapshot.forEach((doc) => {
+            array.push(doc.data().titulo)
+        })
+        localStorage.setItem('events',JSON.stringify(array))
+        querySnapshot = array
+        console.log("Busqueda remota")
+    } else{
+        querySnapshot = JSON.parse(localStorage.getItem('events'))
+        console.log("Busqueda local")
+    }
+    
+    try {querySnapshot.forEach((doc) => {
+        checkExists = doc.includes(evento.title);
         if (checkExists){
             throw BreakException
         }
@@ -104,8 +123,8 @@ async function guardarEventoFirestore(evento) {
         console.log("Fallo: Existe el evento en los datos")
         return false
     };
-    console.log(getLocation(evento))
-    addDoc(collection(db, 'events'), {
+    
+    await addDoc(collection(db, 'events'), {
         titulo: evento.title,
         fecha: `${new Date(evento.start).toLocaleDateString()}`,
         localization: getLocation(evento)
@@ -113,8 +132,10 @@ async function guardarEventoFirestore(evento) {
         console.log("Document written with ID: ", docRef.id);
     }).catch(function(error) {
         console.error("Error adding document: ", error);
-    });*/
+    });
     
+    //si añade uno nuevo, vuelve a cambiar la base de datos del conjunto de eventos
+    localStorage.setItem('eventUpdated',"false")
 }
 
 function getRandomImageURL(category) {
@@ -146,7 +167,6 @@ function renderEvents(events) {
 
     events.forEach(evento => {
         const card = createEventCard(evento);
-        guardarEventoFirestore(evento);
         if (card) {
             container.appendChild(card);
         }
@@ -172,12 +192,13 @@ function createEventCard(evento) {
         }
     });
 
-    function openEventDetails() {
+    async function openEventDetails() {
         const selectedEventData = {
             event: evento,
             imageURL: getRandomImageURL(evento.category)
         };
         localStorage.setItem('selectedEvent', JSON.stringify(selectedEventData));
+        await guardarEventoFirestore(evento);
         window.location.href = `/src/pages/trip/trip.html?eventName=${encodeURIComponent(evento.title)}`;
     }
     card.addEventListener('mouseenter', () => {
