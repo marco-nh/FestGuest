@@ -99,23 +99,29 @@ async function guardarEventoFirestore(evento) {
     const db = getFirestore(app);
     let querySnapshot;
     let checkExists = false
+    
+    // Los eventos son un array 2D, [0] es titulo, [1] es lugar
+    // Esto se hace para facilitar vinculación (por el segundo metodo)
+
     if (localStorage.getItem('eventUpdated') == "false"){
+        //Una operacion de busqueda, no debe de haber muchas!!
         querySnapshot = await getDocs(collection(db, "events"));
+
         localStorage.setItem('eventUpdated',"true")
-        const array = []
+        const eventos = new Array();
         querySnapshot.forEach((doc) => {
-            array.push(doc.data().titulo)
+            eventos.push(new Array(doc.data().titulo,doc.data().localization.split('\n').join(' ')))
         })
-        localStorage.setItem('events',JSON.stringify(array))
-        querySnapshot = array
+        localStorage.setItem('events',JSON.stringify(eventos))
+        querySnapshot = eventos
         console.log("Busqueda remota")
     } else{
         querySnapshot = JSON.parse(localStorage.getItem('events'))
         console.log("Busqueda local")
     }
-    
+
     try {querySnapshot.forEach((doc) => {
-        checkExists = doc.includes(evento.title);
+        checkExists = doc[0].includes(evento.title);
         if (checkExists){
             throw BreakException
         }
@@ -123,7 +129,8 @@ async function guardarEventoFirestore(evento) {
         console.log("Fallo: Existe el evento en los datos")
         return false
     };
-    
+
+
     await addDoc(collection(db, 'events'), {
         titulo: evento.title,
         fecha: `${new Date(evento.start).toLocaleDateString()}`,
@@ -133,7 +140,7 @@ async function guardarEventoFirestore(evento) {
     }).catch(function(error) {
         console.error("Error adding document: ", error);
     });
-    
+
     //si añade uno nuevo, vuelve a cambiar la base de datos del conjunto de eventos
     localStorage.setItem('eventUpdated',"false")
 }

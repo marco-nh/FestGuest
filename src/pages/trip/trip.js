@@ -5,20 +5,21 @@ import { getDocs, getFirestore, collection} from "https://www.gstatic.com/fireba
 function initiateRender(){
 
 }
-async function getTransport(container,location){
+async function getTransport(container,title){
     const db = getFirestore(app);
-    /*const querySnapshot = await getDocs(collection(db, "transports"));*/
+    const querySnapshot = await getDocs(collection(db, "transports"));
     let checkExists = false
-    /*querySnapshot.forEach((doc) => {
-            const regexMatch = location.substring(0,location.indexOf("\n")).match('[a-zA-Z]{2}.+')
-            checkExists = doc.data().destino.includes(regexMatch);
-            console.log(regexMatch)
+    console.log(title)
+    
+    querySnapshot.forEach((doc) => {
+            checkExists = doc.data().festivalAsociado == title;
             if (checkExists){
                 const card = createTransportCard(doc.data())
                 container.appendChild(card)
             }
-        })*/
+        })
 }
+
 function renderTransport(location){
     const base = document.getElementById("base")
 
@@ -83,7 +84,7 @@ function createTransportCard(datos) {
 document.addEventListener('DOMContentLoaded', function() {
     const storedEvent = JSON.parse(localStorage.getItem('selectedEvent'));
     const infoEvent = storedEvent.event;
-
+    localStorage.setItem("transportRendered","false")
     if (storedEvent) {
         const eventNameElement = document.getElementById('eventName');
         const eventImageElement = document.getElementById('eventImage');
@@ -104,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
             getLocationFromAPI(storedEvent.event)
                 .then(location => {
                     eventLocationElement.textContent = `Location: ${location}`;
-                    renderTransport(location)
                 })
                 .catch(error => {
                     console.error('Error al obtener la ubicación:', error);
@@ -115,6 +115,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Pendiente implementar Buscar los transportes relacionados con el evento(Revisar local storage)
             const transportContent = document.getElementById('content')
             transportContent.classList.remove('hidden')
+            if (localStorage.getItem("transportRendered") != "true"){
+                renderTransport(infoEvent.title)
+                localStorage.setItem("transportRendered","true")
+                console.log(localStorage.getItem("transportRendered"))
+            }
+            
         });
 
 

@@ -15,12 +15,16 @@ function agregarSugerencias(inputId, suggestionsId) {
   input.addEventListener('input', function() {
     const query = this.value;
     if (query.length < 3) {
+      cleanFestivalReservation()
       suggestionsPanel.innerHTML = '';
       return;
     }
     fetchSuggestions(query)
       .then(data => displaySuggestions(data, suggestionsPanel, input))
       .catch(error => console.log('Error:', error));
+    if (inputId == 'destino'){
+      getFestivalTransportReservation(query);
+    }
   });
 }
 
@@ -61,6 +65,30 @@ async function handleSubmit(event) {
   }
 }
 
+function getFestivalTransportReservation(query){
+  const festivalForm = document.getElementById("festivalName")
+  const festivales = JSON.parse(localStorage.getItem('events'))
+  if (festivales != null){
+    festivales.forEach((fes) => {
+      console.log(fes[1],query)
+      if (fes[1].includes(query)){
+        const festival = document.createElement('option');
+        festival.textContent = fes[0];
+        festival.value = fes[0];
+        festival.setAttribute("id", fes[0])
+        if (document.getElementById(fes[0]) == null){
+          festivalForm.appendChild(festival)
+        }
+      } 
+    })
+  }
+}
+
+function cleanFestivalReservation(){
+  const festivalForm = document.getElementById("festivalName")
+  festivalForm.textContent = ""
+}
+
 function getFormValues() {
   const userDocString = localStorage.getItem('userDoc');
   if (userDocString) {
@@ -74,6 +102,7 @@ function getFormValues() {
       numeroAsientosLibres: document.getElementById('numeroAsientosLibres').value,
       descripcion: document.getElementById('descripcion').value,
       precio: document.getElementById('precio').value,
+      festivalAsociado: document.getElementById('festivalName').value,
       usuario: userName
     };
   } else {
