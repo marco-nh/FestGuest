@@ -142,11 +142,8 @@ function searchEvents(city, country) {
         });
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 
-async function guardarEventoFirestore(evento) {
+async function saveEventFirestore(evento) {
     const db = getFirestore(app);
     let querySnapshot;
     let checkExists = false
@@ -256,7 +253,7 @@ function createEventCard(evento) {
             imageURL: getRandomImageURL(evento.category)
         };
         localStorage.setItem('selectedEvent', JSON.stringify(selectedEventData));
-        await guardarEventoFirestore(evento);
+        await saveEventFirestore(evento);
         window.location.href = `/src/pages/trip/trip.html?eventName=${encodeURIComponent(evento.title)}`;
     }
     card.addEventListener('mouseenter', () => {
