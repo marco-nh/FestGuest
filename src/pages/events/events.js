@@ -116,12 +116,37 @@ function searchEvents(city, country) {
         });
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 async function guardarEventoFirestore(evento) {
     const db = getFirestore(app);
-    const querySnapshot = await getDocs(collection(db, "events"));
+    let querySnapshot;
     let checkExists = false
+    
+    // Los eventos son un array 2D, [0] es titulo, [1] es lugar
+    // Esto se hace para facilitar vinculación (por el segundo metodo)
+
+    if (localStorage.getItem('eventUpdated') == "false"){
+        //Una operacion de busqueda, no debe de haber muchas!!
+        querySnapshot = await getDocs(collection(db, "events"));
+
+        localStorage.setItem('eventUpdated',"true")
+        const eventos = new Array();
+        querySnapshot.forEach((doc) => {
+            eventos.push(new Array(doc.data().titulo,doc.data().localization.split('\n').join(' ')))
+        })
+        localStorage.setItem('events',JSON.stringify(eventos))
+        querySnapshot = eventos
+        console.log("Busqueda remota")
+    } else{
+        querySnapshot = JSON.parse(localStorage.getItem('events'))
+        console.log("Busqueda local")
+    }
+
     try {querySnapshot.forEach((doc) => {
-        checkExists = doc.data().localization.includes(getLocation(evento));
+        checkExists = doc[0].includes(evento.title);
         if (checkExists){
             throw BreakException
         }
@@ -129,8 +154,9 @@ async function guardarEventoFirestore(evento) {
         console.log("Fallo: Existe el evento en los datos")
         return false
     };
-    console.log(getLocation(evento))
-    addDoc(collection(db, 'events'), {
+
+
+    await addDoc(collection(db, 'events'), {
         titulo: evento.title,
         fecha: `${new Date(evento.start).toLocaleDateString()}`,
         localization: getLocation(evento)
@@ -139,7 +165,9 @@ async function guardarEventoFirestore(evento) {
     }).catch(function(error) {
         console.error("Error adding document: ", error);
     });
-    
+
+    //si añade uno nuevo, vuelve a cambiar la base de datos del conjunto de eventos
+    localStorage.setItem('eventUpdated',"false")
 }
 
 function getRandomImageURL(category) {
@@ -171,7 +199,6 @@ function renderEvents(events) {
 
     events.forEach(evento => {
         const card = createEventCard(evento);
-        guardarEventoFirestore(evento);
         if (card) {
             container.appendChild(card);
         }
@@ -197,12 +224,13 @@ function createEventCard(evento) {
         }
     });
 
-    function openEventDetails() {
+    async function openEventDetails() {
         const selectedEventData = {
             event: evento,
             imageURL: getRandomImageURL(evento.category)
         };
         localStorage.setItem('selectedEvent', JSON.stringify(selectedEventData));
+        await guardarEventoFirestore(evento);
         window.location.href = `/src/pages/trip/trip.html?eventName=${encodeURIComponent(evento.title)}`;
     }
     card.addEventListener('mouseenter', () => {
