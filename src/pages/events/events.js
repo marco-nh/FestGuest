@@ -40,9 +40,22 @@ function searchEvents(city, country) {
     const checkbox2 = document.getElementById('diaFestivo');
     const checkbox3 = document.getElementById('concierto');
     const checkbox4 = document.getElementById('sports');
+    const minAsist = document.getElementById('asistencia_minima').value;
+    const maxAsist = document.getElementById('asistencia_maxima').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
     
+    if(minAsist){
+        console.log(minAsist);
+        url += `phq_attendance.gt=${encodeURIComponent(minAsist)}&`;
+    }
+    if(maxAsist){
+        console.log(maxAsist);
+        url += `phq_attendance.lt=${encodeURIComponent(maxAsist)}&`;
+    }
+
     if (checkbox.checked) {
-        url += 'category=festivals'
+        url += 'category=festivals&'
     }
     if (checkbox3.checked) {
         url += '%2Cconcerts'
@@ -54,10 +67,22 @@ function searchEvents(city, country) {
         url += '%2Csports'
     }
 
+    if(startDate){
+        console.log(startDate);
+        url += `active.gte=${encodeURIComponent(startDate)}&`;
+    }
+
+    if(endDate){
+        console.log(endDate);
+        url += `active.lte=${encodeURIComponent(endDate)}&`;
+    }
+
     if (country) {
         url += `&country=${encodeURIComponent(country)}`;
         url += `&limit=${encodeURIComponent(20)}`
     }
+
+
 
     const rankGrade = document.getElementById('rankGrade').value;
 
@@ -280,6 +305,8 @@ document.addEventListener('DOMContentLoaded', function() {
         option.textContent = country.name;
         selectElement.appendChild(option);
     });
+    
 });
+
 
 document.addEventListener('DOMContentLoaded', initializeEvents);
