@@ -249,10 +249,11 @@ async function addSuscription(){
                 })
                 arraySuscritos.push(fiesta)
             } else{
-                arraySuscritos.push(userdata.data().festivalAsociado)
+                arraySuscritos.push(fiesta)
             }
             
             const userRef = doc(db, "users", userdata.id);
+            console.log(arraySuscritos)
             if (localStorage.getItem("reservado") == "false"){
                 setDoc(userRef, { festivalAsociado: arraySuscritos }, { merge: true });
             }

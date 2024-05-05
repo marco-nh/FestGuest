@@ -1,6 +1,6 @@
 import { signOutSession } from "../../firebase/auth/auth.js"; 
 import { app } from "../../firebase/initializeDatabase.js";
-import { doc, setDoc, getFirestore} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+import { doc, getDoc,setDoc, getFirestore} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -82,10 +82,18 @@ window.addEventListener('load', function() {
     }
 });
 
-function renderSuscriptionFestivals(){
+async function renderSuscriptionFestivals(){
     const eventsLabel = document.getElementById("suscritos")
 
-    const eventsSuscription = JSON.parse(localStorage.getItem("eventosSuscritos"))
+    const db = getFirestore(app);
+    const userRef = doc(db, "users", localStorage.getItem("userId"));
+    const datos = await getDoc(userRef)
+    const eventsSuscription = datos.data().festivalAsociado
+
+    if (eventsSuscription == null){
+        console.log("No existe suscritos")
+        return false
+    }
     let num = 0;
     eventsSuscription.forEach(element => {
         num += 1;
@@ -96,7 +104,6 @@ function renderSuscriptionFestivals(){
 
         const card = document.createElement('a');
         card.classList.add("my-1")
-        card.classList.add("w-1/2")
         card.textContent = element
 
         const elementopage = btoa(encodeURIComponent(element))
@@ -118,11 +125,13 @@ function renderSuscriptionFestivals(){
         
     });
     console.log("renderizado")
+    actionSuscriptionListener()
 }
 function actionSuscriptionListener(){
     let btns = document.querySelectorAll('button');
 
     btns.forEach(function (i) {
+        
         if(i.textContent == "Delete"){
             i.addEventListener("click", function() {deleteSuscription(i.getAttribute("id"))})
         }
