@@ -101,7 +101,7 @@ function actionSuscriptionListener(){
         }
     });
 }
-function deleteSuscription(eventname){
+async function deleteSuscription(eventname){
     const db = getFirestore(app);
     const fiesta = document.getElementById('label'+eventname).textContent
     console.log(fiesta)
@@ -110,6 +110,6 @@ function deleteSuscription(eventname){
     localStorage.setItem("eventosSuscritos",JSON.stringify(arrayReservados))
 
     const userRef = doc(db, "users", localStorage.getItem("userId"));
-    setDoc(userRef, { festivalAsociado: arrayReservados }, { merge: true });
+    await setDoc(userRef, { festivalAsociado: arrayReservados }, { merge: true });
     location.reload()
 }
