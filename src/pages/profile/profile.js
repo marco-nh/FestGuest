@@ -70,6 +70,7 @@ var guardarButton = document.getElementById('guardarButton');
 function guardarTexto() {
     var texto = textarea.value;
     localStorage.setItem('textoGuardado', texto);
+    
 }
 
 guardarButton.addEventListener('click', guardarTexto);
