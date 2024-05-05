@@ -3,6 +3,7 @@ import { countries } from '../../pages/events/arrayPaises.js';
 //DATABASE
 import { app } from "../../firebase/initializeDatabase.js";
 import { getDocs, query, where, getFirestore, collection, addDoc} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+import { getLocationByCords } from "../../utils/location/getLocation.js";
 
 let eventos = [];
 
@@ -35,7 +36,7 @@ function searchEvents(city, country) {
         "Authorization": `Bearer ${ACCESS_TOKEN}`,
         "Accept": "application/json"
     };
-    let url = `${baseURL}?${encodeURIComponent(city)}`;
+    let url = `${baseURL}?q=${encodeURIComponent(city)}`;
 
     const festival = document.getElementById('festival');
     const diaFestivo = document.getElementById('diaFestivo');
@@ -51,11 +52,9 @@ function searchEvents(city, country) {
     const endDate = document.getElementById('endDate').value;
     
     if(minAsist){
-        console.log(minAsist);
         url += `phq_attendance.gt=${encodeURIComponent(minAsist)}&`;
     }
     if(maxAsist){
-        console.log(maxAsist);
         url += `phq_attendance.lt=${encodeURIComponent(maxAsist)}&`;
     }
 
@@ -88,16 +87,14 @@ function searchEvents(city, country) {
 
     // Solo agregar 'category=' si hay al menos una categoría seleccionada
     if (categories.length > 0) {
-        url += `category=${categories.join('%2C')}`;
+        url += `&category=${categories.join('%2C')}`;
     }
 
     if(startDate){
-        console.log(startDate);
         url += `&active.gte=${encodeURIComponent(startDate)}`;
     }
 
     if(endDate){
-        console.log(endDate);
         url += `&active.lte=${encodeURIComponent(endDate)}`;
     }
 
@@ -121,13 +118,11 @@ function searchEvents(city, country) {
         url += `&sort=phq_attendance,-start`;
     }
 
-    console.log(url)
     const loader = document.getElementById('loader');
     loader.style.display = 'flex'; 
     searchResults.innerHTML = '';
     fetch(url, { headers })
         .then(response => {
-            console.log(response)
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -166,10 +161,8 @@ async function saveEventFirestore(evento) {
         })
         localStorage.setItem('events',JSON.stringify(eventos))
         querySnapshot = eventos
-        console.log("Busqueda remota")
     } else{
         querySnapshot = JSON.parse(localStorage.getItem('events'))
-        console.log("Busqueda local")
     }
 
     try {querySnapshot.forEach((doc) => {
@@ -181,12 +174,12 @@ async function saveEventFirestore(evento) {
         console.log("Fallo: Existe el evento en los datos")
         return false
     };
-
+    let eventRealLocation = await getLocation(evento);
 
     await addDoc(collection(db, 'events'), {
         titulo: evento.title,
         fecha: `${new Date(evento.start).toLocaleDateString()}`,
-        localization: getLocation(evento)
+        localization: eventRealLocation
     }).then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
     }).catch(function(error) {
@@ -212,7 +205,7 @@ function getRandomImageURL(category) {
     }
 }
 
-function renderEvents(events) {
+async function renderEvents(events) {
     const searchResults = document.getElementById('searchResults');
     searchResults.innerHTML = '';
 
@@ -224,8 +217,8 @@ function renderEvents(events) {
     const container = document.createElement('div');
     container.classList.add('grid', 'gap-4');
 
-    events.forEach(evento => {
-        const card = createEventCard(evento);
+    events.forEach(async evento => {
+        const card = await createEventCard(evento);
         if (card) {
             container.appendChild(card);
         }
@@ -235,8 +228,8 @@ function renderEvents(events) {
 }
 
 
-function createEventCard(evento) {
-    let localization = getLocation(evento)
+async function createEventCard(evento) {
+    let localization = await getLocation(evento)
     if (!localization) {
         return null; 
     }
@@ -328,16 +321,21 @@ function shortenDescription(description, maxLines = 4, maxWords = 40) {
     return shortenedDescription;
   }
 
-
-function getLocation(event) {
+async function getLocation(event) {
     let locationString = '';
+    console.log(event)
     if (event.entities && event.entities.length > 0) {
         const venue = event.entities[0];
         if (venue.formatted_address) {
             locationString = venue.formatted_address;
         } else {
             if (event.location) {
-                locationString = event.location;
+                try {
+                    const locate = await getLocationByCords(event);
+                    locationString += ` ${locate}`;
+                } catch (error) {
+                    console.error('Error al obtener la ubicación:', error);
+                }
             }
             if (event.locality) {
                 locationString += `, ${event.locality}`;

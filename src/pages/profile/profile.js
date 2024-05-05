@@ -1,4 +1,6 @@
 import { signOutSession } from "../../firebase/auth/auth.js"; 
+import { app } from "../../firebase/initializeDatabase.js";
+import { doc, setDoc, getFirestore} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("logoutButton").addEventListener("click", () => {
@@ -46,8 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Si no hay valor en localStorage, mostrar un mensaje de error o establecer un valor predeterminado
         nombre.textContent = 'No hay nombre asociado a esta cuenta';
     }
+    
+    renderSuscriptionFestivals()
+    actionSuscriptionListener()
 })
 
+<<<<<<< HEAD
 
 
 document.getElementById('imageUpload').addEventListener('change', function(event) {
@@ -100,3 +106,65 @@ window.addEventListener('load', function() {
         textarea.value = textoGuardado;
     }
 });
+=======
+function renderSuscriptionFestivals(){
+    const eventsLabel = document.getElementById("suscritos")
+
+    const eventsSuscription = JSON.parse(localStorage.getItem("eventosSuscritos"))
+    let num = 0;
+    eventsSuscription.forEach(element => {
+        num += 1;
+        const divElementos = document.createElement("div")
+        divElementos.classList.add("flex")
+        divElementos.classList.add("flex-row")
+        divElementos.classList.add("align-items-center")
+
+        const card = document.createElement('a');
+        card.classList.add("my-1")
+        card.classList.add("w-1/2")
+        card.textContent = element
+
+        const elementopage = btoa(encodeURIComponent(element))
+        card.href = `/src/pages/events/events.html?search=${elementopage}`;
+        card.setAttribute("id","labeleventname"+num)
+        divElementos.appendChild(card)
+
+        const deletebutton = document.createElement('button');
+        deletebutton.setAttribute('type', 'button');
+        deletebutton.classList.add("btn")
+        deletebutton.classList.add("btn-danger")
+        deletebutton.classList.add("mx-2")
+        deletebutton.setAttribute("id","eventname"+num)
+
+        deletebutton.textContent = "Delete"
+        
+        divElementos.appendChild(deletebutton)
+        eventsLabel.appendChild(divElementos)
+        
+    });
+    console.log("renderizado")
+}
+function actionSuscriptionListener(){
+    const eventsSuscription = JSON.parse(localStorage.getItem("eventosSuscritos"))
+
+    let btns = document.querySelectorAll('button');
+
+    btns.forEach(function (i) {
+        if(i.textContent == "Delete"){
+            i.addEventListener("click", function() {deleteSuscription(i.getAttribute("id"))})
+        }
+    });
+}
+async function deleteSuscription(eventname){
+    const db = getFirestore(app);
+    const fiesta = document.getElementById('label'+eventname).textContent
+    console.log(fiesta)
+    let arrayReservados = JSON.parse(localStorage.getItem("eventosSuscritos"))
+    arrayReservados = arrayReservados.filter(e => e !== fiesta); // will return ['A', 'C']
+    localStorage.setItem("eventosSuscritos",JSON.stringify(arrayReservados))
+
+    const userRef = doc(db, "users", localStorage.getItem("userId"));
+    await setDoc(userRef, { festivalAsociado: arrayReservados }, { merge: true });
+    location.reload()
+}
+>>>>>>> 60b92c8794864ef75e0b4e80c543c78f8298bf19

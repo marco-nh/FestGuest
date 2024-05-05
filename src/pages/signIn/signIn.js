@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    registro.addEventListener('click', () => {
-        handleRegistroClick().catch(error => {
+    registro.addEventListener('click', (event) => {
+        handleRegistroClick(event).catch(error => {
             console.error("Error during registration:", error);
             const emailErrorDiv = document.getElementById('emailreg-error');
             emailErrorDiv.textContent = 'Invalid email or password.';
