@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const google = document.getElementById('google_button');
     const registro = document.getElementById('registro');
 
-    google.addEventListener("click", () => {
-        handleGoogleButtonClick().catch(error => {
+    google.addEventListener("click", (event) => {
+        handleGoogleButtonClick(event).catch(error => {
             console.error("Error handling Google button click:", error);
         });
     });
 
-    registro.addEventListener('click', () => {
-        handleRegistroClick().catch(error => {
+    registro.addEventListener('click', (event) => {
+        handleRegistroClick(event).catch(error => {
             console.error("Error during registration:", error);
             const emailErrorDiv = document.getElementById('emailreg-error');
             emailErrorDiv.textContent = 'Invalid email or password.';
