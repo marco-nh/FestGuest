@@ -35,7 +35,7 @@ function searchEvents(city, country) {
         "Authorization": `Bearer ${ACCESS_TOKEN}`,
         "Accept": "application/json"
     };
-    let url = `${baseURL}?${encodeURIComponent(city)}`;
+    let url = `${baseURL}?q=${encodeURIComponent(city)}`;
 
     const festival = document.getElementById('festival');
     const diaFestivo = document.getElementById('diaFestivo');
@@ -62,6 +62,7 @@ function searchEvents(city, country) {
     const categories = [];
 
     if (festival.checked) {
+        console.log("entre")
         categories.push('festivals');
     }
     if (concierto.checked) {
@@ -88,7 +89,7 @@ function searchEvents(city, country) {
 
     // Solo agregar 'category=' si hay al menos una categoría seleccionada
     if (categories.length > 0) {
-        url += `category=${categories.join('%2C')}`;
+        url += `&category=${categories.join('%2C')}`;
     }
 
     if(startDate){
