@@ -10,8 +10,21 @@ let maxImagenes = 5
 
 function initialize() {
     document.getElementById('subirImagenFigma').addEventListener('click', handleSubirImagen);
-
+    agregarSugerencias('ciudad');
     validacionFormulario();
+}
+document.addEventListener('DOMContentLoaded', initialize);
+
+function agregarSugerencias(inputId) {
+  const input = document.getElementById(inputId);
+  input.addEventListener('input', function() {
+    const query = this.value;
+    if (query.length < 3) {
+      cleanFestivalReservation()
+      return;
+    }
+    getFestivalAccomodationReservation(query);
+  });
 }
 
 function handleSubirImagen() {
@@ -64,6 +77,29 @@ function mostrarImagen(file, contenedorImagenes) {
     };
     reader.readAsDataURL(file);
 }
+
+function getFestivalAccomodationReservation(query){
+    const festivalForm = document.getElementById("festivalName")
+    const festivales = JSON.parse(localStorage.getItem('events'))
+    if (festivales != null){
+      festivales.forEach((fes) => {
+        console.log(fes[1],query)
+        if (fes[1].includes(query)){
+          const festival = document.createElement('option');
+          festival.textContent = fes[0];
+          festival.value = fes[0];
+          festival.setAttribute("id", fes[0])
+          if (document.getElementById(fes[0]) == null){
+            festivalForm.appendChild(festival)
+          }
+        } 
+      })
+    }
+  }
+  function cleanFestivalReservation(){
+    const festivalForm = document.getElementById("festivalName")
+    festivalForm.textContent = ""
+  }
 
 async function validacionFormulario() {
     document.getElementById('accomodationForm').addEventListener('submit', handleSubmitForm);
@@ -125,20 +161,29 @@ function guardarDatosFirestore(imageUrls) {
     const numeroHuespedesLibres = document.getElementById('numeroHuespedesLibres').value;
     const descripcion = document.getElementById('descripcion').value;
     const precio = document.getElementById('precio').value;
+    const festival = document.getElementById('festivalName').value;
 
     const db = getFirestore(app);
-    addDoc(collection(db, 'accommodations'), {
-        nombreAnuncio: nombreAnuncioCasa,
-        ciudad: ciudad,
-        municipio: municipio,
-        calle: calle,
-        numeroHuespedesLibres: numeroHuespedesLibres,
-        descripcion: descripcion,
-        precio: precio,
-        images: imageUrls
-    }).then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-    }).catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
+
+    const userDocString = localStorage.getItem('userDoc');
+    if (userDocString) {
+        const userDoc = JSON.parse(userDocString);            
+        const userName = userDoc.userName;
+        addDoc(collection(db, 'accommodations'), {
+            nombreAnuncio: nombreAnuncioCasa,
+            ciudad: ciudad,
+            municipio: municipio,
+            calle: calle,
+            numeroHuespedesLibres: numeroHuespedesLibres,
+            descripcion: descripcion,
+            precio: precio,
+            images: imageUrls,
+            festivalAsociado: festival,
+            usuario: userName
+        }).then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+        }).catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+    }
 }

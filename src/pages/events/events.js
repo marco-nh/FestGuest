@@ -27,6 +27,7 @@ function setupSearch() {
     searchButton.addEventListener('click', handleSearch);
 }
 
+
 function searchEvents(city, country) {
     const ACCESS_TOKEN = "jYkS1XaVpIN7oTCR0t2Tx9y4MmNENq4IzQ71mWCT";
     const baseURL = "https://api.predicthq.com/v1/events";
@@ -36,34 +37,88 @@ function searchEvents(city, country) {
     };
     let url = `${baseURL}?${encodeURIComponent(city)}`;
 
-    const checkbox = document.getElementById('festival');
-    const checkbox2 = document.getElementById('diaFestivo');
-    const checkbox3 = document.getElementById('concierto');
-    const checkbox4 = document.getElementById('sports');
+    const festival = document.getElementById('festival');
+    const diaFestivo = document.getElementById('diaFestivo');
+    const concierto = document.getElementById('concierto');
+    const sports = document.getElementById('sports');
+    const community = document.getElementById('community');
+    const conference = document.getElementById('conferences');
+    const expo = document.getElementById('expos');
+    const arts = document.getElementById('arts');
+    const minAsist = document.getElementById('asistencia_minima').value;
+    const maxAsist = document.getElementById('asistencia_maxima').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
     
-    if (checkbox.checked) {
-        url += 'category=festivals'
+    if(minAsist){
+        console.log(minAsist);
+        url += `phq_attendance.gt=${encodeURIComponent(minAsist)}&`;
     }
-    if (checkbox3.checked) {
-        url += '%2Cconcerts'
+    if(maxAsist){
+        console.log(maxAsist);
+        url += `phq_attendance.lt=${encodeURIComponent(maxAsist)}&`;
     }
-    if (checkbox2.checked) {
-        url += '%2Cschool-holidays%2Cpublic-holidays'
+
+    const categories = [];
+
+    if (festival.checked) {
+        categories.push('festivals');
     }
-    if (checkbox4.checked) {
-        url += '%2Csports'
+    if (concierto.checked) {
+        categories.push('concerts');
+    }
+    if (diaFestivo.checked) {
+        categories.push('school-holidays', 'public-holidays');
+    }
+    if (sports.checked) {
+        categories.push('sports');
+    }
+    if (community.checked) {
+        categories.push('community');
+    }
+    if (conference.checked) {
+        categories.push('conferences');
+    }
+    if (expo.checked) {
+        categories.push('expos');
+    }
+    if (arts.checked) {
+        categories.push('performing-arts');
+    }
+
+    // Solo agregar 'category=' si hay al menos una categoría seleccionada
+    if (categories.length > 0) {
+        url += `category=${categories.join('%2C')}`;
+    }
+
+    if(startDate){
+        console.log(startDate);
+        url += `&active.gte=${encodeURIComponent(startDate)}`;
+    }
+
+    if(endDate){
+        console.log(endDate);
+        url += `&active.lte=${encodeURIComponent(endDate)}`;
     }
 
     if (country) {
         url += `&country=${encodeURIComponent(country)}`;
-        url += `&limit=${encodeURIComponent(20)}`
     }
 
-    const rankGrade = document.getElementById('rankGrade').value;
 
-    if (rankGrade) {
-        url += `&local_rank.gte=${encodeURIComponent(rankGrade)}`;
-        console.log(rankGrade);
+
+    const minRankGrade = document.getElementById('minRankGrade').value;
+    const maxRankGrade = document.getElementById('maxRankGrade').value;
+
+    if (minRankGrade) {
+        url += `&local_rank.gte=${encodeURIComponent(minRankGrade)}`;
+    }
+    if(maxRankGrade){
+        url += `&local_rank.lte=${encodeURIComponent(maxRankGrade)}`;
+    }
+
+    if(startDate && endDate && minAsist){
+        url += `&sort=phq_attendance,-start`;
     }
 
     console.log(url)
@@ -91,11 +146,8 @@ function searchEvents(city, country) {
         });
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 
-async function guardarEventoFirestore(evento) {
+async function saveEventFirestore(evento) {
     const db = getFirestore(app);
     let querySnapshot;
     let checkExists = false
@@ -205,7 +257,7 @@ function createEventCard(evento) {
             imageURL: getRandomImageURL(evento.category)
         };
         localStorage.setItem('selectedEvent', JSON.stringify(selectedEventData));
-        await guardarEventoFirestore(evento);
+        await saveEventFirestore(evento);
         window.location.href = `/src/pages/trip/trip.html?eventName=${encodeURIComponent(evento.title)}`;
     }
     card.addEventListener('mouseenter', () => {
@@ -308,6 +360,8 @@ document.addEventListener('DOMContentLoaded', function() {
         option.textContent = country.name;
         selectElement.appendChild(option);
     });
+    
 });
+
 
 document.addEventListener('DOMContentLoaded', initializeEvents);

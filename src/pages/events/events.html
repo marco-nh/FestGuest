@@ -51,7 +51,17 @@
             <a href="../../index.html">
                 <img id="festGuestImage" src="/src/images/FestGuest.png" class="max-w-xs max-h-32 mx-auto" alt="FestGuest Logo">
             </a>
+            
+
             <div class="bg-gray-400 rounded-lg p-4 mt-4">
+
+                <div style="display: flex; justify-content: space-between;">
+                    <label class="block text-blue-900 text-xl font-bold mb-2" for="password">
+                        <p>Country -->:</p>
+                    </label>
+                    <select class="bg-blue-900 hover:bg-blue-700 shadow appearance-none rounded-xl my-1 py-2 px-4 text-white font-bold leading-tight focus:outline-none focus:shadow-outline border border-gray-300" id="country" name="country">
+                  </select>
+                </div>
                 <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
                     <label class="mcui-checkbox">
                         <input type="checkbox" id="festival" name="categoria">
@@ -84,7 +94,7 @@
                           <div>Concerts</div>
                       </label>
                       <label class="mcui-checkbox">
-                          <input type="checkbox" id="sports">
+                          <input type="checkbox" id="sports" name="categoria">
                           <div>
                             <svg class="mcui-check" viewBox="-2 -2 35 35" aria-hidden="true">
                               <title>checkmark-circle</title>
@@ -93,53 +103,118 @@
                           </div>
                           <div>Sports</div>
                       </label>
+    
                 </div>
-                
-
-                <div>
-                    <h2 style="display: flex; justify-content: center; font-weight: bold;">Distancia en KM.</h2>
-
-                    <div class="flex flex-col items-center space-y-2 mt-2">
-                        <input type="range" min="0" max="200" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" id="myRange">
-                        <span id="sliderValue" class="text-sm font-medium text-gray-900 dark:text-gray-300">50</span>
-                    </div>
-                    
-                </div>
-                <div>
-                    <h2 style="display: flex; justify-content: center; font-weight: bold;">Precio máximo.</h2>
-
-                    <div class="flex flex-col items-center space-y-2 mt-2">
-                        <input type="range" min="0" max="200" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" id="myRange2">
-                        <span id="sliderValue2" class="text-sm font-medium text-gray-900 dark:text-gray-300">50</span>
-                    </div>
-                </div>
-                <script>
-                    const slider = document.getElementById('myRange');
-                    const slider2 = document.getElementById('myRange2');
-                    const output = document.getElementById('sliderValue');
-                    const output2 = document.getElementById('sliderValue2');
-                    output.innerHTML = slider.value; // Muestra el valor inicial del slider
-                    output2.innerHTML = slider2.value;
-
-                    slider.oninput = function() {
-                        output.innerHTML = this.value; // Actualiza el texto a medida que se mueve el slider
-                    }
-
-                    slider2.oninput = function(){
-                        output2.innerHTML = this.value;
-                    }
-                </script>
-                 <div>
-                    <input id="rankGrade" type="text" placeholder="Minimum grade (0-100)" 
-                        class="form-input px-4 py-2 border-2 border-gray-300 focus:border-blue-500 rounded-lg shadow-sm transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" />
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                    <label class="block text-blue-900 text-xl font-bold mb-2" for="password">
-                        <p>Country -->:</p>
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                    <label class="mcui-checkbox">
+                        <input type="checkbox" id="community" name="categoria">
+                        <div>
+                          <svg class="mcui-check" viewBox="-2 -2 35 35" aria-hidden="true">
+                            <title>checkmark-circle</title>
+                            <polyline points="7.57 15.87 12.62 21.07 23.43 9.93" />
+                          </svg>
+                        </div>
+                        <div>Community</div>
                     </label>
-                    <select class="bg-blue-900 hover:bg-blue-700 shadow appearance-none rounded-xl my-1 py-2 px-4 text-white font-bold leading-tight focus:outline-none focus:shadow-outline border border-gray-300" id="country" name="country">
-                  </select>
+                    <label class="mcui-checkbox">
+                        <input type="checkbox" id="conferences" name="categoria">
+                        <div>
+                          <svg class="mcui-check" viewBox="-2 -2 35 35" aria-hidden="true">
+                            <title>checkmark-circle</title>
+                            <polyline points="7.57 15.87 12.62 21.07 23.43 9.93" />
+                          </svg>
+                        </div>
+                        <div>Conferences</div>
+                    </label>
+                    <label class="mcui-checkbox">
+                        <input type="checkbox" id="expos" name="categoria">
+                        <div>
+                          <svg class="mcui-check" viewBox="-2 -2 35 35" aria-hidden="true">
+                            <title>checkmark-circle</title>
+                            <polyline points="7.57 15.87 12.62 21.07 23.43 9.93" />
+                          </svg>
+                        </div>
+                        <div>Expos</div>
+                    </label>
+                    <label class="mcui-checkbox">
+                        <input type="checkbox" id="arts" name="categoria">
+                        <div>
+                          <svg class="mcui-check" viewBox="-2 -2 35 35" aria-hidden="true">
+                            <title>checkmark-circle</title>
+                            <polyline points="7.57 15.87 12.62 21.07 23.43 9.93" />
+                          </svg>
+                        </div>
+                        <div>Performing arts</div>
+                    </label>
                 </div>
+
+                <div style="display: flex; justify-content: space-between;">
+                    <div>
+                        <input id="minRankGrade" type="text" placeholder="Minimum grade (0-100)" 
+                            class="form-input px-4 py-2 border-2 border-gray-300 focus:border-blue-500 rounded-lg shadow-sm transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" />
+                    </div>
+                    <div>
+                        <input id="maxRankGrade" type="text" placeholder="Maximus grade (0-100)" 
+                            class="form-input px-4 py-2 border-2 border-gray-300 focus:border-blue-500 rounded-lg shadow-sm transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" />
+                    </div>
+                </div>
+
+                    <button onclick="toggleDateRange()" class="mt-2 flex items-center justify-between w-full text-left text-gray-900 font-semibold py-2 px-2 border-b-2 border-gray-300 focus:outline-none">
+                        <span>Select Date Range</span>
+                        <svg id="chevronDown2" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="dateRange" class="hidden">
+                        <div class="mt-2">
+                            <label for="startDate" class="block text-gray-700 font-semibold">From:</label>
+                            <input type="date" id="startDate" name="startDate"
+                                class="form-input mt-1 block w-full px-3 py-2 rounded-md bg-gray-400 border border-black text-black focus:border-black focus:text-black">
+                        </div>
+                        <div class="mt-">
+                            <label for="endDate" class="block text-gray-700 font-medium mb-2">To:</label>
+                            <input type="date" id="endDate" name="endDate"
+                                class="form-input mt-1 block w-full px-3 py-2 rounded-md bg-gray-400 border border-black text-black focus:border-black focus:text-black">
+                        </div>
+                    </div>
+
+                    <script>
+                        function toggleDateRange() {
+                            const dateRange = document.getElementById('dateRange');
+                            const chevron2 = document.getElementById('chevronDown2');
+                            dateRange.classList.toggle('hidden');
+                            chevron2.classList.toggle('rotate-180'); 
+                        }
+                    </script>
+
+                    <button id="toggleButton" class="mt-2 flex items-center justify-between w-full text-left text-gray-900 font-semibold py-2 px-2 border-b-2 border-gray-200" onclick="toggleDropdown()">
+                        <span>Expected attendance</span>
+                        <svg id="chevronDown" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="dropdown" class="hidden">
+                        <div class="mt-2">
+                            <input type="number" placeholder="From" id="asistencia_minima"
+                                class="form-input mt-1 block w-full px-3 py-2 rounded-md bg-gray-400 border border-black text-black focus:border-black focus:text-black">
+                            <input type="number" placeholder="To"  id="asistencia_maxima"
+                                class="form-input mt-1 block w-full px-3 py-2 rounded-md bg-gray-400" >
+                        </div>
+                    </div>
+            
+                    <script>
+                        function toggleDropdown() {
+                            const dropdown = document.getElementById('dropdown');
+                            const chevron = document.getElementById('chevronDown');
+                            dropdown.classList.toggle('hidden');
+                            chevron.classList.toggle('rotate-180'); 
+                        }
+                    </script>
+
+                    
+
+
+
             </div>
             <!-- Aquí van los filtros -->
         </div>
