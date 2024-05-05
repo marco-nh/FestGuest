@@ -323,7 +323,6 @@ function shortenDescription(description, maxLines = 4, maxWords = 40) {
 
 async function getLocation(event) {
     let locationString = '';
-    console.log(event)
     if (event.entities && event.entities.length > 0) {
         const venue = event.entities[0];
         if (venue.formatted_address) {

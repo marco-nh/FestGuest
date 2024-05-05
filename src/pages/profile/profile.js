@@ -12,11 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error al desconectar:", error);
             });
     });
-});
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    
     var correols = localStorage.getItem('userEmail');
 
     // Obtener el elemento div por su ID
@@ -30,10 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Si no hay valor en localStorage, mostrar un mensaje de error o establecer un valor predeterminado
         correo.textContent = 'No hay correo asociado a esta cuenta';
     }    
-})
-    
-document.addEventListener('DOMContentLoaded', function() {
-    
+
     var userDocString = localStorage.getItem('userDoc');
     var userDocObject = JSON.parse(userDocString);
     var userName = userDocObject.userName;
@@ -51,7 +44,59 @@ document.addEventListener('DOMContentLoaded', function() {
     
     renderSuscriptionFestivals()
     actionSuscriptionListener()
-})
+
+
+    var userPhoto = localStorage.getItem('userPhoto');
+    var profileImage = document.getElementById('imgAvatar');
+    if (userPhoto !== null && userPhoto !== undefined) {
+        profileImage.src = userPhoto
+        console.log(userPhoto)
+    } else {
+        // Si no hay valor en localStorage, mostrar un mensaje de error o establecer un valor predeterminado
+        profileImage.src = "/src/images/photoPred.png"
+    }
+});
+
+
+    
+
+document.getElementById('imageUpload').addEventListener('change', function(event) {
+    var input = event.target;
+    var file = input.files[0];
+    
+    var reader = new FileReader();
+    reader.onload = function() {
+        var imageData = reader.result;
+        // Guardar la imagen en localStorage
+        localStorage.setItem('userPhoto', imageData)
+    };
+    reader.readAsDataURL(file);
+    });        
+
+
+// Obtener el elemento textarea
+var textarea = document.getElementById('descripcion');
+// Obtener el botón guardar
+var guardarButton = document.getElementById('guardarButton');
+
+// Función para guardar el texto en localStorage
+function guardarTexto() {
+    // Obtener el valor actual del textarea
+    var texto = textarea.value;
+    // Guardar el valor en localStorage con una clave específica
+    localStorage.setItem('textoGuardado', texto);
+}
+
+// Escuchar el evento click en el botón guardar
+guardarButton.addEventListener('click', guardarTexto);
+
+// Al cargar la página, verificar si hay datos guardados en localStorage y mostrarlos en el textarea
+window.addEventListener('load', function() {
+    var textoGuardado = localStorage.getItem('textoGuardado');
+    if (textoGuardado !== null) {
+        textarea.value = textoGuardado;
+    }
+});
 
 function renderSuscriptionFestivals(){
     const eventsLabel = document.getElementById("suscritos")
