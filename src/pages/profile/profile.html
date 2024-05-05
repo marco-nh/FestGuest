@@ -38,7 +38,7 @@
         <header class="hidden" id="headerLogged"></header>
     </div>
     
-    <div id="content">
+    <div class="flex" id="content">
         <form id="rutaForm" class="mx-auto p-4 w-3/5">
             <div class="form-group flex flex-col items-center my-2">
                 <img src="/src/images/photoPred.png " alt="avatar" id="img">
@@ -55,7 +55,7 @@
                 <div class="text-xl font-bold flex flex-col items-center text-center pr-3" id="jorge">Correo:</div>
                 <div id="correo" class="text-sm max-w-full flex  items-center text-center ">aqui va el correo electronico</div>
             </div>
-                        <div class="form-group">
+                <div class="form-group">
                 <label for="descripcion" class="text-xl font-bold">Description</label>
                 <textarea class="form-control" id="descripcion" name="descripcion" rows="5"></textarea>
             </div>
@@ -64,6 +64,10 @@
                 <button id="guardarButton" class="bg-green-500 text-white px-4 py-2 rounded-md">Save</button>
 
             </div>
+        </form>
+        <div id="suscritos" class="flex flex-col mx-auto p-4 w-1/5">
+            <p class="h2 font-weight-bold my-2">Suscribed festivals</p>
+        </div>
     </div>
 </body>
 </html>
