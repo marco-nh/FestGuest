@@ -3,6 +3,9 @@ import { app } from "../../firebase/initializeDatabase.js";
 import { doc, setDoc,query,where, getDocs, getFirestore, collection} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 import { getLocationByCords } from "../../utils/location/getLocation.js"
 
+//chat
+import { createChat, createPrivateChat} from "../chat/chat.js";
+
 function initializeOthers(titulo) {
     const suscripcionButon = document.getElementById("suscripcionButon")
     const desuscripcionButon = document.getElementById("disabledsuscripcionButon")
@@ -34,6 +37,7 @@ async function getTransport(container,title){
             checkExists = doc.data().festivalAsociado == title;
             if (checkExists){
                 const card = createTransportCard(doc.data())
+                
                 container.appendChild(card)
             }
         })
@@ -102,11 +106,18 @@ function createTransportCard(datos) {
     username.textContent = datos.usuario;
     username.setAttribute('tabindex', '0');
 
-    const img = document.createElement('img');
-    img.classList.add("w-10");
-    img.setAttribute('src', '/src/images/icon-chat.png');
-    img.setAttribute('tabindex', '0');
-    username.appendChild(img)
+    const chat = document.createElement('img');
+    chat.classList.add("w-10");
+    chat.setAttribute('src', '/src/images/icon-chat.png');
+    chat.setAttribute('tabindex', '0');
+
+    chat.addEventListener('click', function(){
+        const nombre = username.textContent;
+        createPrivateChat(nombre);
+        window.location.href = `/src/pages/chat/chat.html?privatechat=${nombre}`
+    });
+    
+    username.appendChild(chat)
 
     const title = document.createElement('h5');
     title.classList.add('mb-2', 'px-2','text-xl', 'font-bold', 'text-gray-900', 'dark:text-white', "object-fit-fill");
@@ -189,7 +200,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
 });
 
-import { createChat } from "../chat/chat.js";
 
 document.getElementById('chatBoton').addEventListener('click', function(){
     const storedEvent = JSON.parse(localStorage.getItem('selectedEvent'));

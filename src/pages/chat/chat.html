@@ -52,8 +52,13 @@
             <div class="row">
                 
                 <div class="col">
-                    <div id="chatList" class="overflow-auto" style="height: 90vh;">
+                    <div id="chatList" class="overflow-auto" style="height: 40vh;">
                         <h2 class="text-center py-1 my-2 font-weight-bold bg-blue-900 text-white">Lista de festivales</h3>
+                    </div>
+                    <div class="hidden" id="chatUsers">
+                        <div id="chatUsersLabel" class="overflow-auto" style="height: 40vh;">
+                            <h2 class="text-center py-1 my-2 font-weight-bold bg-blue-900 text-white">Lista de usuarios</h3>
+                        </div>
                     </div>
                 </div>
                 <div class="px-1 shadow"></div>
@@ -64,7 +69,7 @@
                         </div>
                         <div class="flex flex-row my-2">
                             <textarea id="messageInput" class="form-control" placeholder="Escribe un mensaje..."></textarea>
-                            <button id="sendMessageButton" class="btn btn-primary mx-1 px-3">Enviar</button>
+                            <button id="sendMessageButton" class="btn btn-primary mx-1 px-3">Send</button>
                         </div>
                     </div>
                 </div>

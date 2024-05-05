@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     var profileImage = document.getElementById('imgAvatar');
     if (userPhoto !== null && userPhoto !== undefined) {
         profileImage.src = userPhoto
-        console.log(userPhoto)
     } else {
         // Si no hay valor en localStorage, mostrar un mensaje de error o establecer un valor predeterminado
         profileImage.src = "/src/images/photoPred.png"
