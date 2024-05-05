@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const google = document.getElementById('google_button');
     const registro = document.getElementById('registro');
 
-    google.addEventListener("click", (event) => {
-        handleGoogleButtonClick(event).catch(error => {
+    google.addEventListener("click", () => {
+        handleGoogleButtonClick().catch(error => {
             console.error("Error handling Google button click:", error);
         });
     });
