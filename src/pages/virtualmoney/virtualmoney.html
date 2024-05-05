@@ -4,15 +4,13 @@
     <!-- Meta tags -->
     <meta charset="UTF-8" />
     <meta name="description" content="Fest Guest App">
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width" />
     <meta name="view-transition" content="same-origin" />
     <meta name="keywords" content="fest guest, app, events, festivals, concerts, conferences, parties, houses, accommodations, transportation, ridesharing">
     <meta name="robots" content="index, follow">
-    
-    <title>Chat</title>
 
-    
-    <!--Icono de Fest Guest-->
+    <!--Profile-->
+    <title>Trip</title>
     <link rel="icon" href="/src/FestGuest.ico" type="image/x-icon">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
@@ -24,16 +22,12 @@
     <!-- Tailwind -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" integrity="sha256-CAI/7ThhltsmP2L2zKBYa7FknB3ZwFbD0nqL8FCdxdc=" crossorigin="anonymous" />
     <!-- Header Styles -->
-    <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
-    <link rel="stylesheet" href="/src/pages/form/accommodation/accommodation.css"/>
-    <!-- Adding Styles -->
-    <link rel="stylesheet" href="/src/style.css"/>
-     <!--ChatScript-->
-    <script src="/src/pages/chat/chat.js" type="module"></script>
-    <!--StyleChat-->
-    <link rel="stylesheet" href="/src/pages/chat/chat.css"/>
-    <!-- Adding Scripts -->
+    <link rel="stylesheet" href="/src/pages/components/header/header.css" />
+    <!-- Custom Styles -->
+    <script type="module" src="/src/pages/virtualmoney/virtualmoney.js"></script>
     <script type="module" src="/src/firebase/auth/verificationLogged.js"></script>
+    <!-- Auth ref user id-->
+    <script type="module" src="/src/firebase/auth/userid.js"></script>
 </head>
 
 <body class="bg-transparent">
@@ -44,40 +38,28 @@
     
     <div class="header">
         <header class="hidden" id="header"></header>
-        <header id="headerLogged"></header>
+        <header class="hidden" id="headerLogged"></header>
     </div>
+    
+    <div class="container">
 
-    <div id="content">
-        <div class="container-fluid">
-            <div class="row">
-                
-                <div class="col">
-                    <div id="chatList" class="overflow-auto" style="height: 40vh;">
-                        <h2 class="text-center py-1 my-2 font-weight-bold bg-blue-900 text-white">Lista de festivales</h3>
-                    </div>
-                    <div class="hidden" id="chatUsers">
-                        <div id="chatUsersLabel" class="overflow-auto" style="height: 40vh;">
-                            <h2 class="text-center py-1 my-2 font-weight-bold bg-blue-900 text-white">Lista de usuarios</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="px-1 shadow"></div>
-                <div class="col-8">
-                    <div id="chatArea" class="d-flex flex-column justify-content-end" style="height: 90vh;">
-                        <div id="messages" class="overflow-auto mb-3">
-                            
-                        </div>
-                        <div class="flex flex-row my-2">
-                            <textarea id="messageInput" class="form-control" placeholder="Escribe un mensaje..."></textarea>
-                            <button id="sendMessageButton" class="btn btn-primary mx-1 px-3">Send</button>
-                        </div>
-                    </div>
-                </div>
+        <div class="hidden flex flex-col w-1/3" id="currentModule">
+            <div class="flex flex-row items-center">
+                <p class="h2 font-weight-bold my-2">Current money:</p>
+                <p class= "h2 my-2 ml-2" id="monedas"></p>
             </div>
+            <button type="button" class="btn bg-green-500" id="addbutton">Add</button>
         </div>
-        
+        <img id="cargando" class="image h-auto w-20" src="/src/images/loading.gif"></img>
+
+        <p class="h2 font-weight-bold mt-20"> How money works in FestGuest?</p>
+        <p class="h4">You can buy money in FestGuest, which can be used to purchases services between other users</p>
+        <img src="/src/images/image.png" alt="Logo FestGest" class="h-auto w-1600 mt-1" />
+        <p class="h2 font-weight-bold mt-20"> Why use money in FestGuest instead in the place?</p>
+        <p class="h4">It will be used, but instead of having to do each time you pay other for the service, you can
+            purchase fixed amount in advance to pay instantly and without doing multiple transactions
+        </p>
     </div>
-    
-    
+   
 </body>
 </html>

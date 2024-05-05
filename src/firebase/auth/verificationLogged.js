@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
             headerLogged.classList.add('hidden');
 
             localStorage.removeItem('userEmail');
+            localStorage.removeItem('userDoc');
         }
     });
 });
