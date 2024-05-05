@@ -37,7 +37,6 @@ function searchEvents(city, country) {
     };
     let url = `${baseURL}?${encodeURIComponent(city)}`;
 
-    const anyChecked = document.querySelector('input[name="categoria"]:checked');
     const festival = document.getElementById('festival');
     const diaFestivo = document.getElementById('diaFestivo');
     const concierto = document.getElementById('concierto');
@@ -74,7 +73,6 @@ function searchEvents(city, country) {
     if (sports.checked) {
         categories.push('sports');
     }
-    /*
     if (community.checked) {
         categories.push('community');
     }
@@ -87,7 +85,7 @@ function searchEvents(city, country) {
     if (arts.checked) {
         categories.push('performing-arts');
     }
-    */
+
     // Solo agregar 'category=' si hay al menos una categoría seleccionada
     if (categories.length > 0) {
         url += `category=${categories.join('%2C')}`;
@@ -95,26 +93,32 @@ function searchEvents(city, country) {
 
     if(startDate){
         console.log(startDate);
-        url += `active.gte=${encodeURIComponent(startDate)}&`;
+        url += `&active.gte=${encodeURIComponent(startDate)}`;
     }
 
     if(endDate){
         console.log(endDate);
-        url += `active.lte=${encodeURIComponent(endDate)}&`;
+        url += `&active.lte=${encodeURIComponent(endDate)}`;
     }
 
     if (country) {
         url += `&country=${encodeURIComponent(country)}`;
-        url += `&limit=${encodeURIComponent(20)}`
     }
 
 
 
-    const rankGrade = document.getElementById('rankGrade').value;
+    const minRankGrade = document.getElementById('minRankGrade').value;
+    const maxRankGrade = document.getElementById('maxRankGrade').value;
 
-    if (rankGrade) {
-        url += `&local_rank.gte=${encodeURIComponent(rankGrade)}`;
-        console.log(rankGrade);
+    if (minRankGrade) {
+        url += `&local_rank.gte=${encodeURIComponent(minRankGrade)}`;
+    }
+    if(maxRankGrade){
+        url += `&local_rank.lte=${encodeURIComponent(maxRankGrade)}`;
+    }
+
+    if(startDate && endDate && minAsist){
+        url += `&sort=phq_attendance,-start`;
     }
 
     console.log(url)
