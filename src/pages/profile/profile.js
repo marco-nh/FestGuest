@@ -53,60 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
     actionSuscriptionListener()
 })
 
-<<<<<<< HEAD
-
-
-document.getElementById('imageUpload').addEventListener('change', function(event) {
-    var input = event.target;
-    var file = input.files[0];
-    
-    var reader = new FileReader();
-    reader.onload = function() {
-        var imageData = reader.result;
-        // Guardar la imagen en localStorage
-        localStorage.setItem('userPhoto', imageData)
-    };
-    reader.readAsDataURL(file);
-    });        
-
-document.addEventListener('DOMContentLoaded', function() {
-
-    var userPhoto = localStorage.getItem('userPhoto');
-    if (userPhoto !== null && userPhoto !== undefined) {
-
-        var profileImage = this.getElementById('img')
-        profileImage.src = userPhoto
-        console.log(userPhoto)
-    } else {
-        // Si no hay valor en localStorage, mostrar un mensaje de error o establecer un valor predeterminado
-        profileImage.src = "/src/images/photoPred.png"
-    }
-    })
-
-// Obtener el elemento textarea
-var textarea = document.getElementById('descripcion');
-// Obtener el botón guardar
-var guardarButton = document.getElementById('guardarButton');
-
-// Función para guardar el texto en localStorage
-function guardarTexto() {
-    // Obtener el valor actual del textarea
-    var texto = textarea.value;
-    // Guardar el valor en localStorage con una clave específica
-    localStorage.setItem('textoGuardado', texto);
-}
-
-// Escuchar el evento click en el botón guardar
-guardarButton.addEventListener('click', guardarTexto);
-
-// Al cargar la página, verificar si hay datos guardados en localStorage y mostrarlos en el textarea
-window.addEventListener('load', function() {
-    var textoGuardado = localStorage.getItem('textoGuardado');
-    if (textoGuardado !== null) {
-        textarea.value = textoGuardado;
-    }
-});
-=======
 function renderSuscriptionFestivals(){
     const eventsLabel = document.getElementById("suscritos")
 
@@ -167,4 +113,3 @@ async function deleteSuscription(eventname){
     await setDoc(userRef, { festivalAsociado: arrayReservados }, { merge: true });
     location.reload()
 }
->>>>>>> 60b92c8794864ef75e0b4e80c543c78f8298bf19
