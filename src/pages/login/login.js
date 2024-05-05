@@ -7,11 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         handleLogin()
             .then(() => {
-                // Éxito
                 window.location.href = "/src/index.html";
             })
             .catch((error) => {
-                // Error
                 showMessage("Invalid email or password", "warning");
             });
     });

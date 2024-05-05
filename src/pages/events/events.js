@@ -30,7 +30,7 @@ function setupSearch() {
 
 
 function searchEvents(city, country) {
-    const ACCESS_TOKEN = "jYkS1XaVpIN7oTCR0t2Tx9y4MmNENq4IzQ71mWCT";
+    const ACCESS_TOKEN = "85teJJYm88B97rIg_7DrHPmAZxmSr4H_mAWggarF";
     const baseURL = "https://api.predicthq.com/v1/events";
     const headers = {
         "Authorization": `Bearer ${ACCESS_TOKEN}`,
