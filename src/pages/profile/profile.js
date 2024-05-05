@@ -12,11 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error al desconectar:", error);
             });
     });
-});
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    
     var correols = localStorage.getItem('userEmail');
 
     // Obtener el elemento div por su ID
@@ -30,10 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Si no hay valor en localStorage, mostrar un mensaje de error o establecer un valor predeterminado
         correo.textContent = 'No hay correo asociado a esta cuenta';
     }    
-})
-    
-document.addEventListener('DOMContentLoaded', function() {
-    
+
     var userDocString = localStorage.getItem('userDoc');
     var userDocObject = JSON.parse(userDocString);
     var userName = userDocObject.userName;
@@ -51,10 +44,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     renderSuscriptionFestivals()
     actionSuscriptionListener()
-})
 
-<<<<<<< HEAD
 
+    var userPhoto = localStorage.getItem('userPhoto');
+    var profileImage = document.getElementById('imgAvatar');
+    if (userPhoto !== null && userPhoto !== undefined) {
+        profileImage.src = userPhoto
+        console.log(userPhoto)
+    } else {
+        // Si no hay valor en localStorage, mostrar un mensaje de error o establecer un valor predeterminado
+        profileImage.src = "/src/images/photoPred.png"
+    }
+});
+
+
+    
 
 document.getElementById('imageUpload').addEventListener('change', function(event) {
     var input = event.target;
@@ -69,19 +73,6 @@ document.getElementById('imageUpload').addEventListener('change', function(event
     reader.readAsDataURL(file);
     });        
 
-document.addEventListener('DOMContentLoaded', function() {
-
-    var userPhoto = localStorage.getItem('userPhoto');
-    if (userPhoto !== null && userPhoto !== undefined) {
-
-        var profileImage = this.getElementById('img')
-        profileImage.src = userPhoto
-        console.log(userPhoto)
-    } else {
-        // Si no hay valor en localStorage, mostrar un mensaje de error o establecer un valor predeterminado
-        profileImage.src = "/src/images/photoPred.png"
-    }
-    })
 
 // Obtener el elemento textarea
 var textarea = document.getElementById('descripcion');
@@ -106,7 +97,7 @@ window.addEventListener('load', function() {
         textarea.value = textoGuardado;
     }
 });
-=======
+
 function renderSuscriptionFestivals(){
     const eventsLabel = document.getElementById("suscritos")
 
@@ -167,4 +158,3 @@ async function deleteSuscription(eventname){
     await setDoc(userRef, { festivalAsociado: arrayReservados }, { merge: true });
     location.reload()
 }
->>>>>>> 60b92c8794864ef75e0b4e80c543c78f8298bf19
