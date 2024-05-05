@@ -171,12 +171,27 @@ function loadUserMessages() {
                             
                             Object.values(chatData.messages).some((message) => {
 
-                                if (message.sender === userEmail || userEmail.split("@")[0] === chatSnapshot.key) {
+                                if (message.sender === userEmail) {
                                     const chatLabel = document.getElementById("chatUsers")
                                     console.log("md:", chatSnapshot.key, "Mensaje:", message);
                                     const chatElement = document.createElement('div');
                                     chatElement.classList.add('chat-box');
-                                    chatElement.textContent = message.sender.split("@")[0];
+                                    chatElement.textContent = chatSnapshot.key;
+                                    console.log(chatElement.textContent)
+                                    chatElement.addEventListener('click', function() {
+                                        window.location.href = `/src/pages/chat/chat.html?privatechat=${chatSnapshot.key}`;
+                                    });
+                                    document.getElementById("chatUsersLabel").appendChild(chatElement);
+                                    chatLabel.classList.remove("hidden")
+                                    return true;
+                                }
+
+                                if (userEmail.split("@")[0] === chatSnapshot.key) {
+                                    const chatLabel = document.getElementById("chatUsers")
+                                    console.log("md:", chatSnapshot.key, "Mensaje:", message);
+                                    const chatElement = document.createElement('div');
+                                    chatElement.classList.add('chat-box');
+                                    chatElement.textContent =  message.sender.split("@")[0];
                                     console.log(chatElement.textContent)
                                     chatElement.addEventListener('click', function() {
                                         window.location.href = `/src/pages/chat/chat.html?privatechat=${chatSnapshot.key}`;
