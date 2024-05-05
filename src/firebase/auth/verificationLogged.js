@@ -55,9 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             header.classList.remove('hidden');
             headerLogged.classList.add('hidden');
-
             localStorage.removeItem('userEmail');
             localStorage.removeItem('userDoc');
+            localStorage.removeItem("currency");
+            localStorage.removeItem("userId")
         }
     });
 });

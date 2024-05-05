@@ -26,6 +26,7 @@ async function getCurrency(){
         localStorage.setItem("currency",datos.data().money);
     }
     else {
+        conso
         currencyLabel.textContent = 0
     }
     showCurrency()

@@ -114,7 +114,8 @@ function createTransportCard(datos) {
     chat.addEventListener('click', function(){
         const nombre = username.textContent;
         createPrivateChat(nombre);
-        window.location.href = `/src/pages/chat/chat.html?privatechat=${nombre}`
+        const usuario = document.getElementById("userNameElement").textContent;
+        window.location.href = `/src/pages/chat/chat.html?privatechat=${nombre}_${usuario}`
     });
     
     username.appendChild(chat)

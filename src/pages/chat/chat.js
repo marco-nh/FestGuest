@@ -77,9 +77,11 @@ function sendMessage() {
                 timestamp: timestamp
             });
         } else{
+            const privateslice = privatechat.split("_")
             const chatMessagesRef = ref(database, `md/${privatechat}/messages`);
             push(chatMessagesRef, {
                 message: message,
+                receiver: privatechat,
                 sender: user.email,
                 timestamp: timestamp
             });
