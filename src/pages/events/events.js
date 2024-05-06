@@ -235,9 +235,10 @@ async function createEventCard(evento) {
     }
 
     const card = document.createElement('a');
-    card.classList.add('flex', 'items-center', 'bg-white', 'border', 'border-gray-200', 'rounded-lg', 'shadow', 'hover:bg-gray-100', 'dark:border-gray-700', 'dark:bg-gray-800', 'dark:hover:bg-gray-700', 'hover:shadow-2xl', 'hover:contrast-125', 'transition-all', 'hover:scale-105');
+    card.classList.add('flex', 'items-center',"card-hover-no-underline", 'bg-white', 'border', 'border-gray-200', 'rounded-lg', 'shadow', 'hover:bg-gray-100', 'dark:border-gray-700', 'dark:bg-gray-800', 'dark:hover:bg-gray-700', 'hover:shadow-2xl', 'hover:contrast-125', 'transition-all', 'hover:scale-105');
     card.setAttribute('tabindex', '0');
     card.addEventListener('click', openEventDetails);
+   
     card.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             openEventDetails();
@@ -254,7 +255,7 @@ async function createEventCard(evento) {
         window.location.href = `/src/pages/trip/trip.html?eventName=${encodeURIComponent(evento.title)}`;
     }
     card.addEventListener('mouseenter', () => {
-        card.classList.add('transform', 'scale-100', 'shadow-lg');
+        card.classList.add('transform', 'scale-100', 'shadow-lg',"text-deco");
     });
 
     card.addEventListener('mouseleave', () => {
@@ -273,10 +274,10 @@ async function createEventCard(evento) {
     card.appendChild(imgContainer);
 
     const content = document.createElement('div');
-    content.classList.add('flex', 'flex-col', 'p-4', 'flex-grow');
+    content.classList.add('flex', 'flex-col', 'p-4', 'flex-grow',);
 
     const title = document.createElement('h5');
-    title.classList.add('mb-2', 'text-xl', 'font-bold', 'text-gray-900', 'dark:text-white');
+    title.classList.add('mb-2', 'text-xl', 'font-bold','text-gray-900', 'dark:text-white');
     title.textContent = evento.title;
     title.setAttribute('tabindex', '0');
 

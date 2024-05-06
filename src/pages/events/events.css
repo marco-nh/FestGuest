@@ -55,6 +55,11 @@
 .mcui-radio input[type=radio] + div {
   border-radius: 50%;
 }
+
+.card-hover-no-underline:hover {
+  text-decoration: AUTO;
+}
+
 .mcui-checkbox input[type=radio] + div::after,
 .mcui-radio input[type=radio] + div::after {
   content: "";
