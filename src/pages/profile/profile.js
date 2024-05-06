@@ -89,7 +89,7 @@ async function renderSuscriptionFestivals(){
     const userRef = doc(db, "users", localStorage.getItem("userId"));
     const datos = await getDoc(userRef)
     const eventsSuscription = datos.data().festivalAsociado
-
+    localStorage.setItem("eventosSuscritos",JSON.stringify(eventsSuscription))
     if (eventsSuscription == null){
         console.log("No existe suscritos")
         return false

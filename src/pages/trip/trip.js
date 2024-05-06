@@ -13,12 +13,12 @@ function initializeOthers(titulo) {
     try {
         arrayReservados.forEach((fiesta) => {
             if (fiesta == titulo){
-                suscripcionButon.classList.add("hidden")
                 console.log("Reservado")
                 throw BreakException
             }
         })
     } catch (e) {
+        suscripcionButon.classList.add("hidden")
         console.log("Fallo: Existe suscripcion")
         return false
     };
