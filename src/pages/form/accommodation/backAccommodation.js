@@ -251,6 +251,7 @@ function guardarDatosFirestore(imageUrls) {
             usuario: userName
         }).then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
+            window.location.href = '/src/index.html'
         }).catch(function(error) {
             console.error("Error adding document: ", error);
         });

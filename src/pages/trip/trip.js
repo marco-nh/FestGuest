@@ -1,29 +1,40 @@
 //firebase
 import { app } from "../../firebase/initializeDatabase.js";
-import { doc, setDoc,query,where, getDocs, getFirestore, collection} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+import { doc, getDoc,setDoc,query,where, getDocs, getFirestore, collection} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 import { getLocationByCords } from "../../utils/location/getLocation.js"
 
 //chat
 import { createChat, createPrivateChat} from "../chat/chat.js";
 
-function initializeOthers(titulo) {
+async function initializeOthers(titulo) {
+    const reloading = document.getElementById("cargando")
     const suscripcionButon = document.getElementById("suscripcionButon")
     const desuscripcionButon = document.getElementById("disabledsuscripcionButon")
-    const arrayReservados = JSON.parse(localStorage.getItem("eventosSuscritos"))
+    let arrayReservados = JSON.parse(localStorage.getItem("eventosSuscritos"))
+    if (arrayReservados == null){
+        const db = getFirestore(app);
+        const userRef = doc(db, "users", localStorage.getItem("userId"));
+        const datos = await getDoc(userRef)
+        const eventsSuscription = datos.data().festivalAsociado
+        arrayReservados = eventsSuscription
+        localStorage.setItem("eventosSuscritos",JSON.stringify(eventsSuscription))
+    }
     try {
         arrayReservados.forEach((fiesta) => {
             if (fiesta == titulo){
-                suscripcionButon.classList.add("hidden")
                 console.log("Reservado")
                 throw BreakException
             }
         })
     } catch (e) {
+        desuscripcionButon.classList.remove("hidden")
+        
         console.log("Fallo: Existe suscripcion")
+        reloading.classList.add("hidden")
         return false
     };
-
-    desuscripcionButon.classList.add("hidden")
+    suscripcionButon.classList.remove("hidden")
+    reloading.classList.add("hidden")
 }
 
 

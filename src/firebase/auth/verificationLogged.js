@@ -62,7 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.removeItem('userEmail');
             localStorage.removeItem('userDoc');
             localStorage.removeItem("currency");
-            localStorage.removeItem("userId")
+            localStorage.removeItem("userId");
+            localStorage.removeItem("eventosSuscritos");
         }
     });
 });
