@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', initialize);
 function initialize() {
   agregarSugerencias('origen', 'origen-suggestions');
   agregarSugerencias('destino', 'destino-suggestions');
+  agregarSugerencias('festivalName', 'festival-suggestions');
   validacionFormulario();
 }
 
@@ -19,18 +20,53 @@ function agregarSugerencias(inputId, suggestionsId) {
       suggestionsPanel.innerHTML = '';
       return;
     }
+    if(inputId != "festivalName"){
     fetchSuggestions(query)
       .then(data => displaySuggestions(data, suggestionsPanel, input))
       .catch(error => console.log('Error:', error));
     if (inputId == 'destino'){
       getFestivalTransportReservation(query);
+    }}else{
+      fetchPredictHQEvents(query)
+      .then(data => displayPredictHQEvents(data, suggestionsPanel, input))
+      .catch(error => console.log('Error:', error));
+    if (inputId == 'destino'){
+      getFestivalTransportReservation(query);
+      }
     }
   });
 }
 
-async function fetchSuggestions(query) {
-  const response = await fetch(`https://api.tomtom.com/search/2/search/${encodeURIComponent(query)}.json?key=BsJ3AWQpgcXR8jiUM4E6AAYYgjNopDLy&limit=3`);
+async function fetchPredictHQEvents(query) {
+  const baseURL = "https://api.predicthq.com/v1/events";
+  const ACCESS_TOKEN = "85teJJYm88B97rIg_7DrHPmAZxmSr4H_mAWggarF";
+  const headers = {
+      "Authorization": `Bearer ${ACCESS_TOKEN}`,
+      "Accept": "application/json"
+  };
+  const url = `${baseURL}?q=${encodeURIComponent(query)}`;
+  const response = await fetch(url, { headers: headers });
   return await response.json();
+}
+
+
+async function fetchSuggestions(query) {
+  const response = await fetch(`https://api.tomtom.com/search/2/search/${encodeURIComponent(query)}.json?key=BsJ3AWQpgcXR8jiUM4E6AAYYgjNopDLy&limit=3&countrySet=ES`);
+  return await response.json();
+}
+
+function displayPredictHQEvents(data, suggestionsPanel, input) {
+  suggestionsPanel.innerHTML = '';
+  data.results.forEach(result => {
+    const div = document.createElement('div');
+    div.innerHTML = result.title;
+    div.classList.add('suggestion-item');
+    div.addEventListener('click', function() {
+      input.value = result.title;
+      suggestionsPanel.innerHTML = '';
+    });
+    suggestionsPanel.appendChild(div);
+  });
 }
 
 function displaySuggestions(data, suggestionsPanel, input) {

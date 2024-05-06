@@ -52,10 +52,10 @@ function searchEvents(city, country) {
     const endDate = document.getElementById('endDate').value;
     
     if(minAsist){
-        url += `phq_attendance.gt=${encodeURIComponent(minAsist)}&`;
+        url += `&phq_attendance.gt=${encodeURIComponent(minAsist)}`;
     }
     if(maxAsist){
-        url += `phq_attendance.lt=${encodeURIComponent(maxAsist)}&`;
+        url += `&phq_attendance.lt=${encodeURIComponent(maxAsist)}`;
     }
 
     const categories = [];
@@ -357,6 +357,32 @@ document.addEventListener('DOMContentLoaded', function() {
         option.textContent = country.name;
         selectElement.appendChild(option);
     });
+
+        // Función para cambiar la visibilidad del contenido de fecha
+        function toggleDateRange() {
+            var dateRange = document.getElementById("dateRange");
+            if (dateRange.style.display === "none" || dateRange.style.display === "") {
+                dateRange.style.display = "block";
+            } else {
+                dateRange.style.display = "none";
+            }
+        }
+    
+        // Función para cambiar la visibilidad del contenido de asistencia esperada
+        function toggleAttendance() {
+            var dropdown = document.getElementById("dropdown");
+            if (dropdown.style.display === "none" || dropdown.style.display === "") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display = "none";
+            }
+        }
+    
+        // Agregar event listener al botón de rango de fecha
+        document.getElementById("toggleDateRangeButton").addEventListener("click", toggleDateRange);
+    
+        // Agregar event listener al botón de asistencia esperada
+        document.getElementById("toggleAttendanceButton").addEventListener("click", toggleAttendance);
     
 });
 
