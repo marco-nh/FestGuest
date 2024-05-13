@@ -23,10 +23,13 @@ async function initializeOthers(titulo) {
             arrayReservados = eventsSuscription
             localStorage.setItem("eventosSuscritos",JSON.stringify(eventsSuscription))
         }
+    } else{
+        arrayReservados = JSON.parse(arrayReservados)
     }
     try { 
         if (arrayReservados.length > 2){
             arrayReservados.forEach((fiesta) => {
+                console.log(fiesta)
                 if (fiesta == titulo){
                     console.log("Reservado")
                     throw BreakException
