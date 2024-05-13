@@ -10,22 +10,29 @@ async function initializeOthers(titulo) {
     const reloading = document.getElementById("cargando")
     const suscripcionButon = document.getElementById("suscripcionButon")
     const desuscripcionButon = document.getElementById("disabledsuscripcionButon")
-    let arrayReservados = JSON.parse(localStorage.getItem("eventosSuscritos"))
-    if (arrayReservados == null){
+    let arrayReservados = localStorage.getItem("eventosSuscritos")
+    if (arrayReservados == null || arrayReservados == "undefined"){
         const db = getFirestore(app);
         const userRef = doc(db, "users", localStorage.getItem("userId"));
         const datos = await getDoc(userRef)
         const eventsSuscription = datos.data().festivalAsociado
-        arrayReservados = eventsSuscription
-        localStorage.setItem("eventosSuscritos",JSON.stringify(eventsSuscription))
+        if (eventsSuscription == null){
+            arrayReservados = []
+            localStorage.setItem("eventosSuscritos",JSON.stringify(eventsSuscription))
+        } else{
+            arrayReservados = eventsSuscription
+            localStorage.setItem("eventosSuscritos",JSON.stringify(eventsSuscription))
+        }
     }
-    try {
-        arrayReservados.forEach((fiesta) => {
-            if (fiesta == titulo){
-                console.log("Reservado")
-                throw BreakException
-            }
-        })
+    try { 
+        if (arrayReservados.length > 2){
+            arrayReservados.forEach((fiesta) => {
+                if (fiesta == titulo){
+                    console.log("Reservado")
+                    throw BreakException
+                }
+            })
+        }
     } catch (e) {
         desuscripcionButon.classList.remove("hidden")
         
