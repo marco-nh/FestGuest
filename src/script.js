@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let searchForm = document.getElementById('searchForm');
     let searchButton = document.getElementById('searchButton');
     let searchInput = document.getElementById('voice-search');
+    
 
     function performSearch() {
         let searchTerm = searchInput.value;

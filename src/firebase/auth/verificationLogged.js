@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const header = document.getElementById('header');
     const headerLogged = document.getElementById('headerLogged');
     const userEmailElement = document.getElementById('imageUser');
+    let userPhotoLocalStorage = localStorage.getItem('userPhoto');
+
+
 
     const updateProfilePhoto = () => {
         try {
@@ -11,12 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
             
             if (userDocString) {
                 const userDoc = JSON.parse(userDocString);            
-                const photoURL = userDoc.photo;
+                //const photoURL = userDoc.photo;
                 const userName = userDoc.userName;
+                const photoURL = userDoc.photo;
 
                 const profileImage = document.querySelector('#imageUserElement');
                 if (profileImage) {
-                    profileImage.src = photoURL;
+                    profileImage.src = userPhotoLocalStorage || photoURL;
                 }
                 
                 const userNameElement = document.querySelector('#userNameElement');

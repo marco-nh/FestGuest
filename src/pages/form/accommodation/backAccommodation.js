@@ -11,21 +11,89 @@ let maxImagenes = 5
 function initialize() {
     document.getElementById('subirImagenFigma').addEventListener('click', handleSubirImagen);
     agregarSugerencias('ciudad');
+    agregarSugerencias('festivalName', 'festival-suggestions');
+    agregarSugerencias('calle', 'street-suggestions');
     validacionFormulario();
 }
 document.addEventListener('DOMContentLoaded', initialize);
 
-function agregarSugerencias(inputId) {
-  const input = document.getElementById(inputId);
-  input.addEventListener('input', function() {
-    const query = this.value;
-    if (query.length < 3) {
-      cleanFestivalReservation()
-      return;
-    }
-    getFestivalAccomodationReservation(query);
-  });
+
+async function fetchPredictHQEvents(query) {
+    const baseURL = "https://api.predicthq.com/v1/events";
+    const ACCESS_TOKEN = "85teJJYm88B97rIg_7DrHPmAZxmSr4H_mAWggarF";
+    const headers = {
+        "Authorization": `Bearer ${ACCESS_TOKEN}`,
+        "Accept": "application/json"
+    };
+    const url = `${baseURL}?q=${encodeURIComponent(query)}`;
+    const response = await fetch(url, { headers: headers });
+    return await response.json();
 }
+  
+  
+async function fetchSuggestions(query) {
+    const response = await fetch(`https://api.tomtom.com/search/2/search/${encodeURIComponent(query)}.json?key=BsJ3AWQpgcXR8jiUM4E6AAYYgjNopDLy&limit=3&countrySet=ES`);
+    return await response.json();
+}
+
+
+
+function displayPredictHQEvents(data, suggestionsPanel, input) {
+    suggestionsPanel.innerHTML = '';
+    data.results.forEach(result => {
+      const div = document.createElement('div');
+      div.innerHTML = result.title;
+      div.classList.add('suggestion-item');
+      div.addEventListener('click', function() {
+        input.value = result.title;
+        suggestionsPanel.innerHTML = '';
+      });
+      suggestionsPanel.appendChild(div);
+    });
+  }
+  
+  function displaySuggestions(data, suggestionsPanel, input) {
+    suggestionsPanel.innerHTML = '';
+    data.results.forEach(result => {
+      const div = document.createElement('div');
+      div.innerHTML = result.address.freeformAddress;
+      div.classList.add('suggestion-item');
+      div.addEventListener('click', function() {
+        input.value = result.address.freeformAddress;
+        suggestionsPanel.innerHTML = '';
+      });
+      suggestionsPanel.appendChild(div);
+    });
+  }
+
+
+  
+function agregarSugerencias(inputId, suggestionsId) {
+    const input = document.getElementById(inputId);
+    const suggestionsPanel = document.getElementById(suggestionsId);
+    input.addEventListener('input', function() {
+      const query = this.value;
+      if (query.length < 3) {
+        cleanFestivalReservation()
+        suggestionsPanel.innerHTML = '';
+        return;
+      }
+      if(inputId != "festivalName"){
+      fetchSuggestions(query)
+        .then(data => displaySuggestions(data, suggestionsPanel, input))
+        .catch(error => console.log('Error:', error));
+      if (inputId == 'calle'){
+        getFestivalTransportReservation(query);
+      }}else{
+        fetchPredictHQEvents(query)
+        .then(data => displayPredictHQEvents(data, suggestionsPanel, input))
+        .catch(error => console.log('Error:', error));
+      if (inputId == 'destino'){
+        getFestivalTransportReservation(query);
+        }
+      }
+    });
+  }
 
 function handleSubirImagen() {
     if (totalImagenes >= maxImagenes) {
@@ -78,24 +146,25 @@ function mostrarImagen(file, contenedorImagenes) {
     reader.readAsDataURL(file);
 }
 
-function getFestivalAccomodationReservation(query){
-    const festivalForm = document.getElementById("festivalName")
-    const festivales = JSON.parse(localStorage.getItem('events'))
-    if (festivales != null){
-      festivales.forEach((fes) => {
-        console.log(fes[1],query)
-        if (fes[1].includes(query)){
-          const festival = document.createElement('option');
-          festival.textContent = fes[0];
-          festival.value = fes[0];
-          festival.setAttribute("id", fes[0])
-          if (document.getElementById(fes[0]) == null){
-            festivalForm.appendChild(festival)
-          }
-        } 
-      })
-    }
+function getFestivalTransportReservation(query){
+  const festivalForm = document.getElementById("festivalName")
+  const festivales = JSON.parse(localStorage.getItem('events'))
+  if (festivales != null){
+    festivales.forEach((fes) => {
+      console.log(fes[1],query)
+      if (fes[1].includes(query)){
+        const festival = document.createElement('option');
+        festival.textContent = fes[0];
+        festival.value = fes[0];
+        festival.setAttribute("id", fes[0])
+        if (document.getElementById(fes[0]) == null){
+          festivalForm.appendChild(festival)
+        }
+      } 
+    })
   }
+}
+
   function cleanFestivalReservation(){
     const festivalForm = document.getElementById("festivalName")
     festivalForm.textContent = ""

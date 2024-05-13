@@ -49,12 +49,12 @@ async function getTransport(container,title){
     const db = getFirestore(app);
     const querySnapshot = await getDocs(collection(db, "transports"));
     let checkExists = false
-    console.log(title)
+    const accommodations ="transports"
     
     querySnapshot.forEach((doc) => {
             checkExists = doc.data().festivalAsociado == title;
             if (checkExists){
-                const card = createTransportCard(doc.data())
+                const card = createTransportCard(doc.data(),accommodations)
                 
                 container.appendChild(card)
             }
@@ -62,12 +62,13 @@ async function getTransport(container,title){
 }
 async function getAccomodations(container,title){
     const db = getFirestore(app);
+    const accommodations ="accommodations"
     const querySnapshot = await getDocs(collection(db, "accommodations"));
     let checkExists = false
     querySnapshot.forEach((doc) => {
             checkExists = doc.data().festivalAsociado == title;
             if (checkExists){
-                const card = createTransportCard(doc.data())
+                const card = createTransportCard(doc.data(), accommodations)
                 container.appendChild(card)
             }
         })
@@ -98,21 +99,12 @@ function renderTransport(location){
 
     base.appendChild(container);
 }
-function createTransportCard(datos) {
+
+function createTransportCard(datos, typeDoc) {
     const card = document.createElement('p');
     card.classList.add('flex', 'items-center', 'bg-white', 'border', 'border-gray-200', 'rounded-lg', 'shadow', 'hover:bg-gray-100', 'dark:border-gray-700', 'dark:bg-gray-800', 'dark:hover:bg-gray-700', 'hover:shadow-2xl', 'hover:contrast-125', 'transition-all', 'hover:scale-105');
     card.setAttribute('tabindex', '0');
-    /*
-    const imgContainer = document.createElement('div');
-    imgContainer.classList.add('flex-shrink-0', 'h-48', 'w-48', 'rounded-l-lg', 'overflow-hidden');
-    const img = document.createElement('img');
-    img.classList.add('object-cover', 'w-full', 'h-full');
-    img.src = getRandomImageURL(evento.category);
-    img.alt = evento.title;
 
-    imgContainer.appendChild(img);
-    card.appendChild(imgContainer);
-    */
     const content = document.createElement('div');
     content.classList.add('flex', 'flex-col', 'p-4');
 
@@ -120,12 +112,12 @@ function createTransportCard(datos) {
     divider.classList.add('flex', 'flex-row', 'p-4','flex-wrap');
   
     const username = document.createElement('h4');
-    username.classList.add('mb-2','px-1','text-xl', 'font-bold', 'text-gray-900', 'dark:text-white');
-    username.textContent = datos.usuario;
+    username.classList.add("flex",'mb-2','mr-2','px-1','text-xl', 'font-bold', 'text-gray-900', 'dark:text-white');
+    username.textContent = datos.usuario ;
     username.setAttribute('tabindex', '0');
 
     const chat = document.createElement('img');
-    chat.classList.add("w-10");
+    chat.classList.add("w-10","ml-2");
     chat.setAttribute('src', '/src/images/icon-chat.png');
     chat.setAttribute('tabindex', '0');
 
@@ -140,7 +132,13 @@ function createTransportCard(datos) {
 
     const title = document.createElement('h5');
     title.classList.add('mb-2', 'px-2','text-xl', 'font-bold', 'text-gray-900', 'dark:text-white', "object-fit-fill");
-    title.textContent = datos.nombreAnuncioCoche;
+    
+    if(typeDoc=="transports"){
+        title.textContent = datos.nombreAnuncioCoche;
+    }else{
+        title.textContent = datos.nombreAnuncio;
+    }
+    console.log(datos)
     title.setAttribute('tabindex', '0');
 
     const descripcion = document.createElement('p');
@@ -156,6 +154,12 @@ function createTransportCard(datos) {
 
     return card;
 }
+
+
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const storedEvent = JSON.parse(localStorage.getItem('selectedEvent'));
@@ -176,8 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
         eventStartElement.textContent = `Start Date: ${new Date(infoEvent.start).toLocaleDateString()}`;
         eventEndElement.textContent = `End Date: ${new Date(infoEvent.end).toLocaleDateString()}`;
         eventUpdatedElement.textContent = `Updated: ${new Date(infoEvent.updated).toLocaleDateString()}`;
-        eventCountryElement.textContent = `Country: ${infoEvent.country}`;
-        
+
         if(storedEvent.event) {
             getLocationByCords(storedEvent.event)
                 .then(location => {

@@ -1,12 +1,15 @@
 import { database } from "../../firebase/initializeDatabase.js";
-import { app } from "../../firebase/initializeDatabase.js";
 import { auth } from "../../firebase/initializeDatabase.js";
 import { ref, push, set, serverTimestamp, query, orderByChild, equalTo, get, update, onChildAdded } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetchChat();
     const sendMessageButton = document.getElementById("sendMessageButton");
-    sendMessageButton.addEventListener("click", sendMessage);
+    if (sendMessageButton) {
+        sendMessageButton.addEventListener("click", sendMessage);
+    }
+
+    fetchChat();
+    loadUserMessages();
     const urlParams = new URLSearchParams(window.location.search);
     const chatName = urlParams.get('chatName');
     if(chatName == "Global"){
@@ -55,7 +58,7 @@ export async function createPrivateChat(name) {
 function sendMessage() {
     const urlParams = new URLSearchParams(window.location.search);
     const chatName = urlParams.get('chatName');
-    const privatechat = urlParams.get('privatechat')
+    const privatechat = urlParams.get('privatechat');
 
     var user=auth.currentUser;
     if(user){
@@ -146,6 +149,7 @@ function loadUserMessages() {
                                     chatElement.textContent = chatSnapshot.key;
                                     console.log(chatElement.textContent)
                                     chatElement.addEventListener('click', function() {
+                                        console.log
                                         window.location.href = `/src/pages/chat/chat.html?chatName=${chatSnapshot.key}`;
                                     });
                                     document.getElementById("chatList").appendChild(chatElement);
@@ -182,6 +186,7 @@ function loadUserMessages() {
                                     chatElement.addEventListener('click', function() {
                                         window.location.href = `/src/pages/chat/chat.html?privatechat=${chatSnapshot.key}`;
                                     });
+                                    
                                     document.getElementById("chatUsersLabel").appendChild(chatElement);
                                     chatLabel.classList.remove("hidden")
                                     return true;
@@ -216,17 +221,8 @@ function loadUserMessages() {
         } else {
           console.log("Fallo");
         }
-      });
-
-    
+      });    
 }
-
-
-loadUserMessages();
-
-
-
-
 
 
 
