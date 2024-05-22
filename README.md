@@ -20,6 +20,20 @@ Our proposed venture aims to develop a social festival reservation application (
 </p>
 
 
+# Viewing the Project 👀
+
+<h4>Using Live Server</h4>
+
+1. **Install Live Server extension**: If you don't have Live Server installed, you can get it from the [Live Server extension page](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) on the Visual Studio Code Marketplace.
+2. **Open the project folder**: Launch Visual Studio Code and open the folder containing the project.
+3. **Start Live Server**: Right-click on the `index.html` file and select "Open with Live Server". This will open the project in your default web browser.
+
+<h4>Opening Directly in Browser</h4>
+
+1. **Locate the `index.html` file**: Navigate to the folder where the project files are stored.
+2. **Open with browser**: Right-click on the `index.html` file and select "Open with [your preferred web browser]". This will display the project in your browser.
+
+
  # Technologies Used 🛠️
 
 [![HTML](https://img.shields.io/badge/HTML-Markup-orange?style=flat-square&logo=html5)](https://www.w3.org/html/) [![CSS](https://img.shields.io/badge/CSS-Styling-blue?style=flat-square&logo=css3)](https://www.w3.org/Style/CSS/) [![JavaScript](https://img.shields.io/badge/JavaScript-Programming-yellow?style=flat-square&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![Firebase](https://img.shields.io/badge/Firebase-database-red?style=flat-square&logo=firebase)](https://firebase.google.com/)
