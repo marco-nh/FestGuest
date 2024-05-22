@@ -40,7 +40,7 @@ Our proposed venture aims to develop a social festival reservation application (
 
 ## External Libraries and Dependencies 📦
 
-[![Toastify](https://img.shields.io/badge/Toastify-JavaScript%20Library-yellow?style=flat-square)](https://github.com/apvarun/toastify-js)[![Font Awesome](https://img.shields.io/badge/Font%20Awesome-Icon%20Library-lightgrey?style=flat-square&logo=font-awesome)](https://fontawesome.com/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-CSS%20Framework-blue?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![Toastify](https://img.shields.io/badge/Toastify-JavaScript%20Library-yellow?style=flat-square)](https://github.com/apvarun/toastify-js) [![Font Awesome](https://img.shields.io/badge/Font%20Awesome-Icon%20Library-lightgrey?style=flat-square&logo=font-awesome)](https://fontawesome.com/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-CSS%20Framework-blue?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 [![SonarQube](https://img.shields.io/badge/SonarQube-Code%20Quality-green?style=flat-square&logo=sonarqube)](https://www.sonarqube.org/)
 
 # Contributions 🤝
