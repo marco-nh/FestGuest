@@ -104,93 +104,73 @@ async function fetchChat(){
 
 }
 
-
-
 function loadUserMessages() {
-    auth.onAuthStateChanged(function(user) {
-        if (user){ 
+    auth.onAuthStateChanged(user => {
+        if (user) {
             const userEmail = user.email;
             const chatRef = ref(database, 'chats');
             const privatechatRef = ref(database, 'md');
             
-            get(chatRef).then((snapshot) => {
-                if (snapshot.exists()) {
-                    snapshot.forEach((chatSnapshot) => {
-                        const chatData = chatSnapshot.val();
-        
-                        
-                        if (chatData.messages) {
-                            
-                            Object.values(chatData.messages).some((message) => {
-                                if (message.sender === userEmail) {                                    
-                                    const chatElement = document.createElement('div');
-                                    chatElement.classList.add('chat-box');
-                                    chatElement.textContent = chatSnapshot.key;
-                                    chatElement.addEventListener('click', function() {
-                                        window.location.href = `/src/pages/chat/chat.html?chatName=${chatSnapshot.key}`;
-                                    });
-                                    document.getElementById("chatList").appendChild(chatElement);
-                                    return true;
-                                }
-                                
-                                return false;
-                            });
-                        }
-                    });
-                }
-            }).catch((error) => {
-                console.error("Error al cargar los chats:", error);
-            });
-          
-            get(privatechatRef).then((snapshot) => {
-                if (snapshot.exists()) {
-                    snapshot.forEach((chatSnapshot) => {
-                        const chatData = chatSnapshot.val();
-        
-                        
-                        if (chatData.messages) {
-                            
-                            Object.values(chatData.messages).some((message) => {
-                                if (message.sender === userEmail) {
-                                    const chatLabel = document.getElementById("chatUsers")
-                                    const chatElement = document.createElement('div');
-                                    chatElement.classList.add('chat-box');
-                                    chatElement.textContent = chatSnapshot.key.split("_")[0];
-                                    
-                                    chatElement.addEventListener('click', function() {
-                                        window.location.href = `/src/pages/chat/chat.html?privatechat=${chatSnapshot.key}`;
-                                    });
-                                    
-                                    document.getElementById("chatUsersLabel").appendChild(chatElement);
-                                    chatLabel.classList.remove("hidden")
-                                    return true;
-                                }
-
-                                if (userEmail.split("@")[0] === chatSnapshot.key.split("_")[0]) {
-                                    const chatLabel = document.getElementById("chatUsers")
-                                    const chatElement = document.createElement('div');
-                                    chatElement.classList.add('chat-box');
-                                    chatElement.textContent =  chatSnapshot.key.split("_")[1];
-                                    chatElement.addEventListener('click', function() {
-                                        window.location.href = `/src/pages/chat/chat.html?privatechat=${chatSnapshot.key}`;
-                                    });
-                                    document.getElementById("chatUsersLabel").appendChild(chatElement);
-                                    chatLabel.classList.remove("hidden")
-                                    return true;
-                                }
-                                
-                                return false;
-                            });
-                        }
-                    });
-                }
-            }).catch((error) => {
-                console.error("Error al cargar los chats:", error);
-            });
-
+            loadChats(chatRef, userEmail, 'chatList', false);
+            loadChats(privatechatRef, userEmail, 'chatUsersLabel', true);
         }
-      });    
+    });
 }
+
+function loadChats(ref, userEmail, elementId, isPrivate) {
+    get(ref).then(snapshot => {
+        if (snapshot.exists()) {
+            snapshot.forEach(chatSnapshot => {
+                processChatSnapshot(chatSnapshot, userEmail, elementId, isPrivate);
+            });
+        }
+    }).catch(error => {
+        console.error("Error al cargar los chats:", error);
+    });
+}
+
+function processChatSnapshot(chatSnapshot, userEmail, elementId, isPrivate) {
+    const chatData = chatSnapshot.val();
+    if (chatData.messages) {
+        Object.values(chatData.messages).some(message => {
+            if (shouldCreateChatElement(message, userEmail, chatSnapshot.key, isPrivate)) {
+                createChatElement(chatSnapshot.key, elementId, userEmail, isPrivate);
+                return true;
+            }
+            return false;
+        });
+    }
+}
+
+function shouldCreateChatElement(message, userEmail, chatKey, isPrivate) {
+    if (message.sender === userEmail) {
+        return true;
+    }
+    if (isPrivate && userEmail.split("@")[0] === chatKey.split("_")[0]) {
+        return true;
+    }
+    return false;
+}
+
+function createChatElement(chatKey, elementId, userEmail, isPrivate) {
+    const chatLabel = document.getElementById("chatUsers");
+    const chatElement = document.createElement('div');
+    chatElement.classList.add('chat-box');
+    chatElement.textContent = isPrivate ? getPrivateChatName(chatKey, userEmail) : chatKey;
+    chatElement.addEventListener('click', () => {
+        window.location.href = `/src/pages/chat/chat.html?${isPrivate ? 'privatechat' : 'chatName'}=${chatKey}`;
+    });
+    document.getElementById(elementId).appendChild(chatElement);
+    if (isPrivate) {
+        chatLabel.classList.remove("hidden");
+    }
+}
+
+function getPrivateChatName(chatKey, userEmail) {
+    const keyParts = chatKey.split("_");
+    return userEmail.split("@")[0] === keyParts[0] ? keyParts[1] : keyParts[0];
+}
+
 
 
 
