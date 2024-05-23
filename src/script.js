@@ -22,8 +22,4 @@ document.addEventListener("DOMContentLoaded", function() {
     searchForm.addEventListener('submit', function(event) {
         event.preventDefault();
     });
-
-    document.getElementById('luckyButton').addEventListener('click', () => {
-        console.log("Implementar un tutorial")
-    });
 });

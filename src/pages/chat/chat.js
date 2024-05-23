@@ -1,6 +1,6 @@
 import { database } from "../../firebase/initializeDatabase.js";
 import { auth } from "../../firebase/initializeDatabase.js";
-import { ref, push, set, serverTimestamp, query, orderByChild, equalTo, get, update, onChildAdded } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+import { ref, push, set, get, onChildAdded } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     const sendMessageButton = document.getElementById("sendMessageButton");
@@ -18,40 +18,30 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 export async function createChat(name) {
-    const chatMessagesRef = ref(database, `chats/${name}/messages`); // Referencia para la carpeta "messages" dentro del chat
-
+    const chatMessagesRef = ref(database, `chats/${name}/messages`); 
     try {
         const snapshot = await get(chatMessagesRef);
         if (!snapshot.exists()) {
-            await set(chatMessagesRef, true); // Crear la carpeta si no existe
-            console.log("Carpeta 'messages' creada en el chat para el evento:", name);
-        } else {
-            console.log("La carpeta 'messages' ya existe en el chat para el evento:", name);
+            await set(chatMessagesRef, true); 
+           
         }
     } catch (error) {
         console.error("Error al crear o verificar la carpeta 'messages' en el chat:", error);
     }
-
-    //window.location.href = `/src/pages/chat/chat.html?chatName=${name}`;
 }
 
 
 export async function createPrivateChat(name) {
-    const chatMessagesRef = ref(database, `md/${name}/messages`); // Referencia para la carpeta "messages" dentro del chat
-
+    const chatMessagesRef = ref(database, `md/${name}/messages`); 
     try {
         const snapshot = await get(chatMessagesRef);
         if (!snapshot.exists()) {
-            await set(chatMessagesRef, true); // Crear la carpeta si no existe
+            await set(chatMessagesRef, true); 
             console.log("Carpeta 'messages' creada en el chat para el evento:", name);
-        } else {
-            console.log("La carpeta 'messages' ya existe en el chat para el evento:", name);
         }
     } catch (error) {
         console.error("Error al crear o verificar la carpeta 'messages' en el chat:", error);
     }
-
-    //window.location.href = `/src/pages/chat/chat.html?chatName=${name}`;
 }
 
 
@@ -61,12 +51,6 @@ function sendMessage() {
     const privatechat = urlParams.get('privatechat');
 
     var user=auth.currentUser;
-    if(user){
-        console.log("Usuario autenticado")
-    }else{
-        console.log("Usuario no autenticado")
-    }
-
     const messageInput = document.getElementById("messageInput");
     const message = messageInput.value.trim(); 
     messageInput.value = ""; 
@@ -80,7 +64,6 @@ function sendMessage() {
                 timestamp: timestamp
             });
         } else{
-            const privateslice = privatechat.split("_")
             const chatMessagesRef = ref(database, `md/${privatechat}/messages`);
             push(chatMessagesRef, {
                 message: message,
@@ -128,7 +111,6 @@ function loadUserMessages() {
     auth.onAuthStateChanged(function(user) {
         if (user){ 
             const userEmail = user.email;
-            console.log(userEmail);
             const chatRef = ref(database, 'chats');
             const privatechatRef = ref(database, 'md');
             
@@ -141,15 +123,11 @@ function loadUserMessages() {
                         if (chatData.messages) {
                             
                             Object.values(chatData.messages).some((message) => {
-                                if (message.sender === userEmail) {
-                                    
-                                    console.log("Se encontró un mensaje del usuario actual en el chat:", chatSnapshot.key, "Mensaje:", message);
+                                if (message.sender === userEmail) {                                    
                                     const chatElement = document.createElement('div');
                                     chatElement.classList.add('chat-box');
                                     chatElement.textContent = chatSnapshot.key;
-                                    console.log(chatElement.textContent)
                                     chatElement.addEventListener('click', function() {
-                                        console.log
                                         window.location.href = `/src/pages/chat/chat.html?chatName=${chatSnapshot.key}`;
                                     });
                                     document.getElementById("chatList").appendChild(chatElement);
@@ -160,8 +138,6 @@ function loadUserMessages() {
                             });
                         }
                     });
-                } else {
-                    console.log("No se encontraron chats en la base de datos.");
                 }
             }).catch((error) => {
                 console.error("Error al cargar los chats:", error);
@@ -178,7 +154,6 @@ function loadUserMessages() {
                             Object.values(chatData.messages).some((message) => {
                                 if (message.sender === userEmail) {
                                     const chatLabel = document.getElementById("chatUsers")
-                                    console.log("md:", chatSnapshot.key, "Mensaje:", message);
                                     const chatElement = document.createElement('div');
                                     chatElement.classList.add('chat-box');
                                     chatElement.textContent = chatSnapshot.key.split("_")[0];
@@ -194,11 +169,9 @@ function loadUserMessages() {
 
                                 if (userEmail.split("@")[0] === chatSnapshot.key.split("_")[0]) {
                                     const chatLabel = document.getElementById("chatUsers")
-                                    console.log("md:", chatSnapshot.key, "Mensaje:", message);
                                     const chatElement = document.createElement('div');
                                     chatElement.classList.add('chat-box');
                                     chatElement.textContent =  chatSnapshot.key.split("_")[1];
-                                    console.log(chatElement.textContent)
                                     chatElement.addEventListener('click', function() {
                                         window.location.href = `/src/pages/chat/chat.html?privatechat=${chatSnapshot.key}`;
                                     });
@@ -211,15 +184,11 @@ function loadUserMessages() {
                             });
                         }
                     });
-                } else {
-                    console.log("No se encontraron chats en la base de datos.");
                 }
             }).catch((error) => {
                 console.error("Error al cargar los chats:", error);
             });
 
-        } else {
-          console.log("Fallo");
         }
       });    
 }
