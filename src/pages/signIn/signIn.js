@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function handleRegistroClick(event) {
     try {
-        event.preventDefault(); // Evita que el formulario se envíe automáticamente
+        event.preventDefault();
 
         const email = document.getElementById('emailreg').value;
         const password = document.getElementById('passwordreg').value;
@@ -76,7 +76,7 @@ async function handleGoogleButtonClick() {
             await addUser(email); 
             await saveUserInfoToLocal(email);
         }
-        window.location.href = "/src/index.html";
+        window.location.href = "./src/index.html";
     } catch (error) {
         console.error("Error signing in with Google:", error);
     }
@@ -86,7 +86,7 @@ async function addUser(emailValue) {
     try {
         const db = getFirestore(app);
         const rol = "Buyer";
-        const photoPred = "/src/images/photoPred.png";
+        const photoPred = "./src/images/photoPred.png";
         const userName = emailValue.split('@')[0]; 
         const docRef = await addDoc(collection(db, 'users'), {
             userEmail: emailValue,

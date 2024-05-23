@@ -12,7 +12,7 @@
     <title>Accomodation</title>
 
     <!--Icono de Fest Guest-->
-    <link rel="icon" href="/src/FestGuest.ico" type="image/x-icon">
+    <link rel="icon" href="./../../../../src/FestGuest.ico" type="image/x-icon">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <!-- Bootstrap -->
@@ -25,18 +25,18 @@
     <!-- Header Styles -->
     <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
     <!--Accomodation Script-->
-    <script type="module" src="../accommodation/backAccommodation.js"></script>
-    <script type="module" src="/src/firebase/auth/verificationLogged.js"></script>
-    <link rel="stylesheet" href="/src/pages/form/accommodation/accommodation.css"/>
+    <script type="module" src="./../../../../accommodation/backAccommodation.js"></script>
+    <script type="module" src="./../../../../src/firebase/auth/verificationLogged.js"></script>
+    <link rel="stylesheet" href="./../../../../src/pages/form/accommodation/accommodation.css"/>
     <!-- Adding Styles -->
-    <link rel="stylesheet" href="/src/style.css"/>
+    <link rel="stylesheet" href="./../../../../src/style.css"/>
 </head>
 
 <body class="bg-transparent">
     <!-- Header dynamic load -->
-    <script src="/src/utils/loadComponents/loadComponents.js"></script>
-    <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
-    <script>loadComponents("/src/pages/components/header/logged/header.html", "headerLogged")</script>
+    <script src="./../../../../src/utils/loadComponents/loadComponents.js"></script>
+    <script>loadComponents("./../../../../src/pages/components/header/header.html", "header")</script>
+    <script>loadComponents("./../../../../src/pages/components/header/logged/header.html", "headerLogged")</script>
     
     <div class="header">
         <header class="hidden" id="header"></header>
@@ -86,7 +86,7 @@
             <div class="form-group">
                 <label for="subirImagen" class="text-xl font-bold">Upload Images</label>
                 <input class="hidden" type="file" id="subirImagen" name="file-upload" accept="image/*" multiple>
-                <img id="subirImagenFigma" src="/src/images/selectPhoto.png" alt="Uploading">
+                <img id="subirImagenFigma" src="./../../../../src/images/selectPhoto.png" alt="Uploading">
                 <div id="previewImagen" class="preview-container"></div>
             </div>
     

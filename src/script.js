@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function performSearch() {
         let searchTerm = searchInput.value;
         let encodedSearchTerm = btoa(searchTerm);
-        window.location.href = '/src/pages/events/events.html?search=' + encodedSearchTerm;
+        window.location.href = './../../src/pages/events/events.html?search=' + encodedSearchTerm;
     }
 
     searchButton.addEventListener('click', performSearch);

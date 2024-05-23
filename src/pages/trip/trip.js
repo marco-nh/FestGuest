@@ -1,9 +1,6 @@
-//firebase
 import { app } from "../../firebase/initializeDatabase.js";
 import { doc, getDoc,setDoc,query,where, getDocs, getFirestore, collection} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 import { getLocationByCords } from "../../utils/location/getLocation.js"
-
-//chat
 import { createChat, createPrivateChat} from "../chat/chat.js";
 
 async function initializeOthers(titulo) {
@@ -117,14 +114,14 @@ function createTransportCard(datos, typeDoc) {
 
     const chat = document.createElement('img');
     chat.classList.add("w-10","ml-2");
-    chat.setAttribute('src', '/src/images/icon-chat.png');
+    chat.setAttribute('src', './../../../src/images/icon-chat.png');
     chat.setAttribute('tabindex', '0');
 
     chat.addEventListener('click', function(){
         const nombre = username.textContent;
         createPrivateChat(nombre);
         const usuario = document.getElementById("userNameElement").textContent;
-        window.location.href = `/src/pages/chat/chat.html?privatechat=${nombre}_${usuario}`
+        window.location.href = `./../../../src/pages/chat/chat.html?privatechat=${nombre}_${usuario}`
     });
     
     username.appendChild(chat)
@@ -152,12 +149,6 @@ function createTransportCard(datos, typeDoc) {
 
     return card;
 }
-
-
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
     const storedEvent = JSON.parse(localStorage.getItem('selectedEvent'));
@@ -198,7 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
         });
 
-
         const accommodationsButton = document.getElementById('accommodationsButton');
         accommodationsButton.addEventListener('click', function() {
             const transportContent = document.getElementById('contentAccomodation')
@@ -209,10 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    initializeOthers(infoEvent.title);
-
-    
-        
+    initializeOthers(infoEvent.title);     
 });
 
 
@@ -221,7 +208,7 @@ document.getElementById('chatBoton').addEventListener('click', function(){
     const infoEvent = storedEvent.event;
     const nombre = infoEvent.title;
     createChat(nombre);
-    window.location.href = `/src/pages/chat/chat.html?chatName=${nombre}`
+    window.location.href = `./../../../src/pages/chat/chat.html?chatName=${nombre}`
 });
 
 
@@ -278,7 +265,7 @@ function removeSuscription() {
     const suscripcionButon = document.getElementById("suscripcionButon")
 
     let arrayReservados = JSON.parse(localStorage.getItem("eventosSuscritos"))
-    arrayReservados = arrayReservados.filter(e => e !== fiesta); // will return ['A', 'C']
+    arrayReservados = arrayReservados.filter(e => e !== fiesta);
     localStorage.setItem("eventosSuscritos",JSON.stringify(arrayReservados))
     const userRef = doc(db, "users", localStorage.getItem("userId"));
     setDoc(userRef, { festivalAsociado: arrayReservados }, { merge: true });

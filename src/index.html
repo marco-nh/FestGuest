@@ -10,12 +10,12 @@
     <meta name="robots" content="index, follow">
     <!--Home-->
     <title>Home</title>
-    <link rel="icon" href="FestGuest.ico" type="image/x-icon">
+    <link rel="icon" href="./../FestGuest.ico" type="image/x-icon">
     <!-- Adding Styles -->
-    <link rel="stylesheet" href="/src/style.css"/>
-    <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
+    <link rel="stylesheet" href="./../src/style.css"/>
+    <link rel="stylesheet" href="./../src/pages/components/header/header.css"/>
     <!-- Adding Scripts -->
-    <script type="module" src="/src/firebase/auth/verificationLogged.js"></script>
+    <script type="module" src="./../src/firebase/auth/verificationLogged.js"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <!-- Bootstrap -->
@@ -26,13 +26,13 @@
     <!-- Tailwind -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" integrity="sha256-CAI/7ThhltsmP2L2zKBYa7FknB3ZwFbD0nqL8FCdxdc=" crossorigin="anonymous" />
     <!-- Auth ref user id-->
-    <script type="module" src="/src/firebase/auth/userid.js"></script>
+    <script type="module" src="./../src/firebase/auth/userid.js"></script>
 </head>
 <body class="bg-transparent">
     <!-- Header dynamic load -->
-    <script src="/src/utils/loadComponents/loadComponents.js"></script>
-    <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
-    <script>loadComponents("/src/pages/components/header/logged/header.html", "headerLogged")</script>
+    <script src="./../src/utils/loadComponents/loadComponents.js"></script>
+    <script>loadComponents("./../src/pages/components/header/header.html", "header")</script>
+    <script>loadComponents("./../src/pages/components/header/logged/header.html", "headerLogged")</script>
     
     <div class="header">
         <header class="hidden" id="header"></header>
@@ -41,8 +41,8 @@
 
     <div id="content">
             <div id="image-container" class="flex justify-center mt-10 mb-4 image-transition">
-                <a href="/src/index.html">
-                <img  id="festGuestImage" src="/src/images/FestGuest.png" class="image max-w-full h-auto max-h-80" alt="FestGuest Logo">
+                <a href="./../src/index.html">
+                <img  id="festGuestImage" src="./../src/images/FestGuest.png" class="image max-w-full h-auto max-h-80" alt="FestGuest Logo">
                 </a>
             </div>            
             <!-- Search bar -->
@@ -76,7 +76,7 @@
             </div>
             <div id="eventContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </div>  
-        <script src="/src/script.js"></script>
-        <script src="/src/utils/voiceRecognition/voiceRecognition.js"></script>
+        <script src="./../src/script.js"></script>
+        <script src="./../src/utils/voiceRecognition/voiceRecognition.js"></script>
 </body>
 </html>

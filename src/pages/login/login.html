@@ -11,7 +11,7 @@
  
     <!--Login-->    
     <title>Login</title>
-    <link rel="icon" href="/src/FestGuest.ico" type="image/x-icon">
+    <link rel="icon" href="./../../../src/FestGuest.ico" type="image/x-icon">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <!-- Bootstrap -->
@@ -22,20 +22,20 @@
     <!-- Tailwind -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" integrity="sha256-CAI/7ThhltsmP2L2zKBYa7FknB3ZwFbD0nqL8FCdxdc=" crossorigin="anonymous" />
     <!-- Adding Styles -->
-    <link rel="stylesheet" href="/src/style.css"/>
+    <link rel="stylesheet" href="./../../../src/style.css"/>
      <!-- Adding Toastify -->   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.min.css" integrity="sha512-UiKdzM5DL+I+2YFxK+7TDedVyVm7HMp/bN85NeWMJNYortoll+Nd6PU9ZDrZiaOsdarOyk9egQm6LOJZi36L2g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.js" integrity="sha512-MnKz2SbnWiXJ/e0lSfSzjaz9JjJXQNb2iykcZkEY2WOzgJIWVqJBFIIPidlCjak0iTH2bt2u1fHQ4pvKvBYy6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Header Styles -->
-    <link rel="stylesheet" href="/src/pages/components/header/header.css"/>
-    <script src="login.js" type="module"></script>
+    <link rel="stylesheet" href="./../../../src/pages/components/header/header.css"/>
+    <script src="./login.js" type="module"></script>
 </head>
 
 <body  class="bg-transparent">
     <!-- Header dynamic load -->
-    <script src="/src/utils/loadComponents/loadComponents.js"></script>
-    <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
-    <script>loadComponents("/src/pages/components/header/logged/header.html", "headerLogged")</script>
+    <script src="./../../../src/utils/loadComponents/loadComponents.js"></script>
+    <script>loadComponents("./../../../src/pages/components/header/header.html", "header")</script>
+    <script>loadComponents("./../../../src/pages/components/header/logged/header.html", "headerLogged")</script>
     
     <div class="header">
         <header id="header"></header>

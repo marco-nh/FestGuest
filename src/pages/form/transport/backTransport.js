@@ -65,7 +65,7 @@ async function addTransportToFirestore(formValues) {
   try {
     const docRef = await addDoc(collection(db, 'transports'), formValues);
     console.log("Document written with ID: ", docRef.id);
-    window.location.href = '/src/index.html'
+    window.location.href = './../../../../src/index.html'
   } catch (error) {
     console.error("Error adding document: ", error);
   }

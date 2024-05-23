@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("logoutButton").addEventListener("click", () => {
         signOutSession()
             .then(() => {
-                window.location.href = "/src/index.html";
+                window.location.href = "./../../../src/index.html";
             })
             .catch((error) => {
                 console.error("Error al desconectar:", error);
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (userPhoto !== null && userPhoto !== undefined) {
         profileImage.src = userPhoto
     } else {
-        profileImage.src = "/src/images/photoPred.png"
+        profileImage.src = "./../../../src/images/photoPred.png"
     }
 });
 
@@ -107,7 +107,7 @@ async function renderSuscriptionFestivals(){
         card.textContent = element
 
         const elementopage = btoa(encodeURIComponent(element))
-        card.href = `/src/pages/events/events.html?search=${elementopage}`;
+        card.href = `./src/pages/events/events.html?search=${elementopage}`;
         card.setAttribute("id","labeleventname"+num)
         divElementos.appendChild(card)
 

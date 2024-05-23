@@ -11,7 +11,7 @@
 
     <!--Profile-->
     <title>Trip</title>
-    <link rel="icon" href="/src/FestGuest.ico" type="image/x-icon">
+    <link rel="icon" href="./../../../src/FestGuest.ico" type="image/x-icon">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <!-- Bootstrap -->
@@ -22,18 +22,18 @@
     <!-- Tailwind -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.4.6/tailwind.min.css" integrity="sha256-CAI/7ThhltsmP2L2zKBYa7FknB3ZwFbD0nqL8FCdxdc=" crossorigin="anonymous" />
     <!-- Header Styles -->
-    <link rel="stylesheet" href="/src/pages/components/header/header.css" />
+    <link rel="stylesheet" href="./../../../src/pages/components/header/header.css" />
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="/src/pages/trip/trip.css" />
-    <script type="module" src="/src/pages/trip/trip.js"></script>
-    <script type="module" src="/src/firebase/auth/verificationLogged.js"></script>
+    <link rel="stylesheet" href="./../../../src/pages/trip/trip.css" />
+    <script type="module" src="./../../../src/pages/trip/trip.js"></script>
+    <script type="module" src="./../../../src/firebase/auth/verificationLogged.js"></script>
 </head>
 
 <body class="bg-transparent">
     <!-- Header dynamic load -->
-    <script src="/src/utils/loadComponents/loadComponents.js"></script>
-    <script>loadComponents("/src/pages/components/header/header.html", "header")</script>
-    <script>loadComponents("/src/pages/components/header/logged/header.html", "headerLogged")</script>
+    <script src="./../../../src/utils/loadComponents/loadComponents.js"></script>
+    <script>loadComponents("./../../../src/pages/components/header/header.html", "header")</script>
+    <script>loadComponents("./../../../src/pages/components/header/logged/header.html", "headerLogged")</script>
     
     <div class="header">
         <header class="hidden" id="header"></header>
@@ -100,7 +100,7 @@
                                 <span>Chat </span>
                                 <i class="fas fa-comments ml-2"></i>
                             </button>
-                            <img id="cargando" alt="loading" class="image h-auto w-20" src="/src/images/loading.gif"></img>
+                            <img id="cargando" alt="loading" class="image h-auto w-20" src="./src/images/loading.gif"></img>
                             <button class="hidden bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center" id="suscripcionButon">
                                 <span>Subscribe </span>
                                 <i class="fas fa-bell ml-2"></i>

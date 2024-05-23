@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         handleLogin()
             .then(() => {
-                window.location.href = "/src/index.html";
+                window.location.href = "./../../../src/index.html";
             })
             .catch((error) => {
                 showMessage("Invalid email or password", "warning");
@@ -20,5 +20,5 @@ async function handleLogin() {
     let password = document.getElementById('passwordlog').value;
     await signInWithEmail(email, password);
     await saveUserInfoToLocal(email);
-    window.location.href = "/src/index.html";
+    window.location.href = "./../../../src/index.html";
 }
