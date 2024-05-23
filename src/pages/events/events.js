@@ -290,28 +290,46 @@ function shortenDescription(description, maxLines = 4, maxWords = 40) {
     return shortenedDescription;
   }
 
-async function getLocation(event) {
+  async function getLocation(event) {
+    if (!event.entities || event.entities.length === 0) {
+        return '';
+    }
+
+    const venue = event.entities[0];
+    if (venue.formatted_address) {
+        return venue.formatted_address;
+    }
+
+    return await buildLocationString(event);
+}
+
+async function buildLocationString(event) {
     let locationString = '';
-    if (event.entities && event.entities.length > 0) {
-        const venue = event.entities[0];
-        if (venue.formatted_address) {
-            locationString = venue.formatted_address;
-        } else {
-            if (event.location) {
-                try {
-                    const locate = await getLocationByCords(event);
-                    locationString += ` ${locate}`;
-                } catch (error) {
-                    console.error('Error al obtener la ubicación:', error);
-                }
-            }
-            if (event.locality) {
-                locationString += `, ${event.locality}`;
-            }
-            if (event.country) {
-                locationString += `, ${event.country}`;
-            }
-        }
+
+    if (event.location) {
+        locationString = await addLocationByCoords(event, locationString);
+    }
+    locationString = addLocalityAndCountry(event, locationString);
+
+    return locationString;
+}
+
+async function addLocationByCoords(event, locationString) {
+    try {
+        const locate = await getLocationByCords(event);
+        return `${locationString} ${locate}`;
+    } catch (error) {
+        console.error('Error al obtener la ubicación:', error);
+        return locationString;
+    }
+}
+
+function addLocalityAndCountry(event, locationString) {
+    if (event.locality) {
+        locationString += `, ${event.locality}`;
+    }
+    if (event.country) {
+        locationString += `, ${event.country}`;
     }
     return locationString;
 }
