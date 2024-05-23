@@ -1,6 +1,5 @@
-import { fetchPredictHQEvents, displayPredictHQEvents } from "./suggestionsLocation.js";
+import { fetchPredictHQEvents, displayPredictHQEvents, fetchSuggestions } from "./suggestionsLocation.js";
 import { getFestivalTransportReservation, cleanFestivalReservation } from "./getFestival.js";
-import { fetchSuggestions } from "./suggestionsLocation.js";
 
 function agregarSugerencias(inputId, suggestionsId) {
     const input = document.getElementById(inputId);
