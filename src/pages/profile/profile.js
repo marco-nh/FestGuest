@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-    var correols = localStorage.getItem('userEmail');
+    let correols = localStorage.getItem('userEmail');
 
-    var correo = document.getElementById('correo');
+    let correo = document.getElementById('correo');
     
     if (correols !== null && correols !== undefined) {
         correo.textContent = correols;
@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
         correo.textContent = 'No hay correo asociado a esta cuenta';
     }    
 
-    var userDocString = localStorage.getItem('userDoc');
-    var userDocObject = JSON.parse(userDocString);
-    var userName = userDocObject.userName;
-    var nombre = document.getElementById('nombre');
+    let userDocString = localStorage.getItem('userDoc');
+    let userDocObject = JSON.parse(userDocString);
+    let userName = userDocObject.userName;
+    let nombre = document.getElementById('nombre');
     
     if (userName !== null && userName !== undefined) {
         nombre.textContent = userName;
@@ -39,8 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     actionSuscriptionListener()
 
 
-    var userPhoto = localStorage.getItem('userPhoto');
-    var profileImage = document.getElementById('imgAvatar');
+    let userPhoto = localStorage.getItem('userPhoto');
+    let profileImage = document.getElementById('imgAvatar');
     if (userPhoto !== null && userPhoto !== undefined) {
         profileImage.src = userPhoto
     } else {
@@ -52,23 +52,23 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
 document.getElementById('imageUpload').addEventListener('change', function(event) {
-    var input = event.target;
-    var file = input.files[0];
+    let input = event.target;
+    let file = input.files[0];
     
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onload = function() {
-        var imageData = reader.result;
+        let imageData = reader.result;
         localStorage.setItem('userPhoto', imageData)
     };
     reader.readAsDataURL(file);
     });        
 
 
-var textarea = document.getElementById('descripcion');
-var guardarButton = document.getElementById('guardarButton');
+let textarea = document.getElementById('descripcion');
+let guardarButton = document.getElementById('guardarButton');
 
 function guardarTexto() {
-    var texto = textarea.value;
+    let texto = textarea.value;
     localStorage.setItem('textoGuardado', texto);
     
 }
@@ -76,7 +76,7 @@ function guardarTexto() {
 guardarButton.addEventListener('click', guardarTexto);
 
 window.addEventListener('load', function() {
-    var textoGuardado = localStorage.getItem('textoGuardado');
+    let textoGuardado = localStorage.getItem('textoGuardado');
     if (textoGuardado !== null) {
         textarea.value = textoGuardado;
     }

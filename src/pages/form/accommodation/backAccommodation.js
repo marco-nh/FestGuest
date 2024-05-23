@@ -1,7 +1,7 @@
 import { app, storage } from "../../../firebase/initializeDatabase.js"; 
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-storage.js"; 
-import { agregarSugerencias, c } from "../../../utils/suggestionsLocation/addSuggestion.js";
+import { agregarSugerencias } from "../../../utils/suggestionsLocation/addSuggestion.js";
 
 document.addEventListener('DOMContentLoaded', initialize);
 
