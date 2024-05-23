@@ -1,12 +1,11 @@
 import { auth } from "../initializeDatabase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-auth.js";
+
 document.addEventListener('DOMContentLoaded', function () {
     const header = document.getElementById('header');
     const headerLogged = document.getElementById('headerLogged');
     const userEmailElement = document.getElementById('imageUser');
     let userPhotoLocalStorage = localStorage.getItem('userPhoto');
-
-
 
     const updateProfilePhoto = () => {
         try {
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
             
             if (userDocString) {
                 const userDoc = JSON.parse(userDocString);            
-                //const photoURL = userDoc.photo;
                 const userName = userDoc.userName;
                 const photoURL = userDoc.photo;
 
@@ -27,8 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (userNameElement) {
                     userNameElement.textContent = userName;
                 }
-            } else {
-                console.log("No se encontraron datos de usuario en el localStorage");
             }
         } catch (error) {
             console.error("Error al actualizar la foto de perfil:", error);
@@ -44,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     onAuthStateChanged(auth, async (user) => {
-        if (user) { // Usuario logeado
+        if (user) {
             header.classList.add('hidden');
             headerLogged.classList.remove('hidden');
 
@@ -54,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (userEmailElement) {
                 userEmailElement.textContent = userEmail;
             }
-
             updateProfilePhoto();
         } else {
             header.classList.remove('hidden');
