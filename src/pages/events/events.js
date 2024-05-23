@@ -1,8 +1,7 @@
 import { categoryImages } from "../../utils/category/category.js";
 import { countries } from '../../pages/events/arrayPaises.js';
-//DATABASE
 import { app } from "../../firebase/initializeDatabase.js";
-import { getDocs, query, where, getFirestore, collection, addDoc} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+import { getDocs, getFirestore, collection, addDoc} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 import { getLocationByCords } from "../../utils/location/getLocation.js";
 
 let eventos = [];
@@ -31,96 +30,17 @@ function setupSearch() {
 
 function searchEvents(city, country) {
     const ACCESS_TOKEN = "KehcazRA-OcKZdoahdjRHouWqb1emiCBYGgIjZvc";
-    const baseURL = "https://api.predicthq.com/v1/events";
     const headers = {
         "Authorization": `Bearer ${ACCESS_TOKEN}`,
         "Accept": "application/json"
     };
-    let url = `${baseURL}?q=${encodeURIComponent(city)}`;
 
-    const festival = document.getElementById('festival');
-    const diaFestivo = document.getElementById('diaFestivo');
-    const concierto = document.getElementById('concierto');
-    const sports = document.getElementById('sports');
-    const community = document.getElementById('community');
-    const conference = document.getElementById('conferences');
-    const expo = document.getElementById('expos');
-    const arts = document.getElementById('arts');
-    const minAsist = document.getElementById('asistencia_minima').value;
-    const maxAsist = document.getElementById('asistencia_maxima').value;
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
-    
-    if(minAsist){
-        url += `&phq_attendance.gt=${encodeURIComponent(minAsist)}`;
-    }
-    if(maxAsist){
-        url += `&phq_attendance.lt=${encodeURIComponent(maxAsist)}`;
-    }
-
-    const categories = [];
-
-    if (festival.checked) {
-        categories.push('festivals');
-    }
-    if (concierto.checked) {
-        categories.push('concerts');
-    }
-    if (diaFestivo.checked) {
-        categories.push('school-holidays', 'public-holidays');
-    }
-    if (sports.checked) {
-        categories.push('sports');
-    }
-    if (community.checked) {
-        categories.push('community');
-    }
-    if (conference.checked) {
-        categories.push('conferences');
-    }
-    if (expo.checked) {
-        categories.push('expos');
-    }
-    if (arts.checked) {
-        categories.push('performing-arts');
-    }
-
-    // Solo agregar 'category=' si hay al menos una categoría seleccionada
-    if (categories.length > 0) {
-        url += `&category=${categories.join('%2C')}`;
-    }
-
-    if(startDate){
-        url += `&active.gte=${encodeURIComponent(startDate)}`;
-    }
-
-    if(endDate){
-        url += `&active.lte=${encodeURIComponent(endDate)}`;
-    }
-
-    if (country) {
-        url += `&country=${encodeURIComponent(country)}`;
-    }
-
-
-
-    const minRankGrade = document.getElementById('minRankGrade').value;
-    const maxRankGrade = document.getElementById('maxRankGrade').value;
-
-    if (minRankGrade) {
-        url += `&local_rank.gte=${encodeURIComponent(minRankGrade)}`;
-    }
-    if(maxRankGrade){
-        url += `&local_rank.lte=${encodeURIComponent(maxRankGrade)}`;
-    }
-
-    if(startDate && endDate && minAsist){
-        url += `&sort=phq_attendance,-start`;
-    }
+    let url = buildUrl(city, country);
 
     const loader = document.getElementById('loader');
     loader.style.display = 'flex'; 
     searchResults.innerHTML = '';
+
     fetch(url, { headers })
         .then(response => {
             if (!response.ok) {
@@ -129,7 +49,7 @@ function searchEvents(city, country) {
             return response.json();
         })
         .then(data => {
-            eventos = data.results;
+            const eventos = data.results;
             renderEvents(eventos);
         })
         .catch(error => {
@@ -140,6 +60,60 @@ function searchEvents(city, country) {
             loader.style.display = 'none';
         });
 }
+
+function buildUrl(city, country) {
+    const baseURL = "https://api.predicthq.com/v1/events";
+    let url = `${baseURL}?q=${encodeURIComponent(city)}`;
+
+    const minAsist = document.getElementById('asistencia_minima').value;
+    const maxAsist = document.getElementById('asistencia_maxima').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const minRankGrade = document.getElementById('minRankGrade').value;
+    const maxRankGrade = document.getElementById('maxRankGrade').value;
+
+    if (minAsist) url += `&phq_attendance.gt=${encodeURIComponent(minAsist)}`;
+    if (maxAsist) url += `&phq_attendance.lt=${encodeURIComponent(maxAsist)}`;
+    if (startDate) url += `&active.gte=${encodeURIComponent(startDate)}`;
+    if (endDate) url += `&active.lte=${encodeURIComponent(endDate)}`;
+    if (country) url += `&country=${encodeURIComponent(country)}`;
+    if (minRankGrade) url += `&local_rank.gte=${encodeURIComponent(minRankGrade)}`;
+    if (maxRankGrade) url += `&local_rank.lte=${encodeURIComponent(maxRankGrade)}`;
+    if (startDate && endDate && minAsist) url += `&sort=phq_attendance,-start`;
+
+    const categories = getCategories();
+    if (categories.length > 0) url += `&category=${categories.join('%2C')}`;
+
+    return url;
+}
+
+function getCategories() {
+    const categories = [];
+    const categoryMapping = {
+        festival: 'festivals',
+        concierto: 'concerts',
+        diaFestivo: ['school-holidays', 'public-holidays'],
+        sports: 'sports',
+        community: 'community',
+        conferences: 'conferences',
+        expos: 'expos',
+        arts: 'performing-arts'
+    };
+
+    for (const [key, value] of Object.entries(categoryMapping)) {
+        const element = document.getElementById(key);
+        if (element && element.checked) {
+            if (Array.isArray(value)) {
+                categories.push(...value);
+            } else {
+                categories.push(value);
+            }
+        }
+    }
+
+    return categories;
+}
+
 
 
 async function saveEventFirestore(evento) {

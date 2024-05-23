@@ -1,5 +1,4 @@
-import { database } from "../../firebase/initializeDatabase.js";
-import { auth } from "../../firebase/initializeDatabase.js";
+import { database, auth } from "../../firebase/initializeDatabase.js";
 import { ref, push, set, get, onChildAdded } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -50,7 +49,7 @@ function sendMessage() {
     const chatName = urlParams.get('chatName');
     const privatechat = urlParams.get('privatechat');
 
-    var user=auth.currentUser;
+    let user = auth.currentUser;
     const messageInput = document.getElementById("messageInput");
     const message = messageInput.value.trim(); 
     messageInput.value = ""; 
