@@ -42,24 +42,18 @@
     
     <div class="flex">
         <div class="w-1/3 px-2" id="transportDiv">
-
-            <!-- <img id="festGuestImage" src="/src/images/FestGuest.jpg" class="max-w-xxl h-auto max-h-32 mx-auto" alt="FestGuest Logo"> -->
-
             <!-- Aquí van los filtros -->
             <div id="content" class="hidden">
                 <!-- Navbar -->
-                <nav class="bg-indigo-500 text-white py-4 px-8">
+                <nav class="bg-indigo-500 text-white py-4 px-8" aria-labelledby="navbar-title">
                     <div class="container mx-auto flex justify-between items-center">
-                        <h1 class="text-xl font-semibold">Transport</h1>
-                        <!-- Add any additional navigation items if needed -->
+                        <h1 id="navbar-title" class="text-xl font-semibold">Transport</h1>
                     </div>
                 </nav>
 
                 <!-- Main Content -->
                 <div class="container mx-auto mt-8">
-                    <div class="bg-white shadow-md rounded-lg p-8" id="base">
-                        
-                    </div>
+                    <div class="bg-white shadow-md rounded-lg p-8" id="base"></div>
                 </div>
             </div>
         </div>
@@ -71,7 +65,6 @@
                 <nav class="bg-gray-800 text-white py-4 px-8">
                     <div class="container mx-auto flex justify-between items-center">
                         <h1 class="text-xl font-semibold">Event Details</h1>
-                        <!-- Add any additional navigation items if needed -->
                     </div>
                 </nav>
             <!-- Botones de Transporte y Alojamiento -->
@@ -107,7 +100,7 @@
                                 <span>Chat </span>
                                 <i class="fas fa-comments ml-2"></i>
                             </button>
-                            <img id="cargando" class="image h-auto w-20" src="/src/images/loading.gif"></img>
+                            <img id="cargando" alt="loading" class="image h-auto w-20" src="/src/images/loading.gif"></img>
                             <button class="hidden bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center" id="suscripcionButon">
                                 <span>Subscribe </span>
                                 <i class="fas fa-bell ml-2"></i>
@@ -122,21 +115,14 @@
             </div>
         </div>
         <div class="w-1/3 px-2" id="accommodation">
-            <!-- Aquí van los filtros -->
             <div id="contentAccomodation" class="hidden">
-                <!-- Navbar -->
                 <nav class="bg-purple-500 text-white py-4 px-8">
                     <div class="container mx-auto flex justify-between items-center">
                         <h1 class="text-xl font-semibold">Accommodations</h1>
-                        <!-- Add any additional navigation items if needed -->
                     </div>
                 </nav>
-
-                <!-- Main Content -->
                 <div class="container mx-auto mt-8">
-                    <div class="bg-white shadow-md rounded-lg p-8" id="baseAccomodation">
-                        
-                    </div>
+                    <div class="bg-white shadow-md rounded-lg p-8" id="baseAccomodation"></div>
                 </div>
             </div>
         </div>
