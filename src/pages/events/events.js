@@ -333,19 +333,17 @@ document.addEventListener('DOMContentLoaded', function() {
         selectElement.appendChild(option);
     });
 
-        // Función para cambiar la visibilidad del contenido de fecha
         function toggleDateRange() {
-            var dateRange = document.getElementById("dateRange");
+            let dateRange = document.getElementById("dateRange");
             if (dateRange.style.display === "none" || dateRange.style.display === "") {
                 dateRange.style.display = "block";
             } else {
                 dateRange.style.display = "none";
             }
         }
-    
-        // Función para cambiar la visibilidad del contenido de asistencia esperada
+
         function toggleAttendance() {
-            var dropdown = document.getElementById("dropdown");
+            let dropdown = document.getElementById("dropdown");
             if (dropdown.style.display === "none" || dropdown.style.display === "") {
                 dropdown.style.display = "block";
             } else {
@@ -353,10 +351,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     
-        // Agregar event listener al botón de rango de fecha
         document.getElementById("toggleDateRangeButton").addEventListener("click", toggleDateRange);
     
-        // Agregar event listener al botón de asistencia esperada
         document.getElementById("toggleAttendanceButton").addEventListener("click", toggleAttendance);
     
 });

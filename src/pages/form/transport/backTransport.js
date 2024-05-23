@@ -46,11 +46,7 @@ function getFormValues() {
       festivalAsociado: document.getElementById('festivalName').value,
       usuario: userName
     };
-  } else {
-    return false 
   }
-
-  
 }
 
 function validateForm(formValues) {
