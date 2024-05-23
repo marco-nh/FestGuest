@@ -102,7 +102,7 @@ function getCategories() {
 
     for (const [key, value] of Object.entries(categoryMapping)) {
         const element = document.getElementById(key);
-        if (element && element.checked) {
+        if (element) {
             if (Array.isArray(value)) {
                 categories.push(...value);
             } else {
@@ -114,18 +114,12 @@ function getCategories() {
     return categories;
 }
 
-
-
 async function saveEventFirestore(evento) {
     const db = getFirestore(app);
     let querySnapshot;
     let checkExists = false
-    
-    // Los eventos son un array 2D, [0] es titulo, [1] es lugar
-    // Esto se hace para facilitar vinculación (por el segundo metodo)
 
     if (localStorage.getItem('eventUpdated') == "false"){
-        //Una operacion de busqueda, no debe de haber muchas!!
         querySnapshot = await getDocs(collection(db, "events"));
 
         localStorage.setItem('eventUpdated',"true")
