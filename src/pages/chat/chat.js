@@ -143,10 +143,7 @@ function processChatSnapshot(chatSnapshot, userEmail, elementId, isPrivate) {
 }
 
 function shouldCreateChatElement(message, userEmail, chatKey, isPrivate) {
-    if (message.sender === userEmail) {
-        return true;
-    }
-    if (isPrivate && userEmail.split("@")[0] === chatKey.split("_")[0]) {
+    if (message.sender === userEmail || (isPrivate && userEmail.split("@")[0] === chatKey.split("_")[0])) {
         return true;
     }
     return false;
