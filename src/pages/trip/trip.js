@@ -29,17 +29,13 @@ async function initializeOthers(titulo) {
     try { 
         if (arrayReservados.length > 2){
             arrayReservados.forEach((fiesta) => {
-                console.log(fiesta)
                 if (fiesta == titulo){
-                    console.log("Reservado")
                     throw BreakException
                 }
             })
         }
     } catch (e) {
         desuscripcionButon.classList.remove("hidden")
-        
-        console.log("Fallo: Existe suscripcion")
         reloading.classList.add("hidden")
         return false
     };
@@ -141,7 +137,6 @@ function createTransportCard(datos, typeDoc) {
     }else{
         title.textContent = datos.nombreAnuncio;
     }
-    console.log(datos)
     title.setAttribute('tabindex', '0');
 
     const descripcion = document.createElement('p');
@@ -175,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const eventStartElement = document.getElementById('eventStart');
         const eventEndElement = document.getElementById('eventEnd');
         const eventUpdatedElement = document.getElementById('eventUpdated');
-        const eventCountryElement = document.getElementById('eventCountry');
         const eventLocationElement = document.getElementById('eventLocation');
         
         eventNameElement.textContent = infoEvent.title;
@@ -195,13 +189,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         const transportButton = document.getElementById('transportButton');
         transportButton.addEventListener('click', function() {
-            // Pendiente implementar Buscar los transportes relacionados con el evento(Revisar local storage)
             const transportContent = document.getElementById('content')
             transportContent.classList.remove('hidden')
             if (localStorage.getItem("transportRendered") != "true"){
                 renderTransport(infoEvent.title)
                 localStorage.setItem("transportRendered","true")
-                console.log(localStorage.getItem("transportRendered"))
             }
             
         });
@@ -211,11 +203,9 @@ document.addEventListener('DOMContentLoaded', function() {
         accommodationsButton.addEventListener('click', function() {
             const transportContent = document.getElementById('contentAccomodation')
             transportContent.classList.remove('hidden')
-            // Pendiente implementar Buscar las acomodaciones relacionados con el evento(Revisar local storage)
             if (localStorage.getItem("accomodationRendered") != "true"){
                 renderAccomodations(infoEvent.title)
                 localStorage.setItem("accomodationRendered","true")
-                console.log(localStorage.getItem("accomodationRendered"))
             }
         });
     }
@@ -232,20 +222,12 @@ document.getElementById('chatBoton').addEventListener('click', function(){
     const nombre = infoEvent.title;
     createChat(nombre);
     window.location.href = `/src/pages/chat/chat.html?chatName=${nombre}`
-    console.log(title)
 });
 
-//suscribirse
 
-document.getElementById("suscripcionButon").addEventListener('click', function(){
-    addSuscription()
-    console.log("Suscrito")
-});
+document.getElementById("suscripcionButon").addEventListener('click', function(){ addSuscription() });
 
-document.getElementById("disabledsuscripcionButon").addEventListener('click', function(){
-    removeSuscription()
-    console.log("Desuscrito")
-});
+document.getElementById("disabledsuscripcionButon").addEventListener('click', function(){ removeSuscription() });
 
 async function addSuscription(){
     const db = getFirestore(app);
@@ -266,7 +248,6 @@ async function addSuscription(){
                 arrayFiestas.forEach((fiestaBase) => {
                     arraySuscritos.push(fiestaBase)
                     if (fiesta == fiestaBase){
-                        console.log("Ya ha sido reservado")
                         localStorage.setItem("reservado","true")
                         return false
                     }
@@ -277,16 +258,12 @@ async function addSuscription(){
             }
             
             const userRef = doc(db, "users", userdata.id);
-            console.log(arraySuscritos)
             if (localStorage.getItem("reservado") == "false"){
                 setDoc(userRef, { festivalAsociado: arraySuscritos }, { merge: true });
             }
-            //para evitar otra busqueda, agrego la id del usuario y lo meto en local
+
             localStorage.setItem("userId",userdata.id)
-
             localStorage.setItem("eventosSuscritos",JSON.stringify(arraySuscritos))
-            console.log("Guardado en local")
-
             localStorage.setItem("reservado",false)
         })
         suscripcionButon.classList.add("hidden")
