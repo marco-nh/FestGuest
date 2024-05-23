@@ -1,6 +1,5 @@
-//firebase
 import { app } from "../../firebase/initializeDatabase.js";
-import { doc,getDoc, setDoc,query,where, getDocs, getFirestore, collection} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+import { doc,getDoc, setDoc, getFirestore} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
 document.getElementById("addbutton").addEventListener("click",addCurrency)
 document.addEventListener("DOMContentLoaded",initialize)
@@ -42,7 +41,6 @@ function showCurrency(){
 async function addCurrency(){
     const db = getFirestore(app);
     if (localStorage.getItem("userId") == null){
-        console.log("No debería de poderse hacer esto")
         return false
     } 
     const userRef = doc(db, "users", localStorage.getItem("userId"));
@@ -52,6 +50,5 @@ async function addCurrency(){
     money += 50
     await setDoc(userRef, { money: money }, { merge: true });
     localStorage.setItem("currency",money);
-    console.log("Money added")
     location.reload()
 }
